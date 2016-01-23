@@ -1,0 +1,2 @@
+CS 5610 Web Development Spring 2016
+This is the GIT Repository we will be using to push our for assignments to. The TAs and instructors have been added as collaborators and will have easy access to the same.

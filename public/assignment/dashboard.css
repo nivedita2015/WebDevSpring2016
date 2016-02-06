@@ -103,3 +103,25 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+
+.btn-lg {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: xx-large;
+
+
+}
+
+.control-label {
+    padding-top: 10px;
+}
+
+.table-bordered {
+    border: solid 2px lightgrey
+}
+
+.row {
+
+    padding-left: 20px;
+}

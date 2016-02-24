@@ -22,7 +22,12 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
-    border: 0;
+    border: groove;
+}
+
+.navbar-brand {
+
+    font-size: xx-large;
 }
 
 /*

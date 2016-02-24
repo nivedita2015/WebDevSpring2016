@@ -6,26 +6,26 @@
 
     function configuration($routeProvider) {
         $routeProvider
-            .when("/home",
+            .when("#/home",
                 {
                     templateUrl: "views/home/home.view.html"
                 })
-            .when("/register",
+            .when("#/register",
                 {
                     templateUrl: "views/users/register.view.html",
                     controller: "RegisterController"
                 })
-            .when("/login",
+            .when("#/login",
                 {
                     templateUrl: "views/users/login.view.html",
                     controller: "LoginController"
                 })
-            .when("/profile",
+            .when("#/profile",
                 {
                     templateUrl: "views/users/profile.view.html",
                     controller: "ProfileController"
                 })
-            .when("/admin",
+            .when("#/admin",
                 {
                     templateUrl: "views/admin/admin.view.html",
                     controller: "AdminController"

@@ -1,3 +1,10 @@
-/**
- * Created by Nivi on 22/02/16.
- */
+(function()
+{
+    angular
+        .module("FormBuilderApp")
+        .controller("SidebarController",SidebarController);
+    function SidebarController()
+    {
+
+    }
+})();

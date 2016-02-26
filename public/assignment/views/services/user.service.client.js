@@ -6,16 +6,26 @@
     function UserService($rootScope) {
         var model = {
             users: [
-                {        "_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                    "username":"alice",  "password":"alice",   "roles": ["student"]                },
-                {        "_id":234, "firstName":"Bob",              "lastName":"Hope",
-                    "username":"bob",    "password":"bob",     "roles": ["admin"]                },
-                {        "_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                    "username":"charlie","password":"charlie", "roles": ["faculty"]                },
-                {        "_id":456, "firstName":"Dan",              "lastName":"Craig",
-                    "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-                {        "_id":567, "firstName":"Edward",           "lastName":"Norton",
-                    "username":"ed",     "password":"ed",      "roles": ["student"]                }
+                {
+                    "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
+                    "username": "alice", "password": "alice", "roles": ["student"]
+                },
+                {
+                    "_id": 234, "firstName": "Bob", "lastName": "Hope",
+                    "username": "bob", "password": "bob", "roles": ["admin"]
+                },
+                {
+                    "_id": 345, "firstName": "Charlie", "lastName": "Brown",
+                    "username": "charlie", "password": "charlie", "roles": ["faculty"]
+                },
+                {
+                    "_id": 456, "firstName": "Dan", "lastName": "Craig",
+                    "username": "dan", "password": "dan", "roles": ["faculty", "admin"]
+                },
+                {
+                    "_id": 567, "firstName": "Edward", "lastName": "Norton",
+                    "username": "ed", "password": "ed", "roles": ["student"]
+                }
             ],
             createUser: createUser,
             findUserByCredentials: findUserByCredentials,
@@ -27,47 +37,59 @@
         };
         return model;
 
-        function setCurrentUser (user) {
+        function setCurrentUser(user) {
             $rootScope.currentUser = user;
         }
 
-        function getCurrentUser () {
+        function getCurrentUser() {
             return $rootScope.currentUser;
         }
 
-        function createUser (user) {
-            var user = {
+        function createUser(user, callback) {
+            var new_user = {
                 username: user.username,
-                password: user.password
+                password: user.password,
+                _id: (new Date).getTime()
+
             };
-            model.users.push(user);
-            return user;
+            model.users.push(new_user);
+            callback(new_user);
         }
 
-        function findUserByUsername (username) {
+        function findUserByCredentials(username, password, callback) {
+
             for (var u in model.users) {
-                if (model.users[u].username === username) {
-                    return model.users[u];
+                if ((model.users[u].username == username) && (model.users[u].password == password)) {
+                    callback(model.users[u]);
+                }
+                else {
+                    callback(null);
                 }
             }
-            return null;
         }
 
-        function findUserByCredentials(username,password,callback) {
-
-
-
+        function findAllUsers(callback) {
+            callback(model.users);
         }
 
-        function updateUser (currentUser) {
-            var user = model.findUserByUsername (currentUser.username);
-            if (user != null) {
-                user.firstName = currentUser.firstName;
-                user.lastName = currentUser.lastName;
-                user.password = currentUser.password;
-                return user;
-            } else {
-                return null;
+        function deleteUserById(userId, callback) {
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
+                    var temp = model.users[u];
+                    model.users.pop(temp);
+                    callback(model.users);
+                }
+            }
+        }
+
+        function updateUser(userId, user, callback) {
+            for (var u in model.users) {
+                if (model.users[u]._id == userId) {
+                    var oldUser = model.users[u];
+                    oldUser.firstName = user.firstName;
+                    oldUser.lastName = user.lastName;
+
+                }
             }
         }
     }

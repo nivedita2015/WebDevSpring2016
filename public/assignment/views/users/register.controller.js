@@ -1,14 +1,16 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .controller("RegisterController", registerController);
+        .controller("RegisterController", RegisterController);
 
-    function registerController($location, $scope, UserService, $rootScope) {
+    function RegisterController($location, $scope, UserService, $rootScope) {
         $scope.message = null;
+        $scope.user = null;
         $scope.register = register;
 
         function register(user) {
             $scope.message = null;
+
             if (user == null) {
                 $scope.message = "Please fill in the required fields";
                 return;
@@ -30,8 +32,10 @@
                 $scope.message = "User already exists";
                 return;
             }
+
             var newUser = UserService.createUser($scope.user);
             UserService.setCurrentUser(newUser);
+
             $location.url("/profile");
         }
     }

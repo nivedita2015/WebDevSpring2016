@@ -22,7 +22,8 @@ body {
  * Hide default border to remove 1px line.
  */
 .navbar-fixed-top {
-    border: groove;
+    border: dotted;
+    border-color: #ff7f7d;
 }
 
 .navbar-brand {

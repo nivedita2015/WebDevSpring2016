@@ -1,7 +1,7 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .factory("UserService");
+        .factory("UserService",UserService);
 
     function UserService($rootScope) {
         var model = {
@@ -59,12 +59,17 @@
         function findUserByCredentials(username, password, callback) {
 
             for (var u in model.users) {
+
                 if ((model.users[u].username == username) && (model.users[u].password == password)) {
-                    callback(model.users[u]);
+
+                    var user = model.users[u];
+                    callback(user);
+                    break;
                 }
                 else {
-                    callback(null);
+                    console.log("nothing found");
                 }
+
             }
         }
 
@@ -85,9 +90,10 @@
         function updateUser(userId, user, callback) {
             for (var u in model.users) {
                 if (model.users[u]._id == userId) {
-                    var oldUser = model.users[u];
-                    oldUser.firstName = user.firstName;
-                    oldUser.lastName = user.lastName;
+                    var newUser = model.users[u];
+                    newUser.firstName = user.firstName;
+                    newUser.lastName = user.lastName;
+                    callback(newUser);
 
                 }
             }

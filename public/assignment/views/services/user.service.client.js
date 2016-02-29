@@ -81,7 +81,7 @@
             for (var u in model.users) {
                 if (model.users[u]._id == userId) {
                     var temp = model.users[u];
-                    model.users.pop(temp);
+                     model.users.pop(temp);
                     callback(model.users);
                 }
             }

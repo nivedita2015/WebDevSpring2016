@@ -33,8 +33,11 @@
             .when("/forms",
                 {
                     templateUrl: "views/forms/forms.view.html",
-                    controller: "FormsController"
-                });
+                    controller: "FormController"
+                })
+            .otherwise({
+                    templateUrl: "views/home/home.view.html"
+            });
 
     }
 })();

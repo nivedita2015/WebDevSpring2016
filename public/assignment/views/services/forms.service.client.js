@@ -15,7 +15,17 @@
             deleteFormById: deleteFormById,
             updateFormById: updateFormById
         };
+        $rootScope.forms = model.forms;
         return model;
+
+
+        function setCurrentForm(form) {
+            $rootScope.currentForm = form;
+        }
+
+        function getCurrentForm() {
+            return $rootScope.currentForm;
+        }
 
         function createFormForUser(userId, form, callback) {
             var newform = {

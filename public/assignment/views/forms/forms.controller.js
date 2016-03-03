@@ -15,9 +15,13 @@
             var callback = function(form){
                tempForm=form;
             };
-
-            FormService.createFormForUser($rootScope.currentUser,form,callback);
-
+            if(form){
+                FormService.createFormForUser($rootScope.currentUser,form,callback);
+                $scope.form = {};
+            }
+            else {
+                return null;
+            }
         }
 
         function updateForm(form){
@@ -26,7 +30,9 @@
             var callback = function(form){
                 tempform = form;
             };
-            FormService.updateForm($rootScope.currentForm._id,form,callback);
+            FormService.updateFormById($rootScope.currentForm._id,form,callback);
+            $scope.form = {};
+
         }
 
         function deleteForm($index){
@@ -42,7 +48,13 @@
 
         function selectForm($index){
 
-            $rootScope.currentForm = $scope.forms[$index]._id;
+            $scope.form = {
+                _id : $scope.forms[$index]._id,
+                title: $scope.forms[$index].title,
+                userId: $scope.forms[$index].userId
+            };
+            $rootScope.currentForm = $scope.form;
+
 
         }
 

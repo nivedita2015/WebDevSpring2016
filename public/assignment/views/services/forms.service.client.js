@@ -34,6 +34,7 @@
                 title: form.title
             };
             model.forms.push(newform);
+
             callback(newform);
         }
 
@@ -63,8 +64,10 @@
         function updateFormById(formId, newForm, callback) {
             for (var f in model.forms) {
                 if (model.forms[f]._id == formId) {
+                    model.forms[f].title = newForm.title;
                     var form = model.forms[f];
-                    form.title = newForm.title;
+                    setCurrentForm(null);
+                    console.log(getCurrentForm());
                     callback(form);
                     break;
                 }

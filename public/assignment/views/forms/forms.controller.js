@@ -30,9 +30,10 @@
             var callback = function(form){
                 tempform = form;
             };
-            FormService.updateFormById($rootScope.currentForm._id,form,callback);
-            $scope.form = {};
-
+            if($rootScope.currentForm){
+                FormService.updateFormById($rootScope.currentForm._id,form,callback);
+                $scope.form = {};
+            }
         }
 
         function deleteForm($index){

@@ -53,12 +53,25 @@
         function deleteFormById(formId, callback) {
             for (var f in model.forms) {
                 if (model.forms[f]._id == formId) {
-                    var temp = model.forms[f];
-                    model.forms.pop(temp);
+                    var fIndex = $rootScope.forms.indexOf(model.forms[f]);
+                    $rootScope.forms.splice(fIndex,1);
                     callback(model.forms);
                     break;
+
+
+                    //var temp = model.forms[f];
+                    //model.forms.pop(temp);
+                    //callback(model.forms);
+                    //break;
                 }
             }
+        }
+
+
+        function deleteMovie(movie) {
+            var index = $scope.movies.indexOf(movie);
+            console.log("deleteMovie: " + index);
+            $scope.movies.splice(index, 1);
         }
 
         function updateFormById(formId, newForm, callback) {
@@ -66,8 +79,6 @@
                 if (model.forms[f]._id == formId) {
                     model.forms[f].title = newForm.title;
                     var form = model.forms[f];
-                    setCurrentForm(null);
-                    console.log(getCurrentForm());
                     callback(form);
                     break;
                 }

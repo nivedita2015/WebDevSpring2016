@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1 main">
+            <h1>Sheets</h1>
+            <table class="table table-responsive" >
+                <tbody>
+                <tr>
+                    <td>
+                        <input ng-model="form.title" type="text" class="form-control"
+                               id="title" placeholder="name">
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-plus" ng-click="addForm(form)"></span>
+                    </td>
+                </tr>
+                <tr ng-repeat ="x in forms">
+                    <td><a href="{{x.title}}">{{x.title}}</a></td>
+                    <td>
+                        <span class="glyphicon glyphicon-remove" ng-click="deleteForm($index)"></span>
+                        <span class="glyphicon glyphicon-share" ng-click="deleteForm($index)"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>

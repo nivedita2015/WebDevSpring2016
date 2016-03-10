@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="SheetEditorApp">
+<head>
+
+    <link href="css/sheetEditor.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="js/sheet.details.controller.js"></script>
+    <script src="js/sheet.list.controller.js"></script>
+    <script src="js/sheet.service.client.js"></script>
+    <script src="js/cell.service.client.js"></script>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Hello</h1>
+    <div ng-view></div>
+</div>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 main">
-            <h1>Sheets</h1>
+            <h1>Web Page Components</h1>
             <table class="table table-responsive" >
                 <tbody>
                 <tr>
@@ -11,21 +11,21 @@
                                id="title" placeholder="name">
                     </td>
                     <td>
-                        <span class="glyphicon glyphicon-plus" ng-click="addsheet(sheet)"></span>
+                        <span class="glyphicon glyphicon-plus" ng-click="addsheetfield(field)"></span>
                     </td>
                 </tr>
-                <tr ng-repeat ="x in sheets">
-                    <td><a href="#/sheetDetails">{{x.title}}</a></td>
+                <tr ng-repeat ="x in fields">
+                    <td>{{x.title}}</td>
                     <td>
-                        <span class="glyphicon glyphicon-remove" ng-click="deletesheet($index)"></span>
-                        <span class="glyphicon glyphicon-share" ng-click="deletesheet($index)"></span>
+                        <span class="glyphicon glyphicon-remove" ng-click="deletesheetfield($index)"></span>
+                        <span class="glyphicon glyphicon-share" ng-click="deletesheetfield($index)"></span>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    </div>
+</div>
 
 <script>
     $('tbody').sortable();

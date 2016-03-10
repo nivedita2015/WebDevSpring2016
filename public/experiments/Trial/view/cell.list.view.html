@@ -1,0 +1,81 @@
+<html lang="en" ng-app="SheetEditorApp" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/sheetEditor.css" rel="stylesheet">
+    <script src="../../../js/angular.min.js"></script><style type="text/css"></style>
+    <script src="../../../js/angular-route.min.js"></script>
+    <script src="../app.js"></script>
+    <script src="../config.js"></script>
+    <script src="sheet/sheet.details.controller.js"></script>
+    <script src="sheet/sheet.list.controller.js"></script>
+    <script src="services/sheet.service.client.js"></script>
+    <script src="services/cell.service.client.js"></script>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- ngView:  --><div ng-view="" class="ng-scope"><h1 class="ng-scope">Spread Sheet Editor</h1>
+    <h2 class="ng-scope">Sheet Details</h2>
+    <div class="row ng-scope">
+        <div ng-class="model.rightCol">
+            <div>
+                <h5>Visible:</h5>
+                <input type="checkbox" ng-checked="true" id="visible" class="form-control" checked="checked">
+                <br>
+
+                <h5>Read Only:</h5>
+                <input type="checkbox" ng-checked="true" id="editable" class="form-control" checked="checked">
+                <br><br>
+
+                <h4>Style Editor</h4>
+                <select ng-model="model.styleEditor" class="form-control ng-pristine ng-untouched ng-valid">
+                    <option value="">--None--</option>
+                    <option value="h1">Heading 1</option>
+                    <option value="h2">Heading 2</option>
+                    <option value="h3">Heading 3</option>
+                    <option value="label">Label</option>
+                    <option value="p">Text Area</option>
+                </select>
+                <br>
+            </div>
+
+            <h4>Function Editor</h4>
+
+            <select ng-model="model.editor" class="form-control ng-pristine ng-untouched ng-valid"><option value="? undefined:undefined ?"></option>
+                <option value="IF">IF</option>
+                <option value="SUM">SUM</option>
+                <option value="AVERAGE">AVERAGE</option>
+                <option value="MAX">MAX</option>
+                <option value="MIN">MIN</option>
+                <option value="DATE">DATE</option>
+                <option value="LENGTH">LENGTH</option>
+                <option value="REPLACE">REPLACE</option>
+            </select>
+
+            <!-- ngIf: model.editor=='LENGTH' -->
+            <!-- ngIf: model.editor=='REPLACE' -->
+
+            <!-- ngIf: model.editor=='DATE' -->
+
+            <!-- ngIf: model.editor=='MIN' -->
+
+            <!-- ngIf: model.editor=='MAX' -->
+
+            <!-- ngIf: model.editor=='AVERAGE' -->
+
+            <!-- ngIf: model.editor=='SUM' -->
+
+            <!-- ngIf: model.editor=='IF' -->
+            <button ng-click="model.functionCellDone(model.sheet._id,model.sheet.cells[model.functionCellIndex].inputCell1,model.sheet.cells[model.functionCellIndex].inputCell2,model.sheet.cells[model.functionCellIndex].inputCell3,model.editor,model.styleEditor, model.ifoperation,model.sheet.cells[model.functionCellIndex].thenCell,model.sheet.cells[model.functionCellIndex].elseCell)" class="col-sm-6 btn btn-block btn-success top">Done</button>
+            <button ng-click="model.functionCellCancel(model.sheet._id)" class="col-sm-6 btn btn-block btn btn-danger top">Cancel</button>
+        </div>
+    </div></div>
+</div>
+
+</body></html>

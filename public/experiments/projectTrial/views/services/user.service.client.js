@@ -1,100 +1,63 @@
 (function(){
     angular
-        .module("FormBuilderApp")
-        .factory("UserService",UserService);
+        .module("SheetBuilderApp")
+        .factory("SheetService",SheetService);
 
-    function UserService($rootScope) {
+    function SheetService($rootScope) {
         var model = {
-            users: [
+            sheet: [
                 {
-                    "_id": 123, "firstName": "Alice", "lastName": "Wonderland",
-                    "username": "alice", "password": "alice", "roles": ["student"]
+                    "_id": 123
                 },
                 {
-                    "_id": 234, "firstName": "Bob", "lastName": "Hope",
-                    "username": "bob", "password": "bob", "roles": ["admin"]
+                    "_id": 234
                 },
                 {
-                    "_id": 345, "firstName": "Charlie", "lastName": "Brown",
-                    "username": "charlie", "password": "charlie", "roles": ["faculty"]
+                    "_id": 345
                 },
                 {
-                    "_id": 456, "firstName": "Dan", "lastName": "Craig",
-                    "username": "dan", "password": "dan", "roles": ["faculty", "admin"]
+                    "_id": 456
                 },
                 {
-                    "_id": 567, "firstName": "Edward", "lastName": "Norton",
-                    "username": "ed", "password": "ed", "roles": ["student"]
+                    "_id": 567
                 }
             ],
-            createUser: createUser,
-            findUserByCredentials: findUserByCredentials,
-            updateUser: updateUser,
-            setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser,
-            findAllUsers: findAllUsers,
-            deleteUserById: deleteUserById
+            createSheet: createSheet,
+            setCurrentSheet: setCurrentSheet,
+            getCurrentSheet: getCurrentSheet,
+            findAllSheets: findAllSheets,
+            deleteSheetById: deleteSheetById
         };
         return model;
 
-        function setCurrentUser(user) {
-            $rootScope.currentUser = user;
+        function setCurrentSheet(sheet) {
+            $rootScope.currentSheet = sheet;
         }
 
-        function getCurrentUser() {
-            return $rootScope.currentUser;
+        function getCurrentSheet() {
+            return $rootScope.currentSheet;
         }
 
-        function createUser(user, callback) {
-            var new_user = {
-                username: user.username,
-                password: user.password,
+        function createSheet(sheet, callback) {
+            var new_sheet = {
                 _id: (new Date).getTime()
 
             };
-            model.users.push(new_user);
-            callback(new_user);
+            model.sheets.push(new_sheet);
+            callback(new_sheet);
         }
 
-        function findUserByCredentials(username, password, callback) {
 
-            for (var u in model.users) {
-
-                if ((model.users[u].username == username) && (model.users[u].password == password)) {
-
-                    var user = model.users[u];
-                    callback(user);
-                    break;
-                }
-                else {
-                    console.log("nothing found");
-                }
-
-            }
+        function findAllSheets(callback) {
+            callback(model.sheets);
         }
 
-        function findAllUsers(callback) {
-            callback(model.users);
-        }
-
-        function deleteUserById(userId, callback) {
-            for (var u in model.users) {
-                if (model.users[u]._id == userId) {
-                    var temp = model.users[u];
-                     model.users.pop(temp);
-                    callback(model.users);
-                }
-            }
-        }
-
-        function updateUser(userId, user, callback) {
-            for (var u in model.users) {
-                if (model.users[u]._id == userId) {
-                    var newUser = model.users[u];
-                    newUser.firstName = user.firstName;
-                    newUser.lastName = user.lastName;
-                    callback(newUser);
-
+        function deleteSheetById(sheetId, callback) {
+            for (var u in model.sheets) {
+                if (model.sheets[u]._id == sheetId) {
+                    var temp = model.sheets[u];
+                     model.sheets.pop(temp);
+                    callback(model.sheets);
                 }
             }
         }

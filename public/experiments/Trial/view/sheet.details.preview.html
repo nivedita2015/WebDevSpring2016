@@ -1,0 +1,106 @@
+<html lang="en" ng-app="SheetEditorApp" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}</style>
+    <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/sheetEditor.css" rel="stylesheet">
+    <script src="../../../js/angular.min.js"></script><style type="text/css"></style>
+    <script src="../../../js/angular-route.min.js"></script>
+    <script src="../app.js"></script>
+    <script src="../config.js"></script>
+    <script src="sheet/sheet.details.controller.js"></script>
+    <script src="sheet/sheet.list.controller.js"></script>
+    <script src="services/sheet.service.client.js"></script>
+    <script src="services/cell.service.client.js"></script>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <style>
+        .borderless td, .borderless th {
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- ngView:  --><div ng-view="" class="ng-scope"><div class="display ng-scope">
+    <div>
+        <div class="table borderless">
+            <!-- ngRepeat: cell in model.sheet.cells --><div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="ng-scope">
+            <!-- ngIf: cell.visible == true --><div ng-if="cell.visible == true" class="ng-scope">
+            <div ng-show="cell.editable &amp;&amp; cell.editable === true" class="ng-hide">
+                <!-- ngIf: cell.cellStyle != 'p' --><input ng-if="cell.cellStyle != 'p'" ng-model="cell.literal" tabindex="0" class="form-control ng-pristine ng-untouched ng-valid ng-scope"><!-- end ngIf: cell.cellStyle != 'p' -->
+                <!-- ngIf: cell.cellStyle == 'p' -->
+            </div>
+
+            <div ng-show="!cell.editable || cell.editable === false">
+                <!-- ngIf: cell.cellStyle == 'label' -->
+                <!-- ngIf: cell.cellStyle == 'h1' -->
+                <!-- ngIf: cell.cellStyle == 'h2' --><h2 ng-if="cell.cellStyle == 'h2'" class="ng-binding ng-scope">
+                Welcome
+            </h2><!-- end ngIf: cell.cellStyle == 'h2' -->
+                <!-- ngIf: cell.cellStyle == 'h3' -->
+                <!-- ngIf: cell.cellStyle == 'p' -->
+                <!-- ngIf: !cell.cellStyle -->
+            </div>
+        </div><!-- end ngIf: cell.visible == true -->
+            <!--<div ng-if="cell.visible==true && cell.editable == true && cell.cellStyle != 'textarea'">-->
+            <!--<input ng-model="cell.literal"-->
+            <!--ng-readonly="false"-->
+            <!--tabindex="{{$index}}"-->
+            <!--class="form-control"/>-->
+            <!--</div>-->
+
+            <!--<div ng-if="cell.visible==true && cell.editable == false">-->
+            <!--<textarea ng-model="cell.literal"-->
+            <!--class="form-control"/>-->
+            <!--</div>-->
+
+            <!--<div ng-if="cell.visible==true && cell.editable == false && cell.cellStyle != 'textarea'">-->
+            <!--<input ng-model="cell.literal"-->
+            <!--id={{cell.cellStyle}}-->
+            <!--ng-readonly="true"-->
+            <!--tabindex="{{$index}}"-->
+            <!--class="form-control "/>-->
+            <!--</div>-->
+        </div><!-- end ngRepeat: cell in model.sheet.cells --><div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="ng-scope">
+            <!-- ngIf: cell.visible == true --><div ng-if="cell.visible == true" class="ng-scope">
+            <div ng-show="cell.editable &amp;&amp; cell.editable === true" class="ng-hide">
+                <!-- ngIf: cell.cellStyle != 'p' --><input ng-if="cell.cellStyle != 'p'" ng-model="cell.literal" tabindex="1" class="form-control ng-pristine ng-untouched ng-valid ng-scope"><!-- end ngIf: cell.cellStyle != 'p' -->
+                <!-- ngIf: cell.cellStyle == 'p' -->
+            </div>
+
+            <div ng-show="!cell.editable || cell.editable === false">
+                <!-- ngIf: cell.cellStyle == 'label' --><label ng-if="cell.cellStyle == 'label'" class="ng-binding ng-scope">
+                First Assignment
+            </label><!-- end ngIf: cell.cellStyle == 'label' -->
+                <!-- ngIf: cell.cellStyle == 'h1' -->
+                <!-- ngIf: cell.cellStyle == 'h2' -->
+                <!-- ngIf: cell.cellStyle == 'h3' -->
+                <!-- ngIf: cell.cellStyle == 'p' -->
+                <!-- ngIf: !cell.cellStyle -->
+            </div>
+        </div><!-- end ngIf: cell.visible == true -->
+            <!--<div ng-if="cell.visible==true && cell.editable == true && cell.cellStyle != 'textarea'">-->
+            <!--<input ng-model="cell.literal"-->
+            <!--ng-readonly="false"-->
+            <!--tabindex="{{$index}}"-->
+            <!--class="form-control"/>-->
+            <!--</div>-->
+
+            <!--<div ng-if="cell.visible==true && cell.editable == false">-->
+            <!--<textarea ng-model="cell.literal"-->
+            <!--class="form-control"/>-->
+            <!--</div>-->
+
+            <!--<div ng-if="cell.visible==true && cell.editable == false && cell.cellStyle != 'textarea'">-->
+            <!--<input ng-model="cell.literal"-->
+            <!--id={{cell.cellStyle}}-->
+            <!--ng-readonly="true"-->
+            <!--tabindex="{{$index}}"-->
+            <!--class="form-control "/>-->
+            <!--</div>-->
+        </div><!-- end ngRepeat: cell in model.sheet.cells -->
+        </div>
+    </div>
+</div></div>
+</div>
+
+</body></html>

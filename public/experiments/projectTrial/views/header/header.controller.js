@@ -1,15 +1,10 @@
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("SheetBuilderApp")
         .controller("HeaderController", headerController);
 
-    function headerController($location, $scope, UserService) {
+    function headerController($location,$scope) {
         $scope.$location = $location;
-        $scope.logout = logout;
 
-        function logout() {
-            UserService.setCurrentUser(null);
-            $location.url("/home");
-        }
     }
 })();

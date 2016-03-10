@@ -1,60 +1,61 @@
 (function(){
     angular
-        .module("FormBuilderApp")
+        .module("SheetBuilderApp")
         .controller("SheetController",SheetController);
 
-    function SheetController(FormService,$location,$rootScope,$scope){
+    function SheetController(SheetService,$location,$rootScope,$scope){
 
-        $scope.addForm = addForm;
-        $scope.updateForm = updateForm;
-        $scope.deleteForm = deleteForm;
-        $scope.selectForm = selectForm;
+        $scope.addsheet = addsheet;
+        $scope.updatesheet = updatesheet;
+        $scope.deletesheet = deletesheet;
+        $scope.selectsheet = selectsheet;
 
-        function addForm(form){
-            var tempForm;
-            var callback = function(form){
-               tempForm=form;
+
+        function addsheet(sheet){
+            var tempsheet;
+            var callback = function(sheet){
+               tempsheet=sheet;
             };
-            if(form){
-                FormService.createFormForUser($rootScope.currentUser,form,callback);
-                $scope.form = {};
+            if(sheet){
+                SheetService.createsheetForUser(sheet,callback);
+                $scope.sheet = {};
             }
             else {
                 return null;
             }
         }
 
-        function updateForm(form){
+        function updatesheet(sheet){
 
-            var tempform;
-            var callback = function(form){
-                tempform = form;
+            var tempsheet;
+            var callback = function(sheet){
+                tempsheet = sheet;
             };
-            if($rootScope.currentForm){
-                FormService.updateFormById($rootScope.currentForm._id,form,callback);
-                $scope.form = {};
+            if($rootScope.currentsheet){
+                SheetService.updatesheetById($rootScope.currentsheet._id,sheet,callback);
+                $scope.sheet = {};
             }
         }
 
-        function deleteForm($index){
+        function deletesheet($index){
 
-            var tempForms;
+            var tempsheets;
 
-            var callback = function(forms){
-                tempForms = forms;
+            var callback = function(sheets){
+                tempsheets = sheets;
             };
 
-            FormService.deleteFormById($scope.forms[$index]._id,callback);
+            SheetService.deletesheetById($scope.sheets[$index]._id,callback);
         }
 
-        function selectForm($index){
+        function selectsheet($index){
 
-            $scope.form = {
-                _id : $scope.forms[$index]._id,
-                title: $scope.forms[$index].title,
-                userId: $scope.forms[$index].userId
+            $scope.sheet = {
+                _id : $scope.sheets[$index]._id,
+                title: $scope.sheets[$index].title,
+                userId: $scope.sheets[$index].userId
             };
-            $rootScope.currentForm = $scope.form;
+            $rootScope.currentsheet = $scope.sheet;
 
 
         }

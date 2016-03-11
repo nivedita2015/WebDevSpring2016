@@ -11,14 +11,14 @@
                                id="title" placeholder="name">
                     </td>
                     <td>
-                        <span class="glyphicon glyphicon-plus" ng-click="addsheet(sheet)"></span>
+                        <span class="glyphicon glyphicon-plus" ng-click="addSheet(sheet)"></span>
                     </td>
                 </tr>
                 <tr ng-repeat ="x in sheets">
                     <td><a href="#/sheetDetails">{{x.title}}</a></td>
                     <td>
-                        <span class="glyphicon glyphicon-remove" ng-click="deletesheet($index)"></span>
-                        <span class="glyphicon glyphicon-share" ng-click="deletesheet($index)"></span>
+                        <span class="glyphicon glyphicon-remove" ng-click="deleteSheet($index)"></span>
+                        <span class="glyphicon glyphicon-share" onclick="window.open('#/sheetPreview')"></span>
                     </td>
                 </tr>
                 </tbody>

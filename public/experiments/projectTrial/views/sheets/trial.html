@@ -5,6 +5,15 @@
             <h1>Web Page Components</h1>
             <table class="table table-responsive" >
                 <tbody>
+                <tr ng-repeat ="x in fields">
+                    <td>
+                        <input ng-model="field.title" type="" class="form.control" value="{{x.title}}">
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-remove" ng-click="deleteSheetField($index)"></span>
+                        <span class="glyphicon glyphicon-share" ng-click="updateSheetField($index)"></span>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <input ng-model="field.title" type="text" class="form-control"
@@ -12,13 +21,6 @@
                     </td>
                     <td>
                         <span class="glyphicon glyphicon-plus" ng-click="addSheetField(field)"></span>
-                    </td>
-                </tr>
-                <tr ng-repeat ="x in fields">
-                    <td><a href="#fields">{{x.title}}</a></td>
-                    <td>
-                        <span class="glyphicon glyphicon-pencil" ng-click="updateSheetField($index)"></span>
-                        <span class="glyphicon glyphicon-remove" ng-click="deleteSheetField($index)"></span>
                     </td>
                 </tr>
                 </tbody>

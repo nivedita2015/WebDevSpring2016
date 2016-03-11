@@ -5,50 +5,34 @@
 
     function SheetController(SheetService,$location,$rootScope,$scope){
 
-        $scope.addsheet = addsheet;
-        $scope.updatesheet = updatesheet;
-        $scope.deletesheet = deletesheet;
-        $scope.selectsheet = selectsheet;
+        $scope.addSheet = addSheet;
+        $scope.deleteSheet = deleteSheet;
+        $scope.selectSheet = selectSheet;
 
 
-        function addsheet(sheet){
-            var tempsheet;
+        function addSheet(sheet){
+            var tempSheet;
             var callback = function(sheet){
-               tempsheet=sheet;
+                tempSheet=sheet;
             };
-            if(sheet){
-                SheetService.createsheetForUser(sheet,callback);
+
+                SheetService.createSheetForUser(sheet,callback);
                 $scope.sheet = {};
+
             }
-            else {
-                return null;
-            }
-        }
 
-        function updatesheet(sheet){
+        function deleteSheet($index){
 
-            var tempsheet;
-            var callback = function(sheet){
-                tempsheet = sheet;
-            };
-            if($rootScope.currentsheet){
-                SheetService.updatesheetById($rootScope.currentsheet._id,sheet,callback);
-                $scope.sheet = {};
-            }
-        }
-
-        function deletesheet($index){
-
-            var tempsheets;
+            var tempSheets;
 
             var callback = function(sheets){
-                tempsheets = sheets;
+                tempSheets = sheets;
             };
 
-            SheetService.deletesheetById($scope.sheets[$index]._id,callback);
+            SheetService.deleteSheetById($scope.sheets[$index].sheetId,callback);
         }
 
-        function selectsheet($index){
+        function selectSheet($index){
 
             $scope.sheet = {
                 _id : $scope.sheets[$index]._id,
@@ -56,8 +40,6 @@
                 userId: $scope.sheets[$index].userId
             };
             $rootScope.currentsheet = $scope.sheet;
-
-
         }
 
     }

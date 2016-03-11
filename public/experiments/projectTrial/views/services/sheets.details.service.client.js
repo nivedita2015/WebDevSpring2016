@@ -6,43 +6,43 @@
     function SheetDetailsService($rootScope) {
         var model = {
             fields: [
-                {"_id": "000", "title": "Heading", "userId": 123},
-                {"_id": "010", "title": "Heading-2", "userId": 123},
-                {"_id": "020", "title": "Paragraph", "userId": 234}
+                {"_id": "000", "title": "Heading", "sheetId": 123},
+                {"_id": "010", "title": "Heading-2", "sheetId": 123},
+                {"_id": "020", "title": "Paragraph", "sheetId": 234}
             ],
-            createsheetFieldForUser: createsheetFieldForUser,
-            findAllsheetsFieldsForUser: findAllsheetsFieldsForUser,
-            deletesheetFieldById: deletesheetFieldById,
-            updatesheetFieldById: updatesheetFieldById
+            createSheetFieldForUser: createSheetFieldForUser,
+            findAllSheetsFieldsForUser: findAllSheetsFieldsForUser,
+            deleteSheetFieldById: deleteSheetFieldById,
+            updateSheetFieldById: updateSheetFieldById
         };
         $rootScope.fields = model.fields;
         return model;
 
 
-        function setCurrentsheet(field) {
+        function setCurrentSheetField(field) {
             $rootScope.currentsheet = field;
         }
 
-        function getCurrentsheet() {
+        function getCurrentSheetField() {
             return $rootScope.currentsheet;
         }
 
-        function createsheetFieldForUser(userId, field, callback) {
+        function createSheetFieldForUser(sheetId, field, callback) {
             var newField = {
                 _id: (new Date).getTime(),
-                id: userId,
-                title: sheet.title
+                id: sheetId,
+                title: field.title
             };
             model.fields.push(newField);
 
             callback(newField);
         }
 
-        function findAllsheetsFieldsForUser(userId, callback) {
+        function findAllSheetsFieldsForUser(sheetId, callback) {
             var a = [];
             for (var f in model.fields) {
                 var i = 0;
-                if (model.fields[f].userId == userId) {
+                if (model.fields[f].sheetId == sheetId) {
                     a[i] = model.fields[f];
                     i++;
                 }
@@ -50,7 +50,7 @@
             callback(a);
         }
 
-        function deletesheetFieldById(sheetId, callback) {
+        function deleteSheetFieldById(sheetId, callback) {
             for (var f in model.fields) {
                 if (model.fields[f]._id == sheetId) {
                     var fIndex = $rootScope.fields.indexOf(model.fields[f]);
@@ -62,10 +62,10 @@
         }
 
 
-        function updatesheetFieldById(sheetId, newsheet, callback) {
+        function updateSheetFieldById(sheetId, newSheet, callback) {
             for (var f in model.fields) {
                 if (model.fields[f]._id == sheetId) {
-                    model.fields[f].title = newsheet.title;
+                    model.fields[f].title = newSheet.title;
                     var field = model.fields[f];
                     callback(field);
                     break;

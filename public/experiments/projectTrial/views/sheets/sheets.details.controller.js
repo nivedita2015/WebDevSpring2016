@@ -5,50 +5,46 @@
 
     function SheetDetailController(SheetDetailsService,$rootScope,$scope){
 
-        $scope.addsheetfield = addsheetfield;
-        $scope.updatesheetfield = updatesheetfield;
-        $scope.deletesheetfield = deletesheetfield;
-        $scope.selectsheetfield = selectsheetfield;
+        $scope.addSheetField = addSheetField;
+        $scope.updateSheetField = updateSheetField;
+        $scope.deleteSheetField = deleteSheetField;
+        $scope.selectSheetField = selectSheetField;
 
 
-        function addsheetfield(field){
-            var tempsheet;
+        function addSheetField(field){
+            var tempSheet;
             var callback = function(field){
-                tempsheet=field;
+                tempSheet=field;
             };
-            if(field){
-                SheetDetailsService.createsheetFieldForUser($rootScope.currentUser,field,callback);
+
+                SheetDetailsService.createSheetFieldForUser($rootScope.currentsheet,field,callback);
                 $scope.field = {};
-            }
-            else {
-                return null;
-            }
         }
 
-        function updatesheetfield(field){
+        function updateSheetField(field){
 
-            var tempsheet;
+            var tempSheet;
             var callback = function(field){
-                tempsheet = field;
+                tempSheet = field;
             };
             if($rootScope.currentsheet){
-                SheetDetailsService.updatesheetFieldById($rootScope.currentsheet._id,field,callback);
+                SheetDetailsService.updateSheetFieldById($rootScope.currentsheet._id,field,callback);
                 $scope.field = {};
             }
         }
 
-        function deletesheetfield($index){
+        function deleteSheetField($index){
 
-            var tempsheets;
+            var tempSheets;
 
             var callback = function(fields){
-                tempsheets = fields;
+                tempSheets = fields;
             };
 
-            SheetDetailsService.deletesheetFieldById($scope.fields[$index]._id,callback);
+            SheetDetailsService.deleteSheetFieldById($scope.fields[$index]._id,callback);
         }
 
-        function selectsheetfield($index){
+        function selectSheetField($index){
 
             $scope.field = {
                 _id : $scope.fields[$index]._id,

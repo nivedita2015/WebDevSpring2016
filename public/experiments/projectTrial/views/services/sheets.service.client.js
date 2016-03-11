@@ -6,41 +6,43 @@
     function SheetService($rootScope) {
         var model = {
             sheets: [
-                {"_id": "000", "title": "Contacts"},
-                {"_id": "010", "title": "ToDo"},
-                {"_id": "020", "title": "CDs"}
+                {"sheetId": "000", "title": "Contacts"},
+                {"sheetId": "010", "title": "ToDo"},
+                {"sheetId": "020", "title": "CDs"}
             ],
-            createsheetForUser: createsheetForUser,
-            deletesheetById: deletesheetById,
-            updatesheetById: updatesheetById,
-            setCurrentSheet: setCurrentsheet,
-            getCurrentSheet: getCurrentsheet
+            createSheetForUser: createSheetForUser,
+            deleteSheetById: deleteSheetById,
+            updateSheetById: updateSheetById,
+            setCurrentSheet: setCurrentSheet,
+            getCurrentSheet: getCurrentSheet
         };
         $rootScope.sheets = model.sheets;
         return model;
 
 
-        function setCurrentsheet(sheet) {
+        function setCurrentSheet(sheet) {
             $rootScope.currentsheet = sheet;
         }
 
-        function getCurrentsheet() {
+        function getCurrentSheet() {
             return $rootScope.currentsheet;
         }
 
-        function createsheetForUser(sheet, callback) {
-            var newsheet = {
-                _id: (new Date).getTime(),
+        function createSheetForUser(sheet, callback) {
+            var newSheet = {
+                sheetId: (new Date).getTime(),
                 title: sheet.title
             };
-            model.sheets.push(newsheet);
+            model.sheets.push(newSheet);
 
-            callback(newsheet);
+            callback(newSheet);
         }
 
-        function deletesheetById(sheetId, callback) {
+        function deleteSheetById(sheetId, callback) {
+
             for (var f in model.sheets) {
-                if (model.sheets[f]._id == sheetId) {
+                if (model.sheets[f].sheetId == sheetId) {
+                    console.log("inside delete");
                     var fIndex = $rootScope.sheets.indexOf(model.sheets[f]);
                     $rootScope.sheets.splice(fIndex,1);
                     callback(model.sheets);
@@ -50,10 +52,10 @@
         }
 
 
-        function updatesheetById(sheetId, newsheet, callback) {
+        function updateSheetById(sheetId, newSheet, callback) {
             for (var f in model.sheets) {
-                if (model.sheets[f]._id == sheetId) {
-                    model.sheets[f].title = newsheet.title;
+                if (model.sheets[f].sheetId == sheetId) {
+                    model.sheets[f].title = newSheet.title;
                     var sheet = model.sheets[f];
                     callback(sheet);
                     break;

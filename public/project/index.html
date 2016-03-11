@@ -1,41 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="WebPageBuilderApp">
+<html lang="en" ng-app="SheetBuilderApp">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-   <link href="css/dashboard.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src=""></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <script src="app.js"></script>
     <script src="config.js"></script>
-    <!-- <script src="views/services/sheets.service.client.js"></script>
-    <script src="views/services/user.service.client.js"></script>
-    <script src="views/admin/admin.controller.js"></script>
-    <script src="views/forms/fields.controller.js"></script>
-    <script src="views/forms/sheets.controller.js"></script>
+    <script src="views/services/sheets.service.client.js"></script>
+    <script src="views/services/sheets.details.service.client.js"></script>
+    <script src="views/sheets/sheets.controller.js"></script>
+    <script src="views/sheetsDetails/sheets.details.controller.js"></script>
     <script src="views/header/header.controller.js"></script>
     <script src="views/home/home.controller.js"></script>
     <script src="views/main/main.controller.js"></script>
-    <script src="views/sidebar/sidebar.controller.js"></script>
-    <script src="views/users/login.controller.js"></script>
-    <script src="views/users/profile.controller.js"></script>
-    <script src="views/users/register.controller.js"></script> -->
-    <script src="views/header/header.controller.js"></script>
-    <script src="views/home/home.controller.js"></script>
-    <script src="views/main/main.controller.js"></script>
+
     <meta charset="utf-8">
     <title></title>
 </head>
 
 <body ng-controller="MainController">
 <div class="container-fluid">
-    <div ng-include="'views/header/header.view.html'"></div>
+    <div ng-if="" ng-include="'views/header/header.view.html'"></div>
     <div class="row">
+
         <div ng-view>
 
         </div>
     </div>
 </div>
-
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

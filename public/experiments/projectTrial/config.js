@@ -17,7 +17,7 @@
                 })
             .when("/sheetDetails",
                 {
-                    templateUrl: "views/sheets/sheets.details.view.html",
+                    templateUrl: "views/sheetsDetails/sheets.details.view.html",
                     controller: "SheetDetailController"
                 })
             .when("/fields",

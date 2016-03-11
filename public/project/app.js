@@ -1,5 +1,5 @@
 
 (function(){
     angular
-        .module("WebPageBuilderApp",["ngRoute"])
+        .module("SheetBuilderApp",["ngRoute"])
 })();

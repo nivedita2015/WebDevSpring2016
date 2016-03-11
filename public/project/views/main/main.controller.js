@@ -2,7 +2,7 @@
 (function()
 {
     angular
-        .module("WebPageBuilderApp")
+        .module("SheetBuilderApp")
         .controller("MainController",MainController);
     function MainController($rootScope,$location)
     {

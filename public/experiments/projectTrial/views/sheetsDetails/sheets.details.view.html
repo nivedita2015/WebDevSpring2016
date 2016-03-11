@@ -12,12 +12,13 @@
                     </td>
                     <td>
                         <span class="glyphicon glyphicon-plus" ng-click="addSheetField(field)"></span>
+                        <span class="glyphicon glyphicon-ok" ng-click ="updateSheetField(field)"></span>
                     </td>
                 </tr>
                 <tr ng-repeat ="x in fields">
                     <td><a href="#fields">{{x.title}}</a></td>
                     <td>
-                        <span class="glyphicon glyphicon-pencil" ng-click="updateSheetField($index)"></span>
+                        <span class="glyphicon glyphicon-pencil" ng-click="selectSheetField($index)"></span>
                         <span class="glyphicon glyphicon-remove" ng-click="deleteSheetField($index)"></span>
                     </td>
                 </tr>

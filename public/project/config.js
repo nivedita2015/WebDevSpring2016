@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("WebPageBuilderApp")
+        .module("SheetBuilderApp")
         .config(configuration);
 
 
@@ -13,8 +13,27 @@
             .when("/sheets",
                 {
                     templateUrl: "views/sheets/sheets.view.html",
-                    controller: "SheetsController"
-                });
+                    controller: "SheetController"
+                })
+            .when("/sheetDetails",
+                {
+                    templateUrl: "views/sheetsDetails/sheets.details.view.html",
+                    controller: "SheetDetailController"
+                })
+            .when("/fields",
+                {
+                    templateUrl: "views/sheets/fields.view.html",
+                    controller: "FieldController"
+                })
+            .when("/sheetPreview",
+                {
+                    templateUrl: "views/sheets/preview.view.html",
+
+                })
+            .otherwise({
+                    redirectTo: "/home"
+
+            });
 
     }
 })();

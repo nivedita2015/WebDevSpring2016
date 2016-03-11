@@ -1,8 +1,10 @@
 (function(){
     angular
-        .module("WebPageBuilderApp")
+        .module("SheetBuilderApp")
         .controller("HeaderController", headerController);
 
-    function headerController() {
+    function headerController($location,$scope) {
+        $scope.$location = $location;
+
     }
 })();

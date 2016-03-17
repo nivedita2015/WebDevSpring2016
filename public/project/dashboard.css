@@ -5,6 +5,12 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
+    /*color: #9c27b0;*/
+    color: #ffdbb6;
+    font-style: bold;
+    font-family: "Comic Sans MS";
+
+
 }
 
 table {
@@ -17,6 +23,15 @@ td {
 /*
  * Global add-ons
  */
+
+
+/*---------HOMEPAGE-------------*/
+
+.home {
+    background: url("");
+}
+
+
 
 .sub-header {
     padding-bottom: 10px;
@@ -131,5 +146,26 @@ td {
 
 .row {
 
-    padding-left: 20px;
+    padding: 20px;
+
+
 }
+
+.blue {
+    color: #a3bfff;
+
+}
+
+
+.displayPic {
+    background: url("colorPic.jpg");
+}
+
+.noPic {
+    background: white;
+}
+
+/*.transPic {*/
+    /*background-color: #fff;*/
+    /*background-color: rgba(30,80,100,0.6);*/
+/*}*/

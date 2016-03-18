@@ -19,22 +19,15 @@ module.exports = function() {
     return api;
 
     function createUser(user) {
-        console.log(user);
-        var new_user = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            username: user.username,
-            password: user.password,
-            _id: (new Date).getTime()
-
-        };
-
-        mock.push(new_user);
+       // console.log(user);
+        user._id = "ID_" + (new Date()).getTime();
+        mock.push(user);
+        //return user;
         return mock;
     }
 
     function findAllUsers(){
-        console.log("inside findAllUsers");
+       // console.log("inside findAllUsers");
         return mock;
     }
 
@@ -50,20 +43,30 @@ module.exports = function() {
 
     function updateUser(id,user){
 
-        var idx = mock.indexOf(id);
-        mock[idx].username = user.username;
-        mock[idx].firstName = user.firstName;
-        mock[idx].lastName = user.lastName;
+       // console.log("inside model updateUser");
+       // console.log(mock);
+
+        for( var i in mock){
+            if(mock[i]._id==id){
+                mock[i].firstName=user.firstName;
+                mock[i].lastName=user.lastName;
+            }
+        }
 
         return mock;
+
+
     }
 
     function deleteUserById(id){
 
         var u = findById(id);
-        var idx = mock.indexOf(u);
-        mock.splice(idx,1);
-        return mock;
+        for(var i in mock){
+            if(mock[i]._id==id){
+                mock.splice(i,1);
+                return mock;
+            }
+        }
 
     }
 
@@ -80,20 +83,12 @@ module.exports = function() {
 
     function findUserByCredentials(cred) {
 
-        console.log("inside user.model.js");
-
-
+        //console.log(cred.username);
         for (var u in mock) {
-
             if ((mock[u].username == cred.username) && (mock[u].password == cred.password)) {
-
                 var user = mock[u];
                 return user;
             }
-            else {
-                return null;
-            }
-
         }
     }
 };

@@ -5,21 +5,25 @@
 
     function profileController($scope, UserService, $location) {
 
-        $scope.error = null;
-        $scope.message = null;
+        var vm = this;
+        vm.updateUser = updateUser;
+        console.log("inside profile controller");
+        vm.error = null;
+        vm.message = null;
 
-        $scope.currentUser = UserService.getCurrentUser();
+        console.log(UserService.getCurrentUser());
+
+        vm.currentUser = UserService.getCurrentUser();
         if (!$scope.currentUser) {
             $location.url("/home");
         }
 
-        var vm = this;
-        vm.updateUser = updateUser;
-
         function updateUser(user){
-            UserService.updateUser(user).then(
+            console.log("profile controller update");
+
+            UserService.updateUser(vm.currentUser._id,user).then(
                 function (response){
-                    UserService.setCurrentUser($scope.currentUser);
+                    UserService.setCurrentUser(vm.currentUser);
                     $location.url("/profile");
                 });
         }

@@ -38,7 +38,7 @@
         }
 
         function findUserByCredentials(username, password) {
-            console.log("inside user.service.client.js");
+            //console.log("inside user.service.client.js");
 
             return $http.get("/api/assignment/user?username="+username+"&password="+password);
 
@@ -56,6 +56,7 @@
         }
 
         function updateUser(userId, user) {
+            console.log("user service client update");
 
            return $http.put("/api/assignment/user/"+userId,user);
 

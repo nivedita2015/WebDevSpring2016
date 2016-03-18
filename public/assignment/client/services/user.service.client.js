@@ -40,7 +40,7 @@
         function findUserByCredentials(username, password) {
             console.log("inside user.service.client.js");
 
-            return $http.get("/api/assignment/user?username=alice&password=wonderland",username,password);
+            return $http.get("/api/assignment/user?username="+username+"&password="+password);
 
         }
 

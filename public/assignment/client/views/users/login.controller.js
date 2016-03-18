@@ -13,15 +13,6 @@
         }
         init();
 
-        //function login(user) {
-        //    console.log("inside login.controller.js");
-        //    UserService.findUserByCredentials(user.username,user.password).then(
-        //        function(response){
-        //            $rootScope.currentUser=response;
-        //            $location.url("/profile");
-        //        });
-        //}
-
         function login(user) {
             if(!user) {
 
@@ -29,10 +20,7 @@
                 return;
             }
             UserService
-                .findUserByCredentials({
-                    username: user.username,
-                    password: user.password
-                })
+                .findUserByCredentials(user.username,user.password)
                 .then(function(response){
                     if(response.data) {
                         UserService.setCurrentUser(response.data);
@@ -42,23 +30,4 @@
                 });
         }
     }
-
-    //   $scope.login = login;
-    //
-    //    function login (user) {
-    //        var tempUser;
-    //        var callback = function(user){
-    //            tempUser=user;
-    //        }
-    //
-    //        UserService.findUserByCredentials(user.username,user.password,callback);
-    //        console.log(tempUser);
-    //        if (tempUser) {
-    //            $rootScope.currentUser = tempUser;
-    //            UserService.setCurrentUser(tempUser);
-    //            $location.url("/profile");
-    //        }
-    //        else console.log("Not found");
-    //    }
-    //}
 })();

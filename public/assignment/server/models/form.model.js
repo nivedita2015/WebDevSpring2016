@@ -6,7 +6,8 @@ module.exports = function() {
     var api = {
 
         findFormByTitle: findFormByTitle,
-        createForm: createForm,
+        findAllFormsForUser:findAllFormsForUser,
+        createFormForUser: createFormForUser,
         updateForm: updateForm,
         findAll: findAll,
         findById: findById,
@@ -16,11 +17,11 @@ module.exports = function() {
     };
     return api;
 
-    function createForm(form) {
+    function createFormForUser(userId,form) {
         var new_form = {
             _id: (new Date).getTime(),
             title: form.title,
-            userId: form.userId
+            userId: userId
         };
 
         mock.push(new_form);
@@ -65,6 +66,18 @@ module.exports = function() {
             }
         }
         return null;
+    }
+
+    function findAllFormsForUser(userId) {
+        var a = [];
+        for (var f in mock) {
+            var i = 0;
+            if (mock[f].userId == userId) {
+                a[i] = mock[f];
+                i++;
+            }
+        }
+        return a;
     }
 
 };

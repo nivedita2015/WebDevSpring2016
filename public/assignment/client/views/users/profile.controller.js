@@ -13,21 +13,15 @@
             $location.url("/home");
         }
 
-        $scope.updateUser = updateUser;
+        var vm = this;
+        vm.updateUser = updateUser;
 
-        function updateUser (user) {
-            // same validation as register
-            $scope.error = null;
-            $scope.message = null;
-
-            $scope.currentUser = UserService.updateUser(user);
-
-            if (user) {
-                $scope.message = "User updated successfully";
-                UserService.setCurrentUser($scope.currentUser);
-            } else {
-                $scope.message = "Unable to update the user";
-            }
+        function updateUser(user){
+            UserService.updateUser(user).then(
+                function (response){
+                    UserService.setCurrentUser($scope.currentUser);
+                    $location.url("/profile");
+                });
         }
     }
 })();

@@ -1,6 +1,7 @@
 
 var mock = require ("./user.mock.json");
 
+
 module.exports = function() {
 
     var api = {
@@ -9,9 +10,9 @@ module.exports = function() {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
         updateUser: updateUser,
-        findAll: findAll,
+        findAllUsers: findAllUsers,
         findById: findById,
-        deleteUser: deleteUser
+        deleteUserById: deleteUserById
 
 
     };
@@ -24,13 +25,14 @@ module.exports = function() {
             username: user.username,
             password: user.password,
             _id: (new Date).getTime()
+
         };
 
         mock.push(new_user);
         return mock;
     }
 
-    function findAll(){
+    function findAllUsers(){
         return mock;
     }
 
@@ -54,7 +56,7 @@ module.exports = function() {
         return mock;
     }
 
-    function deleteUser(id){
+    function deleteUserById(id){
 
         var u = findById(id);
         var idx = mock.indexOf(u);
@@ -74,15 +76,22 @@ module.exports = function() {
         return null;
     }
 
-    function findUserByCredentials(credentials) {
+    function findUserByCredentials(username,password) {
 
-        for(var i in mock){
-            if(mock[i].username==credentials.username
-                &&
-                mock[i].password == credentials.password){
-                return mock[i];
+        console.log("inside user.model.js");
+
+
+        for (var u in mock) {
+
+            if ((mock[u].username == username) && (mock[u].password == password)) {
+
+                var user = mock[u];
+                return user;
             }
+            else {
+                return null;
+            }
+
         }
-        return null;
     }
 };

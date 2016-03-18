@@ -82,23 +82,13 @@
                 console.log("no user for registration");
                 return;
             }
-
                 UserService
-                    .findUserByCredentials(user.username,user.password)
+                    .createUser(user)
                     .then(function(response){
-                        if(response.data){
-                            console.log("user already exists");
-                        }
-                        else {
-                            UserService
-                                .createUser(user)
-                                .then(function(response){
-                                    var currentUser = response.data;
-                                    if(currentUser != null) {
-                                        UserService.setCurrentUser(currentUser);
-                                        $location.url("/profile");
-                                    }}
-                                    );
+                        var currentUser = response.data;
+                        if(currentUser != null) {
+                            UserService.setCurrentUser(currentUser);
+                            $location.url("/profile");
                         }
                     });
         }

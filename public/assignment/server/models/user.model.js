@@ -19,6 +19,7 @@ module.exports = function() {
     return api;
 
     function createUser(user) {
+        console.log(user);
         var new_user = {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -33,6 +34,7 @@ module.exports = function() {
     }
 
     function findAllUsers(){
+        console.log("inside findAllUsers");
         return mock;
     }
 
@@ -76,14 +78,14 @@ module.exports = function() {
         return null;
     }
 
-    function findUserByCredentials(username,password) {
+    function findUserByCredentials(cred) {
 
         console.log("inside user.model.js");
 
 
         for (var u in mock) {
 
-            if ((mock[u].username == username) && (mock[u].password == password)) {
+            if ((mock[u].username == cred.username) && (mock[u].password == cred.password)) {
 
                 var user = mock[u];
                 return user;

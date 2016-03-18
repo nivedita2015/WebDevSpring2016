@@ -8,10 +8,10 @@ module.exports = function() {
         findFormByTitle: findFormByTitle,
         findAllFormsForUser:findAllFormsForUser,
         createFormForUser: createFormForUser,
-        updateForm: updateForm,
-        findAll: findAll,
+        updateFormById: updateFormById,
+        //findAll: findAll,
         findById: findById,
-        deleteForm: deleteForm
+        deleteFormById: deleteFormById
 
 
     };
@@ -28,9 +28,9 @@ module.exports = function() {
         return mock;
     }
 
-    function findAll(){
-        return mock;
-    }
+    //function findAll(){
+    //    return mock;
+    //}
 
     function findById(id){
 
@@ -42,14 +42,14 @@ module.exports = function() {
         return null;
     }
 
-    function updateForm(id,form){
+    function updateFormById(id,form){
 
         var idx = mock.indexOf(id);
         mock[idx].title = form.title;
         return mock;
     }
 
-    function deleteForm(id){
+    function deleteFormById(id){
 
         var u = findById(id);
         var idx = mock.indexOf(u);

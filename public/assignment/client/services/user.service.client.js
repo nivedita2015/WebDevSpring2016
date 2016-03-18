@@ -3,7 +3,7 @@
         .module("FormBuilderApp")
         .factory("UserService",UserService);
 
-    function UserService($rootScope,$http) {
+    function UserService($http,$rootScope) {
         var api = {
 
             createUser: createUser,
@@ -27,26 +27,26 @@
 
         function findUserByUsername(username){
 
-            $http.get("/api/assignment/user?username=username",username);
+            return $http.get("/api/assignment/user?username=username",username);
            
         }
 
         function createUser(user) {
 
-            $http.post("/api/assignment/user",user);
+            return $http.post("/api/assignment/user",user);
 
         }
 
         function findUserByCredentials(username, password) {
             console.log("inside user.service.client.js");
 
-            $http.get("/api/assignment/user?username=alice&password=wonderland",username,password);
+            return $http.get("/api/assignment/user?username=alice&password=wonderland",username,password);
 
         }
 
         function findAllUsers() {
 
-            $http.get("/api/assignment/user");
+            return $http.get("/api/assignment/user");
 
         }
 
@@ -57,7 +57,7 @@
 
         function updateUser(userId, user) {
 
-            $http.put("/api/assignment/user/"+userId,user);
+           return $http.put("/api/assignment/user/"+userId,user);
 
         }
     }

@@ -57,22 +57,10 @@
                     $rootScope.forms.splice(fIndex,1);
                     callback(model.forms);
                     break;
-
-
-                    //var temp = model.forms[f];
-                    //model.forms.pop(temp);
-                    //callback(model.forms);
-                    //break;
                 }
             }
         }
 
-
-        function deleteMovie(movie) {
-            var index = $scope.movies.indexOf(movie);
-            console.log("deleteMovie: " + index);
-            $scope.movies.splice(index, 1);
-        }
 
         function updateFormById(formId, newForm, callback) {
             for (var f in model.forms) {

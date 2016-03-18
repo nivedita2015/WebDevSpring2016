@@ -6,18 +6,18 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="username">Username:</label>
                     <div class="col-sm-10">
-                        <input ng-model="user.username" type="text" class="form-control"
+                        <input ng-model="model.user.username" type="text" class="form-control"
                                id="username" placeholder="johndoe"></div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2" for="password">Password:</label>
                     <div class="col-sm-10">
-                        <input ng-model="user.password" type="password" class="form-control"
+                        <input ng-model="model.user.password" type="password" class="form-control"
                                id="password" placeholder="p@ssw0rd"></div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button ng-click="login(user)" class="btn btn-primary btn-block">
+                        <button ng-click="model.login(model.user)" class="btn btn-primary btn-block">
                             Login
                         </button>
                     </div>

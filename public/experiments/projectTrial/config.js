@@ -22,7 +22,7 @@
                 })
             .when("/fields",
                 {
-                    templateUrl: "views/sheets/fields.view.html",
+                    templateUrl: "views/sheets/fields1.view.html",
                     controller: "FieldController"
                 })
             .when("/sheetPreview",

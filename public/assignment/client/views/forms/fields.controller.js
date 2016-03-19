@@ -1,3 +1,9 @@
-/**
- * Created by Nivi on 19/02/16.
- */
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("FieldController",FieldController);
+
+    function FieldController(FormService,$location,$rootScope,$scope){
+    }
+
+})();

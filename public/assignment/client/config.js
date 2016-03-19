@@ -41,7 +41,7 @@
                 })
             .when("/fields",
                 {
-                    templateUrl: "views/forms/fields.view.html",
+                    templateUrl: "views/forms/fields1.view.html",
 
                 })
             .otherwise({

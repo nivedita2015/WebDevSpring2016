@@ -12,9 +12,40 @@
             </ul>
             <table class="table table-striped table-bordered table-responsive">
                 <tr ng-repeat="field in model.fields">
-                    <ng-switch on="field.field" ng-model="model.field.field">
-                        <div
-                    </ng-switch>
+                    <td>
+                        {{field.label}}
+                    </td>
+                    <td align="right">
+                            <span
+                                   class="glyphicon glyphicon-remove">
+                            </span>
+                            <span
+                                  class="glyphicon glyphicon-pencil"></span>
+                    </td>
+                </tr>
+
+
+
+                <!-- drop down menu -->
+                <tr>
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <label class="control-label">Add New Field:</label>
+                        <select name="field" class="form-control beta" ng-model="model.fieldType">
+                            <option value="m">Single Line Text</option>
+                            <option value="m">Multi Line Text</option>
+                            <option value="f">Date Field</option>
+                            <option value="f">Dropdown Field</option>
+                            <option value="f">Checkboxes Field</option>
+                            <option value="f">Radio buttons Field</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-default btn-lg">
+                            <span class="glyphicon glyphicon-plus" ng-click="model.addField(model.fieldType)"></span>
+                        </button>
+                    </div>
+                </div>
                 </tr>
 
             </table>

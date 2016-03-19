@@ -6,6 +6,11 @@
 
     function configuration($routeProvider) {
         $routeProvider
+            .when("/form/:formId/fields", {
+                templateUrl: "views/forms/fields.view.html",
+                controller: "FieldController",
+                controllerAs: "model"
+            })
             .when("/home",
                 {
                     templateUrl: "views/home/home.view.html"
@@ -41,9 +46,12 @@
                 })
             .when("/fields",
                 {
-                    templateUrl: "views/forms/fields1.view.html",
+                    templateUrl: "views/forms/field.view.html",
+                    controller: "FieldController",
+                    controllerAs: "model"
 
                 })
+
             .otherwise({
                     redirectTo: "/home"
 

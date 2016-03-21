@@ -1,11 +1,10 @@
 module.exports = function(app, formModel) {
+
     app.get("/api/assignment/form/:formId/field", getFieldsOfForm);
     app.get("/api/assignment/form/:formId/field/:fieldId", getFieldOfForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldFromForm);
     app.post("/api/assignment/form/:formId/field", createFieldInForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldInForm);
-
-    console.log("inside");
 
     function getFieldsOfForm(req, res){
         console.log("inside server service");
@@ -25,14 +24,18 @@ module.exports = function(app, formModel) {
     function deleteFieldFromForm(req, res){
         var fieldId = req.params.fieldId;
         var formId = req.params.formId;
-        formModel.deleteFieldFromForm(fieldId,formId);
+        return formModel.deleteFieldFromForm(fieldId,formId);
     };
 
     function createFieldInForm(req, res){
+
+        console.log("inside createFieldForForm server service");
+
         var newField = req.body;
         var formId = req.params.formId;
         newField._id = (new Date).getTime();
-        formModel.createFieldInForm(formId, newField);
+        var createdField = formModel.createFieldInForm(formId, newField);
+        res.send(createdField);
     };
 
     function updateFieldInForm(req, res){

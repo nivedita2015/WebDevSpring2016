@@ -79,18 +79,11 @@ module.exports = function(app){
         var formsForUser = [];
         var form;
         for (var index in mockForms) {
-            form = mockForms[index];
-            console.log("form.userId Value is");
-            console.log(form.userId);
-            console.log("userId value");
-            console.log(userId);
-            console.log(form.userId == userId);
-            if (form.userId == userId) {
-                console.log("entered if condition");
-                formsForUser.push(form);
+            if (mockForms[index].userId == userId) {
+
+                formsForUser.push(mockForms[index]);
             }
         }
-        console.log(formsForUser);
         return formsForUser;
 
     };
@@ -132,16 +125,20 @@ module.exports = function(app){
             field = form.fields[index];
             if( field._id === fieldId){
                 form.fields.splice(index, 1);
-                break;
+                return form.fields;
             }
         }
     };
 
 
     function createFieldInForm(formId, newField){
+
+        console.log("inside createFieldForForm  model");
+
         var form = findFormById(formId);
-        newField._id = (new Date).getTime();
+        newField._id = "id_"+(new Date).getTime();
         form.fields.push(newField);
+        return newField;
     };
 
     function updateFieldInForm(formId, fieldId, updatedField){

@@ -1,0 +1,168 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="title">{{model.currentForm.title}}</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/forms">Forms</a></li>
+                <li role="presentation" class="active"><a href="#/forms">Fields</a></li>
+            </ul>
+            <div>
+                <form ng-model="model.fields">
+                <div  class="form-group" ng-switch="field.type" ng-repeat="field in model.fields">
+                    <div ng-switch-when="TEXT" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div>
+                            <input type="text"
+                                   placeholder="{{field.placeholder}}"
+                                   class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <!--<span class="glyphicon glyphicon-pencil"-->
+                                  <!--ng-click="model.editField(field)"-->
+                                  <!--data-toggle="modal" data-target="#myModal"></span>-->
+                            <!--<a href="/assignment/client/views/forms/modal.html" data-toggle="modal" data-target="#myModal">-->
+                            <span class="glyphicon glyphicon-pencil" data-target="#myModal" data-toggle="modal" ng-click="model.open()"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        </br>
+                    </div>
+
+                    <div ng-switch-when="TEXTAREA" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div>
+                            <textarea class="col-sm-6" placeolder="{{field.placeholder}}"></textarea>
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <span class="glyphicon glyphicon-pencil"
+                                  ng-click="model.editField(field)"
+                                  data-toggle="modal" data-target="#myModal"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div ng-switch-when="DATE" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div>
+                            <input type="date"
+                                   placeholder={{field.placeholder}}
+                                   class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <span class="glyphicon glyphicon-pencil"
+                                  ng-click="model.editField(field)"
+                                  data-toggle="modal" data-target="#myModal"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div ng-switch-when="OPTIONS" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div>
+                            <select class="col-sm-6">
+                                <option ng-repeat="option in field.options">{{option.label}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <span class="glyphicon glyphicon-pencil"
+                                  ng-click="model.editField(field)"
+                                  data-toggle="modal" data-target="#myModal"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div ng-switch-when="CHECKBOXES" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div class="checkbox-group col-sm-6" ng-repeat="checkbox in field.options">
+                            <input type="checkbox" value="{{checkbox.value}}"/>{{checkbox.label}}<br/>
+                        </div>
+                        <br/>
+                        <div class="col-sm-6" align="right">
+                            <span class="glyphicon glyphicon-pencil"
+                                  ng-click="model.editField(field)"
+                                  data-toggle="modal" data-target="#myModal"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <div ng-switch-when="RADIOS" class="form-group">
+                        <label>{{field.label}}</label>
+                        <br/>
+                        <div class="radio-group col-sm-6" ng-repeat="radio in field.options">
+                            <input type="radio">{{radio.label}}<br/>
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <span class="glyphicon glyphicon-pencil"
+                                  ng-click="model.editField(field)"
+                                  data-toggle="modal" data-target="#myModal"></span>
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span class="glyphicon glyphicon-remove"
+                                  ng-click="model.removeField(field)"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="form-group dropdown">
+                    <label>Add New Field:</label>
+                    <br/>
+                    <div>
+                        <select class="col-sm-6" ng-model="model.fieldType">
+                            <option value="TEXT" selected>Single Text Field</option>
+                            <option value="TEXTAREA">Paragraph Text Field</option>
+                            <option value="DATE">Date</option>
+                            <option value="DROPDOWN">Dropdown</option>
+                            <option value="CHECKBOXES">Checkboxes</option>
+                            <option value="RADIOS">Radio buttons</option>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-sm-offset-4" align="center">
+                        <span ng-click="model.addField(model.fieldType)" class="glyphicon glyphicon-plus"></span>
+                    </div>
+                    <br/>
+                </div>
+    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" ng-include="modal.html">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

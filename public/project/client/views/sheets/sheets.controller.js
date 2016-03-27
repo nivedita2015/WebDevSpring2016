@@ -14,7 +14,7 @@
         vm.selectSheet = selectSheet;
 
         function init(){
-            SheetService.findAllSheets.then(function (response){
+            SheetService.findAllSheets().then(function (response){
                 vm.sheets = response.data;
             });
         }

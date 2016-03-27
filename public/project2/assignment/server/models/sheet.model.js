@@ -9,11 +9,11 @@ module.exports = function(app){
         deleteSheet: deleteSheet,
         findSheetByTitle: findSheetByTitle,
         findSheetsForUser: findSheetsForUser,
-        findAllSheetDetailsInSheet: findAllSheetDetailsInSheet,
-        findSheetDetailInSheet: findSheetDetailInSheet,
-        deleteSheetDetailFromSheet: deleteSheetDetailFromSheet,
-        createSheetDetailInSheet: createSheetDetailInSheet,
-        updateSheetDetailInSheet: updateSheetDetailInSheet
+        findAllComponentsInSheet: findAllComponentsInSheet,
+        findComponentInSheet: findComponentInSheet,
+        deleteComponentFromSheet: deleteComponentFromSheet,
+        createComponentInSheet: createComponentInSheet,
+        updateComponentInSheet: updateComponentInSheet
     };
 
     return api;
@@ -26,7 +26,6 @@ module.exports = function(app){
     };
 
     function findAllSheets () {
-        console.log("inside model.js");
         return mockSheets;
     };
 
@@ -74,65 +73,80 @@ module.exports = function(app){
         return null;
     };
 
-    //functions for sheetDetails of the sheet
-    function findAllSheetDetailsInSheet(sheetId){
+    function findSheetsForUser(userId) {
+        console.log("entred find sheets for user in sheet model server");
+        console.log("userId is " + userId);
+        var sheetsForUser = [];
+        var sheet;
+        for (var index in mockSheets) {
+            if (mockSheets[index].userId == userId) {
+
+                sheetsForUser.push(mockSheets[index]);
+            }
+        }
+        return sheetsForUser;
+
+    };
+
+    //functions for components of the sheet
+    function findAllComponentsInSheet(sheetId){
 
         console.log("inside sheet model");
-        var sheetDetails = [];
+        var components = [];
         var sheet;
         for(var index in mockSheets){
             sheet = mockSheets[index];
             if(sheet._id=== sheetId){
-                sheetDetails = sheet.sheetDetails;
-                return sheetDetails;
+                components = sheet.components;
+                return components;
                 break;
             }
         }
         return null;
     };
 
-    function findSheetDetailInSheet(sheetDetailId, sheetId){
-        var sheetDetail;
+    function findComponentInSheet(componentId, sheetId){
+        var component;
         var sheet = findSheetById(sheetId);
-        for(var index in sheet.sheetDetails){
-            sheetDetail = sheet.sheetDetails[index];
-            if(sheetDetail._id === sheetDetailId){
-                return sheetDetail;
+        for(var index in sheet.components){
+            component = sheet.components[index];
+            if(component._id === componentId){
+                return component;
                 break;
             }
         }
         return null;
     };
 
-    function deleteSheetDetailFromSheet(sheetDetailId, sheetId){
-        var sheetDetail;
+    function deleteComponentFromSheet(componentId, sheetId){
+        var component;
         var sheet = findSheetById(sheetId);
-        for (var index in sheet.sheetDetails){
-            sheetDetail = sheet.sheetDetails[index];
-            if( sheetDetail._id === sheetDetailId){
-                sheet.sheetDetails.splice(index, 1);
-                return sheet.sheetDetails;
+        for (var index in sheet.components){
+            component = sheet.components[index];
+            if( component._id === componentId){
+                sheet.components.splice(index, 1);
+                return sheet.components;
             }
         }
     };
 
 
-    function createSheetDetailInSheet(sheetId, newSheetDetail){
+    function createComponentInSheet(sheetId, newComponent){
 
-        console.log("inside createSheetDetailForSheet  model");
+        console.log("inside createComponentForSheet  model");
 
         var sheet = findSheetById(sheetId);
-        newSheetDetail._id = "id_"+(new Date).getTime();
-        sheet.sheetDetails.push(newSheetDetail);
-        return newSheetDetail;
+        newComponent._id = "id_"+(new Date).getTime();
+        sheet.components.push(newComponent);
+        return newComponent;
     };
 
-    function updateSheetDetailInSheet(sheetId, sheetDetailId, updatedSheetDetail){
+    function updateComponentInSheet(sheetId, componentId, updatedComponent){
         var sheet = findSheetById(sheetId);
-        var sheetDetail;
-        for(var index in sheet.sheetDetails){
-            if(sheet.sheetDetails[index]._id === sheetDetailId){
-                sheet.sheetDetails[index] = updatedSheetDetail;
+        var component;
+        for(var index in sheet.components){
+            if(sheet.components[index]._id === componentId){
+                sheet.components[index] = updatedComponent;
                 break;
             }
         }

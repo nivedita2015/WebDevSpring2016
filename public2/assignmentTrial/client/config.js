@@ -46,7 +46,7 @@
                 })
             //.when("/fields",
             //    {
-            //        templateUrl: "views/forms/field.view.html",
+            //        templateUrl: "views/forms/components.view.html",
             //        controller: "FieldController",
             //        controllerAs: "model"
             //

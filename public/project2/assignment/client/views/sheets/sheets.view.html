@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="title">Sheets</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#/sheets">Sheets</a></li>
+                <li role="presentation"><a href="#/sheets">Fields</a></li>
+            </ul>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                            Sheet-Name
+                        </th>
+                        <th>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                            Action
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" ng-model="model.sheet.title" placeholder="Name" id="title" class="sheet-control">
+                        </td>
+                        <td align="right">
+                            <span class="glyphicon glyphicon-plus" ng-click="model.addSheet(model.sheet)"></span>
+                            <span  class="glyphicon glyphicon-ok" ng-click="model.updateSheet(model.sheet)"></span>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="sheet in model.sheets">
+                        <td><a href="#/sheet/{{sheet._id}}/fields">
+                                {{sheet.title}}
+                            </a>
+                        </td>
+                        <td align="right">
+                            <span  ng-click="model.deleteSheet(sheet)" class="glyphicon glyphicon-remove">
+                            </span>
+                            <span ng-click="model.selectSheet($index)" class="glyphicon glyphicon-pencil"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

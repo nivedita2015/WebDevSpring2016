@@ -32,6 +32,7 @@
 
 
         function addSheet(sheet){
+            console.log("add sheet controller");
             SheetService.createSheet(sheet).then(function (response){
                 init();
             });

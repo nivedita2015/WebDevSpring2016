@@ -1,4 +1,5 @@
 module.exports = function(app, sheetModel) {
+    console.log("hello");
     app.get("/api/project/sheet", getAllSheets);
     //app.get("/api/project/sheet/:sheetId", getSheetById);
     app.delete("/api/project/sheet/:sheetId", deleteSheetById);
@@ -44,6 +45,8 @@ module.exports = function(app, sheetModel) {
     };
 
     function getAllSheets(req, res){
+
+        console.log("inside server.js");
         var allSheets = [];
         allSheets = sheetModel.findAllSheets();
         res.send(allSheets);

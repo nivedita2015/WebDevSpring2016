@@ -1,4 +1,7 @@
 module.exports = function(app, formModel) {
+
+    console.log("form service server");
+
     app.get("/api/assignment/user/:userId/form", getFormsForUser);
     app.get("/api/assignment/form/:formId", getFormById);
     app.delete("/api/assignment/form/:formId", deleteFormById);
@@ -18,8 +21,10 @@ module.exports = function(app, formModel) {
     };
 
     function getFormById(req, res){
+        console.log("inside form service server"+ req.params.formId);
         var formId = req.params.formId;
         var form = formModel.findFormById(formId);
+        console.log(form);
         res.send(form);
     };
 

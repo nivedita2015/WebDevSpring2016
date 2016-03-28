@@ -12,7 +12,8 @@
             updateFormById: updateFormById,
             setCurrentForm: setCurrentForm,
             getCurrentForm: getCurrentForm,
-            getCurrentForms: getCurrentForms
+            getCurrentForms: getCurrentForms,
+            findFormById: findFormById
         };
         //$rootScope.sheets = formsApi.sheets;
         return formsApi;
@@ -45,5 +46,9 @@
         function updateFormById(formId, newForm){
             return $http.put("/api/assignment/form/"+ formId, newForm);
         };
+
+        function findFormById(formId){
+            return $http.get("/api/assignment/formId?formId=formId",formId);
+        }
     }
 })();

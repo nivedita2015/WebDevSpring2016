@@ -33,7 +33,6 @@ module.exports = function(app){
         for (var index in mockForms) {
             if (mockForms[index]._id === formId) {
                 return mockForms[index];
-                break;
             }
         }
         return null;

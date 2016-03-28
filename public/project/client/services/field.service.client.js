@@ -6,18 +6,31 @@
 
     function FieldService($rootScope, $http){
         var fieldsApi = {
-            findMyForm: findMyForm,
             createFieldForForm: createFieldForForm,
-            getFieldsForForm: getFieldsForForm,
-            getFieldForForm: getFieldForForm,
-            deleteFieldFromForm: deleteFieldFromForm,
-            updateField: updateField
+            findAllFieldsForForm: findAllFieldsForForm,
+            deleteFieldById: deleteFieldById,
+            updateFieldById: updateFieldById,
+            setCurrentField: setCurrentField,
+            getCurrentField: getCurrentField,
+            getCurrentFields: getCurrentFields,
+            findMyForm : findMyForm,
+            getFieldsForForm: getFieldsForForm
         };
-
+        //$rootScope.sheets = fieldsApi.sheets;
         return fieldsApi;
 
+        function setCurrentField(field){
+            $rootScope.currentField= field;
+        }
+
+        function getCurrentField(){
+            return $rootScope.currentField;
+        }
+
+        function getCurrentFields(){
+            return fieldsApi.fields;
+        }
         function createFieldForForm(formId, field){
-            console.log("inside createFieldForForm client service");
             return $http.post("/api/assignment/form/"+formId+"/field", field);
         };
 
@@ -26,17 +39,18 @@
             return $http.get("/api/assignment/form/"+formId+"/field");
         };
 
-        function getFieldForForm(formId, fieldId){
-            return $http.get("/api/assignment/form/"+formId+"/field/"+ fieldId);
+        function findAllFieldsForForm(formId){
+            console.log("entered find All sheets for Form"+formId);
+            return $http.get("/api/assignment/form/"+formId+"/field");
         };
 
-        function deleteFieldFromForm(formId, fieldId){
-            console.log("inside deleteFirledFromFormID");
-            return $http.delete("/api/assignment/form/"+ formId+"/field/"+ fieldId);
-        }
+        function deleteFieldById(fieldId){
+            console.log("entered deleteFieldById in sheets service client");
+            return $http.delete("/api/assignment/field/"+ fieldId);
+        };
 
-        function updateField(formId, fieldId, field){
-            return $http.put("/api/assignment/form/"+formId+"/field/"+ fieldId, field);
+        function updateFieldById(fieldId, newField){
+            return $http.put("/api/assignment/field/"+ fieldId, newField);
         };
 
         function findMyForm(formId){

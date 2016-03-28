@@ -1,47 +1,59 @@
 module.exports = function(app, formModel) {
+    app.get("/api/assignment/form/:formId/field", getFieldsForForm);
+    app.get("/api/assignment/field/:fieldId", getFieldById);
+    app.delete("/api/assignment/field/:fieldId", deleteFieldById);
+    app.post("/api/assignment/form/:formId/field", createFieldForForm);
+    app.put("/api/assignment/field/:fieldId", updateFieldById);
+    app.get("/api/assignment/form/:formId", getMyForm);
 
-    app.get("/api/assignment/form/:formId/field", getFieldsOfForm);
-    app.get("/api/assignment/form/:formId/field/:fieldId", getFieldOfForm);
-    app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldFromForm);
-    app.post("/api/assignment/form/:formId/field", createFieldInForm);
-    app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldInForm);
 
-    function getFieldsOfForm(req, res){
-        console.log("inside server service");
+
+    function getFieldsForForm(req, res){
+        console.log("entered get sheets for form in field service in server");
         var formId = req.params.formId;
-        var fields =[];
-        fields = formModel.findAllFieldsInForm(formId);
-        res.json(fields);
+        console.log(formId);
+        var fields = formModel.findFieldsForForm(formId);
+        console.log("sheets in field service server js (response) is ");
+        console.log(fields);
+        res.send(fields);
     };
 
-    function getFieldOfForm(req, res){
+    function getFieldById(req, res){
         var fieldId = req.params.fieldId;
-        var formId = req.params.formId;
-        var field =  formModel.findFieldInForm(fieldId, formId);
+        var field = formModel.findFieldById(fieldId);
         res.send(field);
     };
 
-    function deleteFieldFromForm(req, res){
-        var fieldId = req.params.fieldId;
-        var formId = req.params.formId;
-        return formModel.deleteFieldFromForm(fieldId,formId);
+    function deleteFieldById(req, res){
+        console.log("entered deleteFieldById in server service");
+        var deleteFieldId = req.params.fieldId;
+        var response = formModel.deleteField(deleteFieldId);
+        res.send(response);
     };
 
-    function createFieldInForm(req, res){
-
-        console.log("inside createFieldForForm server service");
-
-        var newField = req.body;
+    function createFieldForForm(req, res){
+        var field = req.body;
         var formId = req.params.formId;
-        newField._id = (new Date).getTime();
-        var createdField = formModel.createFieldInForm(formId, newField);
+        field.formId = formId;
+        var createdField = formModel.createField(field);
         res.send(createdField);
     };
 
-    function updateFieldInForm(req, res){
-        var updatedField = req.body;
-        var formId = req.params.formId;
+    function updateFieldById(req, res){
         var fieldId = req.params.fieldId;
-        formModel.updateFieldInForm(formId,fieldId, updatedField);
+        var updatedField = req.body;
+        var response = formModel.updateField(fieldId, updatedField);
+        res.send(response);
+    };
+
+    function getMyForm(req, res){
+        var form = formModel.findFormById(req.params.formId);
+        res.send(form);
+    }
+
+    function getAllFields(req, res){
+        var allFields = [];
+        allFields = formModel.findAllFields();
+        res.send(allFields);
     };
 };

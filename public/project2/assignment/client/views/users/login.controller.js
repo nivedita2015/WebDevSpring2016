@@ -15,6 +15,7 @@
         init();
 
         function login(user) {
+            console.log("inside login");
             if(!user) {
 
                 console.log("no user for login");
@@ -25,7 +26,7 @@
                 .then(function(response){
                     if(response.data) {
                         UserService.setCurrentUser(response.data);
-                        $location.url("/forms");
+                        $location.url("/sheets");
                         console.log("all logged in ");
                     }
                 });

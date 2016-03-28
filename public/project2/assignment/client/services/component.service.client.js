@@ -18,29 +18,29 @@
 
         function createComponentForForm(formId, component){
             console.log("inside createComponentForForm client service");
-            return $http.post("/api/assignment/form/"+formId+"/component", component);
+            return $http.post("/api/project1/form/"+formId+"/component", component);
         };
 
         function getComponentsForForm(formId){
             console.log("inside client service"+formId);
-            return $http.get("/api/assignment/form/"+formId+"/component");
+            return $http.get("/api/project1/form/"+formId+"/component");
         };
 
         function getComponentForForm(formId, componentId){
-            return $http.get("/api/assignment/form/"+formId+"/component/"+ componentId);
+            return $http.get("/api/project1/form/"+formId+"/component/"+ componentId);
         };
 
         function deleteComponentFromForm(formId, componentId){
             console.log("inside deleteFirledFromFormID");
-            return $http.delete("/api/assignment/form/"+ formId+"/component/"+ componentId);
+            return $http.delete("/api/project1/form/"+ formId+"/component/"+ componentId);
         }
 
         function updateComponent(formId, componentId, component){
-            return $http.put("/api/assignment/form/"+formId+"/component/"+ componentId, component);
+            return $http.put("/api/project1/form/"+formId+"/component/"+ componentId, component);
         };
 
         function findMyForm(formId){
-            return $http.get("/api/assignment/form/"+ formId);
+            return $http.get("/api/project1/form/"+ formId);
         };
     }
 })();

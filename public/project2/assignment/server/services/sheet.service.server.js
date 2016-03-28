@@ -1,9 +1,9 @@
 module.exports = function(app, sheetModel) {
-    app.get("/api/assignment/user/:userId/sheet", getSheetsForUser);
-    app.get("/api/assignment/sheet/:sheetId", getSheetById);
-    app.delete("/api/assignment/sheet/:sheetId", deleteSheetById);
-    app.post("/api/assignment/user/:userId/sheet", createSheetForUser);
-    app.put("/api/assignment/sheet/:sheetId", updateSheetById);
+    app.get("/api/project1/user/:userId/sheet", getSheetsForUser);
+    app.get("/api/project1/sheet/:sheetId", getSheetById);
+    app.delete("/api/project1/sheet/:sheetId", deleteSheetById);
+    app.post("/api/project1/user/:userId/sheet", createSheetForUser);
+    app.put("/api/project1/sheet/:sheetId", updateSheetById);
 
 
 

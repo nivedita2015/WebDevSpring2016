@@ -14,7 +14,7 @@
             getCurrentForm: getCurrentForm,
             getCurrentForms: getCurrentForms
         };
-        //$rootScope.forms = formsApi.forms;
+        //$rootScope.sheets = formsApi.sheets;
         return formsApi;
 
         function setCurrentForm(form){
@@ -33,12 +33,12 @@
         };
 
         function findAllFormsForUser(userId){
-            console.log("entered find All forms for User");
+            console.log("entered find All sheets for User");
             return $http.get("/api/assignment/user/"+userId+"/form");
         };
 
         function deleteFormById(formId){
-            console.log("entered deleteFormById in forms service client");
+            console.log("entered deleteFormById in sheets service client");
             return $http.delete("/api/assignment/form/"+ formId);
         };
 

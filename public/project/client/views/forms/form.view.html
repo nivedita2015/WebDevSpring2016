@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+        <br><br>
+        <div class="col-md-10 col-md-offset-2 main">
+           <ul class="LOS">
+               <li>
+                   <div class="col-md-8">
+                       <input type="text" ng-model="model.form.title" placeholder="Name" id="title" class="form-control inputVal">
+                   </div>
+                   <div class="col-md-3">
+                       <span class="glyphicon glyphicon-plus" ng-click="model.addForm(model.form)"></span>
+                       <span  class="glyphicon glyphicon-ok" ng-click="model.updateForm(model.form)"></span>
+                   </div>
+               </li>
+               <li ng-repeat="form in model.forms" class="formsList">
+                   <div class="col-md-8">
+                       <span class="g"><a href="#/form/{{form._id}}/fields">
+                       {{form.title}}
+                       </a></span>
+                   </div>
+                   <div class="col-md-3">
+                       <span  ng-click="model.deleteForm(form)" class="glyphicon glyphicon-remove"></span>
+                       <span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil"></span>
+                       <span class="glyphicon glyphicon-share" onclick="window.open('#/sheetPreview')"></span>
+                   </div>
+
+               </li>
+               </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+               <!--<li>-->
+                   <!--<div class="col-sm-6">-->
+                       <!--<input type="text" ng-model="model.form.title" placeholder="Name" id="title" class="form-control">-->
+                   <!--</div>-->
+                   <!--<div class="col-sm-3">-->
+                       <!--<span class="glyphicon glyphicon-plus" ng-click="model.addForm(model.form)"></span>-->
+                       <!--<span  class="glyphicon glyphicon-ok" ng-click="model.updateForm(model.form)"></span>-->
+                   <!--</div>-->
+               <!--</li>-->
+               <!--<li>-->
+                   <!--<hr>-->
+               <!--</li>-->
+               <!--<li ng-repeat="form in model.forms">-->
+               <!--<div class="col-sm-6">-->
+                   <!--<span class="glyphicon-file"><a href="#/form/{{form._id}}/fields">-->
+                       <!--{{form.title}}-->
+                   <!--</a></span>-->
+               <!--</div>-->
+               <!--<div class="col-sm-3">-->
+                    <!--<span  ng-click="model.deleteForm(form)" class="glyphicon glyphicon-remove">-->
+                            <!--</span>-->
+                   <!--<span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil"></span>-->
+               <!--</div>-->
+
+
+
+               <!--</li>-->
+           <!--</ul>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->

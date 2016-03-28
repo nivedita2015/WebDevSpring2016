@@ -1,10 +1,10 @@
 module.exports = function(app, sheetModel) {
     console.log("hello");
-    app.get("/api/project/sheet", getAllSheets);
-    //app.get("/api/project/sheet/:sheetId", getSheetById);
-    app.delete("/api/project/sheet/:sheetId", deleteSheetById);
-    app.post("/api/project/sheet", createSheet);
-    app.put("/api/project/sheet/:sheetId", updateSheetById);
+    app.get("/api/project1/sheet", getAllSheets);
+    //app.get("/api/project1/sheet/:sheetId", getSheetById);
+    app.delete("/api/project1/sheet/:sheetId", deleteSheetById);
+    app.post("/api/project1/sheet", createSheet);
+    app.put("/api/project1/sheet/:sheetId", updateSheetById);
 
 
 

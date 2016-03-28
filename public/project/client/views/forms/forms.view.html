@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="title">Forms</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a href="#/forms">Forms</a></li>
+                <li role="presentation"><a href="#/forms">Fields</a></li>
+            </ul>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                            Form-Name
+                        </th>
+                        <th>
+                            <span class="glyphicon glyphicon-triangle-bottom"></span>
+                            Action
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" ng-model="model.form.title" placeholder="Name" id="title" class="form-control">
+                        </td>
+                        <td align="right">
+                            <span class="glyphicon glyphicon-plus" ng-click="model.addForm(model.form)"></span>
+                            <span  class="glyphicon glyphicon-ok" ng-click="model.updateForm(model.form)"></span>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="form in model.forms">
+                        <td><span class="glyphicon-file"><a href="#/form/{{form._id}}/fields">
+                                {{form.title}}
+                            </a></span>
+                        </td>
+                        <td align="right">
+                            <span  ng-click="model.deleteForm(form)" class="glyphicon glyphicon-remove">
+                            </span>
+                            <span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

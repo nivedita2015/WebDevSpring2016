@@ -1,8 +1,9 @@
 
 (function()
 {
+    "use strict"
     angular
-        .module("SheetBuilderApp")
+        .module("WebBuilderApp")
         .controller("MainController",MainController);
     function MainController($rootScope,$location)
     {

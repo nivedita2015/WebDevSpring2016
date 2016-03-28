@@ -27,38 +27,38 @@
 
         function findUserByUsername(username){
 
-            return $http.get("/api/assignment/user?username=username",username);
+            return $http.get("/api/project2/user?username=username",username);
            
         }
 
         function createUser(user) {
 
-            return $http.post("/api/assignment/user",user);
+            return $http.post("/api/project2/user",user);
 
         }
 
         function findUserByCredentials(username, password) {
-            //console.log("inside user.service.client.js");
+            console.log("inside user.service.client.js");
 
-            return $http.get("/api/assignment/user?username="+username+"&password="+password);
+            return $http.get("/api/project2/user?username="+username+"&password="+password);
 
         }
 
         function findAllUsers() {
 
-            return $http.get("/api/assignment/user");
+            return $http.get("/api/project2/user");
 
         }
 
         function deleteUserById(userId) {
 
-            //$http.delete("/api/assignment/user/",+userId);
+            //$http.delete("/api/project2/user/",+userId);
         }
 
         function updateUser(userId, user) {
             console.log("user service client update");
 
-           return $http.put("/api/assignment/user/"+userId,user);
+           return $http.put("/api/project2/user/"+userId,user);
 
         }
     }

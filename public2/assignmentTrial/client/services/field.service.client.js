@@ -12,7 +12,7 @@
             deleteFieldFromForm: deleteFieldFromForm,
             updateField: updateField
         };
-        //$rootScope.forms = formsApi.forms;
+        //$rootScope.sheets = formsApi.sheets;
         return fieldsApi;
 
         function createFieldForForm(formId, field){

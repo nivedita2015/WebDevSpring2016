@@ -1,10 +1,10 @@
 
 module.exports = function(app, userModel) {
-    app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", editUser);
-    app.get("/api/assignment/user/:id", getUserById);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
+    app.post("/api/project2/user", createUser);
+    app.get("/api/project2/user", editUser);
+    app.get("/api/project2/user/:id", getUserById);
+    app.put("/api/project2/user/:id", updateUser);
+    app.delete("/api/project2/user/:id", deleteUser);
 
     function createUser(req, res){
         //console.log("inside service");
@@ -16,6 +16,7 @@ module.exports = function(app, userModel) {
     };
 
     function editUser(req, res){
+        console.log("inside edituser");
         var cred = {
             username: req.query.username,
             password: req.query.password

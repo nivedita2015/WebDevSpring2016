@@ -30,7 +30,7 @@
                     templateUrl: "views/admin/admin.view.html",
                     controller: "AdminController"
                 })
-            .when("/forms",
+            .when("/sheets",
                 {
                     templateUrl: "views/forms/forms.view.html",
                     controller: "FormController"

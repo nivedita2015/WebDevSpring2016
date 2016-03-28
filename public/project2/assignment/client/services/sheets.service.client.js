@@ -29,21 +29,21 @@
             return sheetsApi.sheets;
         }
         function createSheetForUser(userId, sheet){
-            return $http.post("/api/assignment/user/"+userId+"/sheet", sheet);
+            return $http.post("/api/project1/user/"+userId+"/sheet", sheet);
         };
 
         function findAllSheetsForUser(userId){
             console.log("entered find All sheets for User");
-            return $http.get("/api/assignment/user/"+userId+"/sheet");
+            return $http.get("/api/project1/user/"+userId+"/sheet");
         };
 
         function deleteSheetById(sheetId){
             console.log("entered deleteSheetById in sheets service client");
-            return $http.delete("/api/assignment/sheet/"+ sheetId);
+            return $http.delete("/api/project1/sheet/"+ sheetId);
         };
 
         function updateSheetById(sheetId, newSheet){
-            return $http.put("/api/assignment/sheet/"+ sheetId, newSheet);
+            return $http.put("/api/project1/sheet/"+ sheetId, newSheet);
         };
     }
 })();

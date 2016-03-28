@@ -74,7 +74,7 @@ module.exports = function(app){
     };
 
     function findFormsForUser(userId) {
-        console.log("entred find forms for user in form model server");
+        console.log("entred find sheets for user in form model server");
         console.log("userId is " + userId);
         var formsForUser = [];
         var form;

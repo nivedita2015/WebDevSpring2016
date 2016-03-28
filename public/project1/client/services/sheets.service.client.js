@@ -29,22 +29,22 @@
             return sheetsApi.sheets;
         }
         function createSheet(sheet){
-            return $http.post("/api/project/sheet", sheet);
+            return $http.post("/api/project1/sheet", sheet);
         };
 
         function findAllSheets(){
 
             console.log("inside client.js");
 
-            return $http.get("/api/project/sheet");
+            return $http.get("/api/project1/sheet");
         };
 
         function deleteSheetById(sheetId){
-            return $http.delete("/api/project/sheet/"+ sheetId);
+            return $http.delete("/api/project1/sheet/"+ sheetId);
         };
 
         function updateSheetById(sheetId, newSheet){
-            return $http.put("/api/project/sheet/"+ sheetId, newSheet);
+            return $http.put("/api/project1/sheet/"+ sheetId, newSheet);
         };
     }
 })();

@@ -1,5 +1,4 @@
-
-(function(){
-    angular
-        .module("SheetBuilderApp",["ngRoute"])
+(function () {
+    "use strict";
+    angular.module("WebBuilderApp", ["ngRoute"]);
 })();

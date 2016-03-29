@@ -39,12 +39,10 @@
 <body ng-controller="MainController as model">
 <div class="container-fluid">
     <div ng-include="'views/header/header.view.html'"></div>
-    <br>
-
-
-    <div class="row">
+    <div class="row" style="
+    padding-left: 0px;">
         <!--<div ng-include="'views/sidebar/sidebar.view.html'"></div>-->
-        <div ng-view class="col-md-10 col-md-offset-1">
+        <div ng-view class="col-md-10 col-md-offset-1" style="padding-left: 0px;padding-right: 0px;">
 
         </div>
     </div>

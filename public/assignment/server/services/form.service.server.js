@@ -8,7 +8,7 @@ module.exports = function(app, formModel) {
 
 
     function getFormsForUser(req, res){
-        console.log("entered get sheets for user in form service in server");
+        //console.log("entered get sheets for user in form service in server");
         var userId = req.params.userId;
         console.log(userId);
         var forms = formModel.findFormsForUser(userId);

@@ -30,26 +30,23 @@
             return formsApi.forms;
         }
         function createFormForUser(userId, form){
-            return $http.post("/api/assignment/user/"+userId+"/form", form);
+            return $http.post("/api/project/user/"+userId+"/form", form);
         };
 
         function findAllFormsForUser(userId){
-            console.log("entered find All sheets for User");
-            return $http.get("/api/assignment/user/"+userId+"/form");
+            return $http.get("/api/project/user/"+userId+"/form");
         };
 
         function deleteFormById(formId){
-            console.log("entered deleteFormById in sheets service client");
-            return $http.delete("/api/assignment/form/"+ formId);
+            return $http.delete("/api/project/form/"+ formId);
         };
 
         function updateFormById(formId, newForm){
-            return $http.put("/api/assignment/form/"+ formId, newForm);
+            return $http.put("/api/project/form/"+ formId, newForm);
         };
 
         function findFormById(formId){
-            console.log("inside form service client "+formId);
-            return $http.get("/api/assignment/form/"+ formId);
+            return $http.get("/api/project/form/"+ formId);
         };
     }
 })();

@@ -21,7 +21,6 @@ module.exports = function(app){
     function createForm (form) {
         form._id = (new Date).getTime();
         mockForms.push(form);
-        console.log(form);
         return form;
     };
 
@@ -48,11 +47,8 @@ module.exports = function(app){
     };
 
     function deleteForm (formId) {
-        console.log("entered deleteForm in model");
-        console.log("formId is " + formId);
         for (var index in mockForms) {
             if (mockForms[index]._id == formId) {
-                console.log("entered if condition");
                 mockForms.splice(index, 1);
                 return true;
             }
@@ -73,8 +69,6 @@ module.exports = function(app){
     };
 
     function findFormsForUser(userId) {
-        console.log("entred find sheets for user in form model server");
-        console.log("userId is " + userId);
         var formsForUser = [];
         var form;
         for (var index in mockForms) {
@@ -90,7 +84,6 @@ module.exports = function(app){
     //functions for fields of the form
     function findAllFieldsInForm(formId){
 
-        console.log("inside form model");
         var fields = [];
         var form;
         for(var index in mockForms){
@@ -98,7 +91,7 @@ module.exports = function(app){
             if(form._id=== formId){
                 fields = form.fields;
                 return fields;
-                break;
+
             }
         }
         return null;
@@ -111,7 +104,6 @@ module.exports = function(app){
             field = form.fields[index];
             if(field._id === fieldId){
                 return field;
-                break;
             }
         }
         return null;
@@ -131,9 +123,6 @@ module.exports = function(app){
 
 
     function createFieldInForm(formId, newField){
-
-        console.log("inside createFieldForForm  model");
-
         var form = findFormById(formId);
         newField._id = "id_"+(new Date).getTime();
         form.fields.push(newField);

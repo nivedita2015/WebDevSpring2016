@@ -41,6 +41,7 @@
 
         function addField(field){
             console.log("field controller");
+            console.log(field);
             FieldService.createFieldForForm(vm.currentForm._id, field).then(function(response){
                 console.log("printing data " +response.data);
                 FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){

@@ -30,23 +30,23 @@
             return formsApi.forms;
         }
         function createFormForUser(userId, form){
-            return $http.post("/api/project/user/"+userId+"/form", form);
+            return $http.post("/api/assignment/user/"+userId+"/form", form);
         };
 
         function findAllFormsForUser(userId){
-            return $http.get("/api/project/user/"+userId+"/form");
+            return $http.get("/api/assignment/user/"+userId+"/form");
         };
 
         function deleteFormById(formId){
-            return $http.delete("/api/project/form/"+ formId);
+            return $http.delete("/api/assignment/form/"+ formId);
         };
 
         function updateFormById(formId, newForm){
-            return $http.put("/api/project/form/"+ formId, newForm);
+            return $http.put("/api/assignment/form/"+ formId, newForm);
         };
 
         function findFormById(formId){
-            return $http.get("/api/project/form/"+ formId);
+            return $http.get("/api/assignment/form/"+ formId);
         };
     }
 })();

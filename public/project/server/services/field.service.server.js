@@ -1,10 +1,10 @@
 module.exports = function(app, formModel) {
-    app.get("/api/project/form/:formId/field", getFieldsForForm);
-    app.get("/api/project/field/:fieldId", getFieldById);
-    app.delete("/api/project/field/:fieldId", deleteFieldById);
-    app.post("/api/project/form/:formId/field", createFieldForForm);
-    app.put("/api/project/field/:fieldId", updateFieldById);
-    app.get("/api/project/form/:formId", getMyForm);
+    app.get("/api/assignment/form/:formId/field", getFieldsForForm);
+    app.get("/api/assignment/field/:fieldId", getFieldById);
+    app.delete("/api/assignment/field/:fieldId", deleteFieldById);
+    app.post("/api/assignment/form/:formId/field", createFieldForForm);
+    app.put("/api/assignment/field/:fieldId", updateFieldById);
+    app.get("/api/assignment/form/:formId", getMyForm);
 
 
 

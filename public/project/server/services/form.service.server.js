@@ -1,9 +1,9 @@
 module.exports = function(app, formModel) {
-    app.get("/api/project/user/:userId/form", getFormsForUser);
-    app.get("/api/project/form/:formId", getFormById);
-    app.delete("/api/project/form/:formId", deleteFormById);
-    app.post("/api/project/user/:userId/form", createFormForUser);
-    app.put("/api/project/form/:formId", updateFormById);
+    app.get("/api/assignment/user/:userId/form", getFormsForUser);
+    app.get("/api/assignment/form/:formId", getFormById);
+    app.delete("/api/assignment/form/:formId", deleteFormById);
+    app.post("/api/assignment/user/:userId/form", createFormForUser);
+    app.put("/api/assignment/form/:formId", updateFormById);
 
 
 

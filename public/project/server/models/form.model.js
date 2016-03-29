@@ -40,7 +40,7 @@ module.exports = function(app){
     function updateForm (formId, form) {
         for (var index in mockForms) {
             if (mockForms[index]._id === formId) {
-                mockForms[index] = form;
+                mockForms[index].title = form.title ;
                 return true;
             }
         }

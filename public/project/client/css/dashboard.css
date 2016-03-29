@@ -183,3 +183,7 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, cursive;
 
 }
+
+.a .non-highlighted{
+    color: black;
+}

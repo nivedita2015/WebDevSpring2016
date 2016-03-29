@@ -14,12 +14,6 @@
 
         var formId = $routeParams.formId;
         console.log(formId);
-        //function init(){
-        //    console.log("inside init for fields");
-        //    FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){
-        //        vm.fields= response.data;
-        //    });}
-        //init();
 
         function init(){
             FieldService.findMyForm(formId).then(function(response){
@@ -34,8 +28,9 @@
         init();
 
         function selectField($index){
+            console.log("inside select Field");
             vm.field = {_id: vm.fields[$index]._id,
-                title: vm.fields[$index].title,
+                label: vm.fields[$index].label,
                 formId: vm.fields[$index].formId
             }
         }
@@ -52,10 +47,12 @@
                 init();
 
             });
+            vm.field = null;
         }
 
         function deleteField(field){
-            FieldService.deleteFieldById(field._id).then(function(response){
+            console.log("delete Field " +field);
+            FieldService.deleteFieldById(field._id,vm.currentForm._id).then(function(response){
                 FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){
                     vm.fields= response.data;
                 });
@@ -63,7 +60,7 @@
         }
 
         function updateField(newField){
-            FieldService.updateFieldById(vm.field._id, newField).then(function(response){
+            FieldService.updateFieldById(vm.currentForm._id,vm.field._id, newField).then(function(response){
                 FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(resp){
                     vm.fields= resp.data;
                     vm.field = null;

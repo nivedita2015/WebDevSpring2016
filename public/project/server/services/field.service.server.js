@@ -1,9 +1,9 @@
 module.exports = function(app, formModel) {
     app.get("/api/project/form/:formId/field", getFieldsForForm);
     app.get("/api/project/field/:fieldId", getFieldById);
-    app.delete("/api/project/field/:fieldId", deleteFieldById);
+    app.delete("/api/project/form/:formId/field/:fieldId", deleteFieldById);
     app.post("/api/project/form/:formId/field", createFieldForForm);
-    app.put("/api/project/field/:fieldId", updateFieldById);
+    app.put("/api/project/form/:formId/field/:fieldId", updateFieldById);
     app.get("/api/project/form/:formId", getMyForm);
 
 
@@ -22,7 +22,8 @@ module.exports = function(app, formModel) {
 
     function deleteFieldById(req, res){
         var deleteFieldId = req.params.fieldId;
-        var response = formModel.deleteField(deleteFieldId);
+        var currForm = req.params.formId;
+        var response = formModel.deleteFieldFromForm(deleteFieldId,currForm);
         res.send(response);
     };
 
@@ -38,8 +39,9 @@ module.exports = function(app, formModel) {
 
     function updateFieldById(req, res){
         var fieldId = req.params.fieldId;
+        var formId = req.params.formId;
         var updatedField = req.body;
-        var response = formModel.updateField(fieldId, updatedField);
+        var response = formModel.updateFieldInForm(formId,fieldId, updatedField);
         res.send(response);
     };
 

@@ -4,7 +4,7 @@
         .module("WebBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController(FormService,UserService){
+    function FormController(FormService,UserService,FieldService){
         var vm = this;
 
         vm.addForm = addForm;

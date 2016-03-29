@@ -31,28 +31,24 @@
             return fieldsApi.fields;
         }
         function createFieldForForm(formId, field){
-            console.log("client field "+formId);
-
             return $http.post("/api/project/form/"+formId+"/field", field);
         };
 
         function getFieldsForForm(formId){
-            console.log("inside client service"+formId);
             return $http.get("/api/project/form/"+formId+"/field");
         };
 
         function findAllFieldsForForm(formId){
-            console.log("entered find All sheets for Form"+formId);
             return $http.get("/api/project/form/"+formId+"/field");
         };
 
-        function deleteFieldById(fieldId){
-            console.log("entered deleteFieldById in sheets service client");
-            return $http.delete("/api/project/field/"+ fieldId);
+        function deleteFieldById(fieldId,formId){
+            return $http.delete("/api/project/form/"+formId+"/field/"+fieldId);
         };
 
-        function updateFieldById(fieldId, newField){
-            return $http.put("/api/project/field/"+ fieldId, newField);
+        function updateFieldById(formId,fieldId, newField){
+            console.log("inside put client service");
+            return $http.put("/api/project/form/"+formId+"/field/"+ fieldId, newField);
         };
 
         function findMyForm(formId){

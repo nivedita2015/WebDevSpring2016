@@ -11,16 +11,16 @@
                     </td>
                     <td>
                         <span class="glyphicon glyphicon-plus" ng-click="model.addField(model.field)"></span>
-                        <!--<span class="glyphicon glyphicon-ok" ng-click ="updateSheetField(field)"></span>-->
+                        <span class="glyphicon glyphicon-ok" ng-click ="model.updateField(model.field)"></span>
 
                     </td>
                 </tr>
-                <tr ng-repeat ="x in model.fields">
-                    <td>{{x.label}}</td>
+                <tr ng-repeat ="field in model.fields">
+                    <td> <a href="#/field/{{field._id}}/settings">{{field.label}}</a></td>
                     <td>
                         <!--<span class="glyphicon glyphicon-pencil" ng-click="selectSheetField($index)"></span>-->
-                        <span class="glyphicon glyphicon-pencil" ng-click="model.editField(model.field)"></span>
-                        <span class="glyphicon glyphicon-remove" ng-click="model.removeField($index)"></span>
+                        <span class="glyphicon glyphicon-pencil" ng-click="model.selectField($index)"></span>
+                        <span class="glyphicon glyphicon-remove" ng-click="model.deleteField(field)"></span>
                     </td>
                 </tr>
                 </tbody>

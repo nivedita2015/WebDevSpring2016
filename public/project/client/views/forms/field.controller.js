@@ -13,6 +13,7 @@
         vm.selectField = selectField;
 
         var formId = $routeParams.formId;
+        console.log(formId);
         //function init(){
         //    console.log("inside init for fields");
         //    FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){
@@ -43,12 +44,14 @@
             console.log("field controller");
             console.log(field);
             FieldService.createFieldForForm(vm.currentForm._id, field).then(function(response){
-                console.log("printing data " +response.data);
-                FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){
-                    vm.fields= response.data;
-                });
+                console.log("printing data " +response.data.label);
+                //FieldService.findAllFieldsForForm(vm.currentForm._id).then(function(response){
+                //    vm.fields= response.data;
+                //});
+
+                init();
+
             });
-            vm.field = null;
         }
 
         function deleteField(field){

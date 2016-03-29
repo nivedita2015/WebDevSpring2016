@@ -123,12 +123,10 @@ module.exports = function(app){
 
 
     function createFieldInForm(formId, newField){
-        console.log(newField);
         var form = findFormById(formId);
         var nf = {
             _id: "id_"+(new Date).getTime(),
-            title: newField.title
-
+            label: newField.label
         };
 
         //newField._id = "id_"+(new Date).getTime();

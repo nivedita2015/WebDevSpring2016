@@ -30,8 +30,9 @@ module.exports = function(app, formModel) {
         var field = req.body;
         var formId = req.params.formId;
         field.formId = formId;
-        console.log("passed field is "+field);
+
         var createdField = formModel.createFieldInForm(formId,field);
+        console.log("passed field is "+createdField.label);
         res.send(createdField);
     };
 

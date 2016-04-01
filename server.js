@@ -16,7 +16,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/cs5610');
+mongoose.connect('mongodb://127.0.0.1:27017/cs5610');
 
 require("./public/assignment/server/app.js")(app,db,mongoose);
 require("./public/project/server/app.js")(app);

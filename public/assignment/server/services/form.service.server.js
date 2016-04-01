@@ -8,25 +8,67 @@ module.exports = function(app, formModel) {
 
 
     function getFormsForUser(req, res){
-        res.send(formModel.findFormsForUser(req.params.userId));
+        formModel
+            .findFormsForUser(req.params.userId)
+            .then(function(result){
+                res.json(result);
+            },
+            function(err){
+                res.status(400).send(err);
+            });
     };
 
     function getFormById(req, res){
-        res.send(formModel.findFormById(req.params.formId));
+
+        formModel
+            .findFormById(req.params.formId)
+            .then(function(result){
+                    res.json(result);
+                },
+                function(err){
+                    res.status(400).send(err);
+                });
     };
 
     function deleteFormById(req, res){
-        res.send(formModel.deleteForm(req.params.formId));
+
+        formModel
+            .deleteForm(req.params.formId)
+            .then(function(result) {
+                    res.json(result);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     };
 
     function createFormForUser(req, res){
         var form = req.body;
         var userId = req.params.userId;
         form.userId = userId;
-        res.send(formModel.createForm(form));
+
+        formModel
+            .createForm(form)
+            .then(function(result) {
+                    res.json(result);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     };
 
     function updateFormById(req, res){
-        res.send(formModel.updateForm(req.params.formId, req.body));
+
+        formModel
+            .updateForm(req.params.formId, req.body)
+            .then(function(result) {
+                    res.json(result);
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     };
 };

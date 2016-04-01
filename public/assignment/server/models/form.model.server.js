@@ -1,6 +1,15 @@
 var mockForms = require("./form.mock.json");
 
-module.exports = function(app) {
+module.exports = function(app,db,mongoose) {
+
+
+    var FormSchema = require('./form.schema.server.js')(mongoose);
+    var FormModel = mongoose.model("Form", FormSchema);
+
+    var FieldSchema = require('./field.schema.server.js')(mongoose);
+    var FieldModel= mongoose.model("Field", FieldSchema);
+
+
     var api = {
         createForm: createForm,
         findAllForms: findAllForms,
@@ -9,6 +18,7 @@ module.exports = function(app) {
         deleteForm: deleteForm,
         findFormByTitle: findFormByTitle,
         findFormsForUser: findFormsForUser,
+        //field functions
         findAllFieldsInForm: findAllFieldsInForm,
         findFieldInForm: findFieldInForm,
         deleteFieldFromForm: deleteFieldFromForm,
@@ -19,68 +29,37 @@ module.exports = function(app) {
     return api;
 
     function createForm(form) {
-        form._id = (new Date).getTime();
-        mockForms.push(form);
-        return form;
+        return FormModel.create(form);
     };
 
     function findAllForms() {
-        return mockForms;
+        return FormModel.find();
     };
 
     function findFormById(formId) {
-        for (var index in mockForms) {
-            if (mockForms[index]._id === formId) {
-                return mockForms[index];
-            }
-        }
-        return null;
+        return FormModel.findById(formId);
     };
 
     function updateForm(formId, form) {
-        for (var index in mockForms) {
-            if (mockForms[index]._id === formId) {
-                mockForms[index] = form;
-                return true;
-            }
-        }
+        return FormModel.update({_id: formId}, {$set: form});
     };
 
     function deleteForm(formId) {
-        for (var index in mockForms) {
-            if (mockForms[index]._id == formId) {
-                mockForms.splice(index, 1);
-                return true;
-            }
-        }
-        return false;
+        return FormModel.remove({_id: formId});
     };
 
     function findFormByTitle(title) {
-        var form;
-        for (var index in mockForms) {
-            form = mockForms[index];
-            if (form.title == title) {
-                return form;
-            }
-        }
-        return null;
+        return FormModel.findOne({title: title});
     };
 
     function findFormsForUser(userId) {
-        var formsForUser = [];
-        var form;
-        for (var index in mockForms) {
-            form = mockForms[index];
-            if (form.userId == userId) {
-                formsForUser.push(form);
-            }
-        }
+        var formsForUser = FormModel.find({userId: userId});
         return formsForUser;
+
 
     };
 
-    //Field functions in form.model.js
+   //Field Functions
     function findAllFieldsInForm(formId) {
         var fields = [];
         var form;

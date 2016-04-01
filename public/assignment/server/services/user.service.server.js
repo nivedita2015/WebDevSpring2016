@@ -7,7 +7,6 @@ module.exports = function(app, userModel) {
     app.delete("/api/assignment/user/:id", deleteUser);
 
     function createUser(req, res){
-        //console.log("inside service");
         var user = req.body;
         var users = [];
         users = userModel.createUser(user);
@@ -23,7 +22,6 @@ module.exports = function(app, userModel) {
 
         if(cred){
          var user = userModel.findUserByCredentials(cred);
-            //console.log(user);
             res.send(user);}
         else{
             var users=[];
@@ -41,10 +39,7 @@ module.exports = function(app, userModel) {
     };
 
     function updateUser(req,res){
-        //console.log("inside server updateUser");
-        //console.log(req);
         var updatedUser = req.body;
-        console.log(req.body);
         userModel.updateUser(req.params, updatedUser);
         var users = userModel.findAllUsers();
         res.json(users);

@@ -8,46 +8,25 @@ module.exports = function(app, formModel) {
 
 
     function getFormsForUser(req, res){
-        //console.log("entered get sheets for user in form service in server");
-        var userId = req.params.userId;
-        console.log(userId);
-        var forms = formModel.findFormsForUser(userId);
-        console.log("sheets in form service server js (response) is ");
-        console.log(forms);
-        res.send(forms);
+        res.send(formModel.findFormsForUser(req.params.userId));
     };
 
     function getFormById(req, res){
-        var formId = req.params.formId;
-        var form = formModel.findFormById(formId);
-        res.send(form);
+        res.send(formModel.findFormById(req.params.formId));
     };
 
     function deleteFormById(req, res){
-        console.log("entered deleteFormById in server service");
-        var deleteFormId = req.params.formId;
-        var response = formModel.deleteForm(deleteFormId);
-        res.send(response);
+        res.send(formModel.deleteForm(req.params.formId));
     };
 
     function createFormForUser(req, res){
         var form = req.body;
         var userId = req.params.userId;
         form.userId = userId;
-        var createdForm = formModel.createForm(form);
-        res.send(createdForm);
+        res.send(formModel.createForm(form));
     };
 
     function updateFormById(req, res){
-        var formId = req.params.formId;
-        var updatedForm = req.body;
-        var response = formModel.updateForm(formId, updatedForm);
-        res.send(response);
-    };
-
-    function getAllForms(req, res){
-        var allForms = [];
-        allForms = formModel.findAllForms();
-        res.send(allForms);
+        res.send(formModel.updateForm(req.params.formId, req.body));
     };
 };

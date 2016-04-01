@@ -1,6 +1,6 @@
 var mockForms = require("./form.mock.json");
 
-module.exports = function(app){
+module.exports = function(app) {
     var api = {
         createForm: createForm,
         findAllForms: findAllForms,
@@ -18,28 +18,26 @@ module.exports = function(app){
 
     return api;
 
-    function createForm (form) {
+    function createForm(form) {
         form._id = (new Date).getTime();
         mockForms.push(form);
-        console.log(form);
         return form;
     };
 
-    function findAllForms () {
+    function findAllForms() {
         return mockForms;
     };
 
-    function findFormById (formId) {
+    function findFormById(formId) {
         for (var index in mockForms) {
             if (mockForms[index]._id === formId) {
                 return mockForms[index];
-                break;
             }
         }
         return null;
     };
 
-    function updateForm (formId, form) {
+    function updateForm(formId, form) {
         for (var index in mockForms) {
             if (mockForms[index]._id === formId) {
                 mockForms[index] = form;
@@ -48,12 +46,9 @@ module.exports = function(app){
         }
     };
 
-    function deleteForm (formId) {
-        console.log("entered deleteForm in model");
-        console.log("formId is " + formId);
+    function deleteForm(formId) {
         for (var index in mockForms) {
             if (mockForms[index]._id == formId) {
-                console.log("entered if condition");
                 mockForms.splice(index, 1);
                 return true;
             }
@@ -67,36 +62,31 @@ module.exports = function(app){
             form = mockForms[index];
             if (form.title == title) {
                 return form;
-                break;
             }
         }
         return null;
     };
 
     function findFormsForUser(userId) {
-        console.log("entred find sheets for user in form model server");
-        console.log("userId is " + userId);
         var formsForUser = [];
         var form;
         for (var index in mockForms) {
-            if (mockForms[index].userId == userId) {
-
-                formsForUser.push(mockForms[index]);
+            form = mockForms[index];
+            if (form.userId == userId) {
+                formsForUser.push(form);
             }
         }
         return formsForUser;
 
     };
 
-    //functions for fields of the form
-    function findAllFieldsInForm(formId){
-
-        console.log("inside form model");
+    //Field functions in form.model.js
+    function findAllFieldsInForm(formId) {
         var fields = [];
         var form;
-        for(var index in mockForms){
+        for (var index in mockForms) {
             form = mockForms[index];
-            if(form._id=== formId){
+            if (form._id === formId) {
                 fields = form.fields;
                 return fields;
                 break;
@@ -105,12 +95,12 @@ module.exports = function(app){
         return null;
     };
 
-    function findFieldInForm(fieldId, formId){
+    function findFieldInForm(fieldId, formId) {
         var field;
         var form = findFormById(formId);
-        for(var index in form.fields){
+        for (var index in form.fields) {
             field = form.fields[index];
-            if(field._id === fieldId){
+            if (field._id === fieldId) {
                 return field;
                 break;
             }
@@ -118,40 +108,33 @@ module.exports = function(app){
         return null;
     };
 
-    function deleteFieldFromForm(fieldId, formId){
+    function deleteFieldFromForm(fieldId, formId) {
         var field;
         var form = findFormById(formId);
-        for (var index in form.fields){
+        for (var index in form.fields) {
             field = form.fields[index];
-            if( field._id === fieldId){
+            if (field._id == fieldId) {
                 form.fields.splice(index, 1);
                 return form.fields;
             }
         }
     };
 
-
-    function createFieldInForm(formId, newField){
-
-        console.log("inside createFieldForForm  model");
-
+    function createFieldInForm(formId, newField) {
         var form = findFormById(formId);
-        newField._id = "id_"+(new Date).getTime();
+        newField._id = (new Date).getTime();
         form.fields.push(newField);
-        return newField;
+        return form.fields;
     };
 
-    function updateFieldInForm(formId, fieldId, updatedField){
+    function updateFieldInForm(formId, fieldId, updatedField) {
         var form = findFormById(formId);
-        var field;
-        for(var index in form.fields){
-            if(form.fields[index]._id === fieldId){
+        for (var index in form.fields) {
+            if (form.fields[index]._id == fieldId) {
                 form.fields[index] = updatedField;
-                break;
+                return form.fields;
             }
+
         }
     };
-
-
-
 }

@@ -11,15 +11,22 @@
         vm.login=login;
 
         function init() {
+
+
         }
         init();
 
         function login(user) {
+
+            console.log("inside login");
+
             if(!user) {
 
                 console.log("no user for login");
                 return;
             }
+
+            console.log("user found. going ahead");
             UserService
                 .findUserByCredentials(user.username,user.password)
                 .then(function(response){

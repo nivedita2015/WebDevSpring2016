@@ -15,7 +15,7 @@
         console.log(UserService.getCurrentUser());
 
         vm.currentUser = UserService.getCurrentUser();
-        if (!$scope.currentUser) {
+        if (!vm.currentUser) {
             $location.url("/home");
         }
 
@@ -24,7 +24,7 @@
 
             UserService.updateUser(vm.currentUser._id,user).then(
                 function (response){
-                    UserService.setCurrentUser(vm.currentUser);
+                    UserService.setCurrentUser(response.data);
                     $location.url("/profile");
                 });
         }

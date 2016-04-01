@@ -1,4 +1,5 @@
 (function(){
+    "use strict"
     angular
         .module("FormBuilderApp")
         .factory("UserService",UserService);
@@ -13,7 +14,10 @@
             getCurrentUser: getCurrentUser,
             findAllUsers: findAllUsers,
             deleteUserById: deleteUserById,
-            findUserByUsername:findUserByUsername
+            findUserByUsername:findUserByUsername,
+            findUserById: findUserById,
+            getCurrentUserId: getCurrentUserId
+
         };
         return api;
 
@@ -25,24 +29,39 @@
             return $rootScope.currentUser;
         }
 
+        function getCurrentUserId() {
+            return $rootscope.currentUser._id;
+        }
+
         function findUserByUsername(username){
 
             return $http.get("/api/assignment/user?username=username",username);
            
         }
 
+        function findUserByCredentials(username, password) {
+
+            console.log("find user by cred user client service");
+
+            return $http.get("/api/assignment/user?username="+username+"&password="+password);
+
+        }
+
+        function findUserById(userId){
+            return $http.get("/api/assignment/user/" + userId);
+
+        };
+
+
         function createUser(user) {
+
+            console.log("inside create user service");
 
             return $http.post("/api/assignment/user",user);
 
         }
 
-        function findUserByCredentials(username, password) {
-            //console.log("inside user.service.client.js");
 
-            return $http.get("/api/assignment/user?username="+username+"&password="+password);
-
-        }
 
         function findAllUsers() {
 
@@ -52,7 +71,7 @@
 
         function deleteUserById(userId) {
 
-            //$http.delete("/api/assignment/user/",+userId);
+            $http.delete("/api/assignment/user/",+userId);
         }
 
         function updateUser(userId, user) {

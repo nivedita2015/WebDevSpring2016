@@ -1,42 +1,34 @@
 (function(){
-    "use strict"
+    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("RegisterController", RegisterController);
+        .controller("RegisterController", registerController);
 
-    function RegisterController($location, $scope, UserService, $rootScope) {
-        $scope.message = null;
-        $scope.user = null;
+    function registerController($location, UserService) {
 
         console.log("inside register controller");
+
         var vm = this;
+
         vm.register = register;
 
         function init() {
 
         }
+
         init();
 
         function register(user) {
 
-            if(!user) {
-
-                console.log("no user for registration");
-                return;
-            }
-
-                UserService
-                    .createUser(user)
-                    .then(function(response){
-                        var resp = response.data;
-                        if(resp != null) {
-                            UserService.setCurrentUser(user);
-                            //UserService.setCurrentUser(currentUser);
-                            $location.url("/profile");
-                        }
-                    });
+            console.log("inside register");
+            UserService
+                .createUser(user)
+                .then(function(newUser){
+                    if(newUser) {
+                        UserService.setCurrentUser(newUser.data);
+                        $location.url("/profile");
+                    }
+                });
         }
-
-
     }
 })();

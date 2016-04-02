@@ -13,8 +13,11 @@
             updateField: updateField,
             findForm: findForm
         };
-        //$rootScope.forms = formsApi.forms;
         return fieldsApi;
+
+        function findForm(formId){
+            return $http.get("/api/assignment/form/"+ formId);
+        };
 
         function createFieldForForm(formId, field){
             return $http.post("/api/assignment/form/"+formId+"/field", field);
@@ -28,17 +31,12 @@
             return $http.get("/api/assignment/form/"+formId+"/field/"+ fieldId);
         };
 
-        function deleteFieldFromForm(formId, fieldId){
-            return $http.delete("/api/assignment/form/"+ formId+"/field/"+ fieldId);
-        }
-
         function updateField(formId, fieldId, field){
-            console.log("entered the updateField in client wc_services");
             return $http.put("/api/assignment/form/"+formId+"/field/"+ fieldId, field);
         };
 
-        function findForm(formId){
-            return $http.get("/api/assignment/form/"+ formId);
-        };
+        function deleteFieldFromForm(formId, fieldId){
+            return $http.delete("/api/assignment/form/"+ formId+"/field/"+ fieldId);
+        }
     }
 })();

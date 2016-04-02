@@ -1,14 +1,9 @@
-var mockForms = require("./form.mock.json");
 
 module.exports = function(app,db,mongoose) {
-
-
     var FormSchema = require('./form.schema.server.js')(mongoose);
     var FormModel = mongoose.model("Form", FormSchema);
-
     var FieldSchema = require('./field.schema.server.js')(mongoose);
-    var FieldModel= mongoose.model("Field", FieldSchema);
-
+    //var FieldModel= mongoose.model("Field", FieldSchema);
 
     var api = {
         createForm: createForm,
@@ -55,65 +50,45 @@ module.exports = function(app,db,mongoose) {
     function findFormsForUser(userId) {
         var formsForUser = FormModel.find({userId: userId});
         return formsForUser;
+    };
 
+    function findAllFieldsInForm(formId){
+        return FormModel.findById(formId)
+            .then(function(result){
+                return result.fields;
+            })
+    };
+
+    function findFieldInForm(fieldId, formId){
+        return FormModel.findById({_id: formId})
+            .then(function(form){
+                return form.fields.id(fieldId);
+            });
+    };
+
+    function createFieldInForm(formId, newField){
+        return FormModel.findById(formId).then(function(result) {
+                result.fields.push(newField);
+                return result.save();
+            });
+    };
+
+    function updateFieldInForm(formId, fieldId, updatedField){
+        return FormModel.findOne({_id: formId})
+            .then(function(form){
+                form.fields.update({_id: fieldId}, {$set: updatedField});
+                return form.save();
+            })
+    };
+
+    function deleteFieldFromForm(fieldId, formId){
+        return FormModel.findById(formId)
+            .then(function(result){
+                result.fields.id(fieldId).remove();
+                return result.save();
+            });
 
     };
 
-   //Field Functions
-    function findAllFieldsInForm(formId) {
-        var fields = [];
-        var form;
-        for (var index in mockForms) {
-            form = mockForms[index];
-            if (form._id === formId) {
-                fields = form.fields;
-                return fields;
-                break;
-            }
-        }
-        return null;
-    };
 
-    function findFieldInForm(fieldId, formId) {
-        var field;
-        var form = findFormById(formId);
-        for (var index in form.fields) {
-            field = form.fields[index];
-            if (field._id === fieldId) {
-                return field;
-                break;
-            }
-        }
-        return null;
-    };
-
-    function deleteFieldFromForm(fieldId, formId) {
-        var field;
-        var form = findFormById(formId);
-        for (var index in form.fields) {
-            field = form.fields[index];
-            if (field._id == fieldId) {
-                form.fields.splice(index, 1);
-                return form.fields;
-            }
-        }
-    };
-
-    function createFieldInForm(formId, newField) {
-        var form = findFormById(formId);
-        newField._id = (new Date).getTime();
-        form.fields.push(newField);
-        return form.fields;
-    };
-
-    function updateFieldInForm(formId, fieldId, updatedField) {
-        var form = findFormById(formId);
-        for (var index in form.fields) {
-            if (form.fields[index]._id == fieldId) {
-                form.fields[index] = updatedField;
-                return form.fields;
-            }
-
-        }
-    };
 }

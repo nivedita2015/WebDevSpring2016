@@ -27,9 +27,17 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 var mongoose = require('mongoose');
-db = mongoose.connect('mongodb://127.0.0.1:27017/formMaker');
-
-
+var connectionString = 'mongodb://127.0.0.1:27017/formMaker';
+// use remote connection string
+// if running in remote server
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+db = mongoose.connect(connectionString);
 
 require("./public/assignment/server/app.js")(app,db,mongoose);
 require("./public/project/server/app.js")(app);

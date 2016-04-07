@@ -1,6 +1,6 @@
 module.exports = function(app, userModel) {
 
-    var passports = require ('passport');
+    var passport = require ('passport');
     var auth = authorized;
 
 
@@ -152,5 +152,55 @@ module.exports = function(app, userModel) {
         userModel.deleteUser(deleteUserId);
         var users = userModel.editUser();
         res.json(users);
+    };
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    };
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    };
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    };
+
+    function register(req, res) {
+        var newUser = req.body;
+        newUser.roles = ['student'];
+
+        userModel
+            .findUserByUsername(newUser.username)
+            .then(
+                function(user){
+                    if(user) {
+                        res.json(null);
+                    } else {
+                        return userModel.createUser(newUser);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                }
+            );
     };
 };

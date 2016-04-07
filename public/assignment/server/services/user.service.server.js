@@ -1,11 +1,28 @@
 module.exports = function(app, userModel) {
-    app.post("/api/assignment/user", createUser);
-    app.get("/api/assignment/user", getAllUsers);
-    app.get("/api/assignment/user/:id", getUserById);
-    app.get("/api/assignment/user?username=username", getUserByUsername);
-    app.get("/api/assignment/user?username=username&password=password", getUserByCredentials);
-    app.put("/api/assignment/user/:id", updateUser);
-    app.delete("/api/assignment/user/:id", deleteUser);
+
+    var passports = require ('passport');
+    var auth = authorized;
+
+
+    app.post("/api/assignment/login",passport.authenticate('local'),login);
+    app.post("/api/assignment/logout",logout);
+    app.post("/api/assignment/register",register);
+    app.post("/api/assignment/user",auth, createUser);
+    app.get('/api/assignment/loggedin',loggedin);
+    app.get("/api/assignment/user",auth, getAllUsers);
+    app.get("/api/assignment/user/:id",auth, getUserById);
+    app.get("/api/assignment/user?username=username",auth, getUserByUsername);
+    app.get("/api/assignment/user?username=username&password=password",auth, getUserByCredentials);
+    app.put("/api/assignment/user/:id",auth, updateUser);
+    app.delete("/api/assignment/user/:id",auth, deleteUser);
+
+    function authorized(req,res,next){
+        if (!req.isAuthenticated()) {
+            res.send(401);
+        } else {
+            next();
+        }
+    };
 
     function createUser(req, res) {
 

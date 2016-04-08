@@ -8,5 +8,6 @@
     function MainController($rootScope,$location)
     {
         $rootScope.$location = $location;
+        $rootScope.local = $location;
     }
 })();

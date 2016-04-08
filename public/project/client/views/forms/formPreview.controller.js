@@ -7,7 +7,8 @@
     function formPreviewController(FieldService, $routeParams) {
         var vm = this;
         var formId = $routeParams.formId;
-        console.log(formId);
+        vm.currentLocation = 'preview';
+        console.log(vm.currentLocation);
 
         function init() {
             FieldService.findMyForm(formId).then(function (response) {

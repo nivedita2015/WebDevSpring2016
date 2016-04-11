@@ -22,12 +22,9 @@
             })
             .when("/sheet/:sheetId/cell/:cellId", {
                 //templateUrl: "sheet/cell.list.view.html",
-                templateUrl: "sheet/trial.html",
+                templateUrl: "sheet/cell.list.view.html",
                 controller: "SheetDetailsController",
                 controllerAs: "model"
-            })
-            .when("/trial", {
-                templateUrl: "sheet/trial.html"
             })
             .otherwise({
                 redirectTo: "/home",

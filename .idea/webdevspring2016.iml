@@ -13,5 +13,8 @@
     <orderEntry type="library" name="sortable" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="jquery.easing" level="application" />
+    <orderEntry type="library" name="jquery.magnific-popup" level="application" />
+    <orderEntry type="library" name="modernizr" level="application" />
+    <orderEntry type="library" name="responsiveslides" level="application" />
   </component>
 </module>

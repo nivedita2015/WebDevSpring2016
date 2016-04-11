@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <br><br>
+        <div class="input-group">
+            <input ng-model="sheet.name" class="form-control inputVal" placeholder="Add a New Sheet" />
+            <span class="input-group-btn"><button class="btn btn-default" ng-click="model.createSheet(sheet)">+</button></span>
+        </div>
+    </div>
+    <br> <hr>
+    <div class="row">
+        <ul class="list-inline">
+            <li class="list-group-item col-md-2" ng-repeat="sheet in model.sheets">
+                <a href="#/sheet/{{sheet._id}}"><img src="../../../project3/img/doc.png" alt="Sheet" class="img-thumbnail"><br>
+                    {{sheet.name}}</a>
+                    <br>
+                    <span ng-click="model.deleteSheet(sheet._id)" class="glyphicon glyphicon-remove"></span>
+                    <!--<span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil"></span>-->
+                    <a class="non-highlighted" href="#/sheet/{{sheet._id}}/preview"><span class="glyphicon glyphicon-share"></span></a>
+            </li>
+        </ul>
+    </div>
+    </div>
+
+
+<!--Tried Cards as well.Kept code for reference-->
+<!--<div class="row">-->
+<!--<div class="col-sm-3 sheet-tiles" ng-repeat="sheet in model.sheets">-->
+<!--<img src="../../../project3/img/doc.png" alt="Sheet" class="img-thumbnail">-->
+<!--<div class="card card-block">-->
+<!--<a href="#/sheet/{{sheet._id}}" class="card-title">{{sheet.name}}</a>-->
+<!--<br>-->
+<!--<span  ng-click="model.deleteSheet(sheet._id)" class="glyphicon glyphicon-remove"></span>-->
+<!--&lt;!&ndash;<span ng-click="model.selectForm($index)" class="glyphicon glyphicon-pencil"></span>&ndash;&gt;-->
+<!--<a class="non-highlighted" href="#/sheet/{{sheet._id}}/preview"><span class="glyphicon glyphicon-share"></span></a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+

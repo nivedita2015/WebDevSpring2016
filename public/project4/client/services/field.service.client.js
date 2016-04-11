@@ -31,28 +31,28 @@
             return fieldsApi.fields;
         }
         function createFieldForForm(formId, field){
-            return $http.post("/api/project/form/"+formId+"/field", field);
+            return $http.post("/api/project4/form/"+formId+"/field", field);
         };
 
         function getFieldsForForm(formId){
-            return $http.get("/api/project/form/"+formId+"/field");
+            return $http.get("/api/project4/form/"+formId+"/field");
         };
 
         function findAllFieldsForForm(formId){
-            return $http.get("/api/project/form/"+formId+"/field");
+            return $http.get("/api/project4/form/"+formId+"/field");
         };
 
         function deleteFieldById(fieldId,formId){
-            return $http.delete("/api/project/form/"+formId+"/field/"+fieldId);
+            return $http.delete("/api/project4/form/"+formId+"/field/"+fieldId);
         };
 
         function updateFieldById(formId,fieldId, newField){
             console.log("inside put client service");
-            return $http.put("/api/project/form/"+formId+"/field/"+ fieldId, newField);
+            return $http.put("/api/project4/form/"+formId+"/field/"+ fieldId, newField);
         };
 
         function findMyForm(formId){
-            return $http.get("/api/project/form/"+ formId);
+            return $http.get("/api/project4/form/"+ formId);
         };
     }
 })();

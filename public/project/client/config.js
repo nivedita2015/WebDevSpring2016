@@ -1,51 +1,34 @@
 (function(){
     angular
-        .module("WebBuilderApp")
-        .config(configuration);
-    function configuration($routeProvider){
+        .module("SheetEditorApp")
+        .config(Configuration);
 
+    function Configuration($routeProvider) {
         $routeProvider
-
-            .when("/home", {
-                templateUrl: "views/home/home.view.html"
-               })
-            .when("/register",{
-                templateUrl: "views/users/register.view.html",
-                controller: "RegisterController",
+            .when("/sheet", {
+                templateUrl: "sheet/sheet.list.view.html",
+                controller: "SheetListController",
                 controllerAs: "model"
             })
-            .when("/login",{
-                templateUrl: "views/users/login.view.html",
-                controller: "LoginController",
+            .when("/sheet/:sheetId", {
+                templateUrl: "sheet/sheet.details.view.html",
+                controller: "SheetDetailsController",
                 controllerAs: "model"
             })
-            .when("/profile",{
-                templateUrl: "views/users/profile.view.html",
-                controller: "ProfileController",
+            .when("/sheet/:sheetId/preview", {
+                templateUrl: "sheet/sheet.details.preview.html",
+                controller: "SheetDetailsController",
                 controllerAs: "model"
             })
-           .when("/forms",{
-                templateUrl: "views/forms/form.view.html",
-                controller: "FormController",
-                controllerAs: "model"
-            })
-            .when("/form/:formId/fields",{
-                templateUrl: "views/forms/field.view.html",
-                controller: "FieldController",
-                controllerAs: "model"
-            })
-            .when("/form/:formId/formPreview",{
-                templateUrl: "views/forms/formPreview.view.html",
-                controller: "formPreviewController",
-                controllerAs: "model"
-            })
-            .when("/field/:fieldId/settings",{
-                templateUrl: "views/forms/settings.view.html",
-                controller: "SettingsController",
+            .when("/sheet/:sheetId/cell/:cellId", {
+                //templateUrl: "sheet/cell.list.view.html",
+                templateUrl: "sheet/cell.list.view.html",
+                controller: "SheetDetailsController",
                 controllerAs: "model"
             })
             .otherwise({
-                redirectTo:"/home"
-            })
+                redirectTo: "/home",
+                templateUrl : "sheet/home.html"
+            });
     }
 })();

@@ -1,8 +1,5 @@
-module.exports = function(app){
-    var userModel = require("./models/user.model.js")();
-    var formModel = require("./models/form.model.js")();
-
-    var UserService = require("./services/user.service.server.js")(app, userModel);
-    var FormService = require("./services/form.service.server.js")(app, formModel,userModel);
-    var FieldService = require("./services/field.service.server.js")(app,formModel);
-}
+module.exports = function(app, db, mongoose) {
+    var model = require("./models/sheet.model.server.js")(db, mongoose);
+    require("./services/sheet.service.server.js")(app, model);
+    require("./services/cell.service.server.js")(app, model);
+};

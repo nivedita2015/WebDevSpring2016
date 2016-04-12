@@ -13,7 +13,8 @@
 
         function updateCell(sheetId, cellIndex, cell) {
             if(cell.editable == undefined)
-            cell.editable= true;
+                cell.editable= true;
+
             var deferred = $q.defer();
 
             $http.put("/ds/ss/sheet/"+sheetId+"/cell/"+cellIndex, cell)
@@ -44,10 +45,12 @@
                     undefined,
                     undefined,
                     undefined,
+                    undefined,
                     undefined)
             }
             var deferred = $q.defer();
-            cell.visible = true;
+            //cell.visible = true;
+            //cell.alignment = "center";
             $http.post("/ds/ss/sheet/"+sheetId+"/cell", cell)
                 .success(function(response){
                     deferred.resolve(response);

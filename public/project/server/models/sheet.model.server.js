@@ -18,6 +18,7 @@ module.exports = function(db, mongoose) {
 
     function updateCell(sheetId, cellIndex, cell) {
         var deferred = q.defer();
+        console.log(cell);
 
         SheetModel2.findById(sheetId, function(err, sheet){
             sheet.cells[cellIndex].label      = cell.label;
@@ -28,7 +29,6 @@ module.exports = function(db, mongoose) {
             sheet.cells[cellIndex].cellStyle  = cell.cellStyle;
             sheet.cells[cellIndex].visible    = cell.visible;
             sheet.cells[cellIndex].editable    = cell.editable;
-            sheet.cells[cellIndex].alignment    = cell.alignment;
             sheet.save(function(err, sheet){
                 deferred.resolve(sheet);
             });

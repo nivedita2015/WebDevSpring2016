@@ -6,26 +6,28 @@
         <h4 class="insideEditor">Appearance</h4>
         <ul class="noBullets">
             <li class="switch-field">
-                <div class="switch-title">Read Only</div>
-                <input type="radio" id="read_left" name="readonly" value="yes" checked/>
-                <label for="read_left">Yes</label>
-                <input type="radio" id="read_right" name="readonly" value="maybe" />
-                <label for="read_right">No</label>
+                <div class="switch-title" id="editable">Read Only</div>
+                <form action="">
+                    <input type="radio" id="read_left" name="editable" value="yes" checked/>
+                    <label for="read_left">Yes</label>
+                    <input type="radio" id="read_right" name="editable" value="maybe" />
+                    <label for="read_right">No</label>
+                </form>
             </li>
-            <li class="switch-field">
+            <li class="switch-field" id="visible">
                 <div class="switch-title">Visible</div>
                 <input type="radio" id="vis_left" name="visible" value="yes" checked/>
                 <label for="vis_left">Yes</label>
                 <input type="radio" id="vis_right" name="visible" value="maybe" />
                 <label for="vis_right">No</label>
             </li>
-            <li class="switch-field">
+            <li class="switch-field" id="alignment">
                 <div class="switch-title">Alignment</div>
-                <input type="radio" id="align_left" name="align" value="yes" checked/>
+                <input type="radio" id="align_left" name="alignment" value="left" checked/>
                 <label for="align_left">&nbsp;Left</label>
-                <input type="radio" id="align_center" name="align" value="maybe" />
+                <input type="radio" id="align_center" name="alignment" value="center" />
                 <label for="align_center">&nbsp;Center</label>
-                <input type="radio" id="align_right" name="align" value="no" />
+                <input type="radio" id="align_right" name="alignment" value="right" />
                 <label for="align_right">&nbsp;Right</label>
             </li>
             <li>
@@ -330,13 +332,23 @@
     <div class="endButtons">
         <!--<div>-->
             <button class="glyphicon glyphicon-ok buttons"
-                    ng-click="model.functionCellDone(model.sheet._id,model.sheet.cells[model.functionCellIndex].inputCell1,model.sheet.cells[model.functionCellIndex].inputCell2,model.sheet.cells[model.functionCellIndex].inputCell3,model.editor,model.styleEditor, model.ifoperation,model.sheet.cells[model.functionCellIndex].thenCell,model.sheet.cells[model.functionCellIndex].elseCell)">
+                    ng-click="model.functionCellDone(
+                    model.sheet._id,
+                    model.sheet.cells[model.functionCellIndex].inputCell1,
+                    model.sheet.cells[model.functionCellIndex].inputCell2,
+                    model.sheet.cells[model.functionCellIndex].inputCell3,
+                    model.editor,
+                    model.styleEditor,
+                    model.ifoperation,
+                    model.sheet.cells[model.functionCellIndex].thenCell,
+                    model.sheet.cells[model.functionCellIndex].elseCell)">
             </button>
             <button class="glyphicon glyphicon-remove buttons"
                     ng-click="model.functionCellCancel(model.sheet._id)">
 
             </button>
-            <button class="glyphicon glyphicon-refresh buttons"></button>
+            <button class="glyphicon glyphicon-refresh buttons"
+                    ng-click="model.functionCellReset(model.sheet._id)"></button>
         <!--</div>-->
         <br><br>
     </div>

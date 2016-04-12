@@ -1,7 +1,7 @@
 <div class="container-fluid detailsBg">
     <div class="row padding10">
             <div class="jumbotron listDescr">
-            <h2>Sheet Details
+            <h2> Sheet: {{model.sheet.name}}
                 <a href="#/sheet/{{model.sheet._id}}/preview"class="btn btn-info">
                     <span class="glyphicon glyphicon-share"> </span>
                 </a>
@@ -29,14 +29,15 @@
                             </button>
                         </div>
                 </div>
-                <div class="col-xs-12 pad" ng-repeat="cell in model.sheet.cells"
-                         ng-class="{'active': $index==model.functionCellIndex}">
+
+                <ul ui-sortable class="noBullets" ng-model="model.sheet.cells" >
+                    <li class="col-xs-12 pad" ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}">
                         <div class="col-xs-9" ng-if="!cell.arithmetic && !cell.ifObj">
-                    <span ng-if="cell.cellStyle == 'p'">
-                            <textarea ng-model="cell.literal"
-                                      ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                      class="form-control"></textarea>
-                    </span>
+                            <span ng-if="cell.cellStyle == 'p'">
+                                <textarea ng-model="cell.literal"
+                                          ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                          class="form-control"></textarea>
+                            </span>
                             <span ng-if="cell.cellStyle == 'label'">
                             <input ng-model="cell.literal"
                                    id={{cell.cellStyle}}
@@ -45,70 +46,70 @@
                             </span>
                             <span ng-if="cell.cellStyle == 'h1'">
                                 <input
-                                    ng-model="cell.literal"
-                                    id={{cell.cellStyle}}
-                                    ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                    class="form-control"/>
+                                        ng-model="cell.literal"
+                                        id={{cell.cellStyle}}
+                                        ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                        class="form-control"/>
                             </span>
                             <span ng-show="cell.cellStyle == 'h2'">
                                 <input ng-model="cell.literal"
-                                   id={{cell.cellStyle}}
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   class="form-control"/>
+                                       id={{cell.cellStyle}}
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       class="form-control"/>
                             </span>
                             <span ng-show="cell.cellStyle == 'h3'">
                                 <input ng-model="cell.literal"
-                                   id={{cell.cellStyle}}
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   class="form-control"/>
+                                       id={{cell.cellStyle}}
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       class="form-control"/>
                             </span>
                             <span ng-show="!cell.cellStyle">
                                 <input ng-model="cell.literal"
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   class="form-control"/>
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       class="form-control"/>
                             </span>
                         </div>
                         <div class="col-xs-9" ng-if="cell.arithmetic || cell.ifObj">
                             <span ng-if="cell.cellStyle == 'p'">
                                 <textarea ng-model="cell.literal"
-                                      ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                      ng-readonly="true"
-                                      class="form-control"></textarea>
+                                          ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                          ng-readonly="true"
+                                          class="form-control"></textarea>
                             </span>
                             <span ng-if="cell.cellStyle == 'label'">
                                 <input ng-model="cell.literal"
-                                   id={{cell.cellStyle}}
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   ng-readonly="true"
-                                   class="form-control"/>
+                                       id={{cell.cellStyle}}
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       ng-readonly="true"
+                                       class="form-control"/>
                             </span>
                             <span ng-if="cell.cellStyle == 'h1'">
                                 <input
-                                    ng-model="cell.literal"
-                                    id={{cell.cellStyle}}
-                                    ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                    ng-readonly="true"
-                                    class="form-control"/>
+                                        ng-model="cell.literal"
+                                        id={{cell.cellStyle}}
+                                        ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                        ng-readonly="true"
+                                        class="form-control"/>
                             </span>
                             <span ng-show="cell.cellStyle == 'h2'">
                                 <input ng-model="cell.literal"
-                                   id={{cell.cellStyle}}
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   ng-readonly="true"
-                                   class="form-control"/>
+                                       id={{cell.cellStyle}}
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       ng-readonly="true"
+                                       class="form-control"/>
                             </span>
                             <span ng-show="cell.cellStyle == 'h3'">
                                 <input ng-model="cell.literal"
-                                   id={{cell.cellStyle}}
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   ng-readonly="true"
-                                   class="form-control"/>
+                                       id={{cell.cellStyle}}
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       ng-readonly="true"
+                                       class="form-control"/>
                             </span>
                             <span ng-show="!cell.cellStyle">
                                 <input ng-model="cell.literal"
-                                   ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                                   ng-readonly="true"
-                                   class="form-control"/>
+                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
+                                       ng-readonly="true"
+                                       class="form-control"/>
                             </span>
                         </div>
                         <div class="col-xs-3">
@@ -126,16 +127,124 @@
                             <button class="btn btn-default btn-group">
                                 <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </button>
-                         <!--<button ng-click="model.functionCellUp($index,model.sheet._id)" class="btn btn-default">-->
-                         <!--<span class="glyphicon glyphicon-arrow-up"></span>-->
-                         <!--</button>-->
+                                <!--<button ng-click="model.functionCellUp($index,model.sheet._id)" class="btn btn-default">-->
+                                <!--<span class="glyphicon glyphicon-arrow-up"></span>-->
+                                <!--</button>-->
 
-                         <!--<button ng-click="model.functionCellDown($index,model.sheet._id)" class="btn btn-default">-->
-                         <!--<span class="glyphicon glyphicon-arrow-down"></span>-->
-                         <!--</button>-->
+                                <!--<button ng-click="model.functionCellDown($index,model.sheet._id)" class="btn btn-default">-->
+                                <!--<span class="glyphicon glyphicon-arrow-down"></span>-->
+                                <!--</button>-->
                         </span>
                         </div>
-                    </div>
+                    </li>
+                </ul>
+
+                <!--<div class="col-xs-12 pad" ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}">-->
+                        <!--<div class="col-xs-9" ng-if="!cell.arithmetic && !cell.ifObj">-->
+                            <!--<span ng-if="cell.cellStyle == 'p'">-->
+                                <!--<textarea ng-model="cell.literal"-->
+                                      <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                      <!--class="form-control"></textarea>-->
+                            <!--</span>-->
+                            <!--<span ng-if="cell.cellStyle == 'label'">-->
+                            <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-if="cell.cellStyle == 'h1'">-->
+                                <!--<input-->
+                                    <!--ng-model="cell.literal"-->
+                                    <!--id={{cell.cellStyle}}-->
+                                    <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                    <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="cell.cellStyle == 'h2'">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="cell.cellStyle == 'h3'">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="!cell.cellStyle">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-9" ng-if="cell.arithmetic || cell.ifObj">-->
+                            <!--<span ng-if="cell.cellStyle == 'p'">-->
+                                <!--<textarea ng-model="cell.literal"-->
+                                      <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                      <!--ng-readonly="true"-->
+                                      <!--class="form-control"></textarea>-->
+                            <!--</span>-->
+                            <!--<span ng-if="cell.cellStyle == 'label'">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--ng-readonly="true"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-if="cell.cellStyle == 'h1'">-->
+                                <!--<input-->
+                                    <!--ng-model="cell.literal"-->
+                                    <!--id={{cell.cellStyle}}-->
+                                    <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                    <!--ng-readonly="true"-->
+                                    <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="cell.cellStyle == 'h2'">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--ng-readonly="true"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="cell.cellStyle == 'h3'">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--id={{cell.cellStyle}}-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--ng-readonly="true"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                            <!--<span ng-show="!cell.cellStyle">-->
+                                <!--<input ng-model="cell.literal"-->
+                                   <!--ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"-->
+                                   <!--ng-readonly="true"-->
+                                   <!--class="form-control"/>-->
+                            <!--</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-xs-3">-->
+                            <!--<span ng-show="true">-->
+                            <!--<button ng-click="model.removeCell(model.sheet._id, $index)"-->
+                                    <!--class="btn btn-danger btn-group">-->
+                                <!--<span class="glyphicon glyphicon-remove">-->
+                                <!--</span>-->
+                            <!--</button>-->
+
+                              <!--<a href="#/sheet/{{model.sheet._id}}/cell/{{model.sheet.cells[$index]._id}}"class="btn btn-warning btn-group">-->
+                                <!--<span class="glyphicon glyphicon-pencil">-->
+                                <!--</span>-->
+                              <!--</a>-->
+                            <!--<button class="btn btn-default btn-group">-->
+                                <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                            <!--</button>-->
+                         <!--&lt;!&ndash;<button ng-click="model.functionCellUp($index,model.sheet._id)" class="btn btn-default">&ndash;&gt;-->
+                         <!--&lt;!&ndash;<span class="glyphicon glyphicon-arrow-up"></span>&ndash;&gt;-->
+                         <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+                         <!--&lt;!&ndash;<button ng-click="model.functionCellDown($index,model.sheet._id)" class="btn btn-default">&ndash;&gt;-->
+                         <!--&lt;!&ndash;<span class="glyphicon glyphicon-arrow-down"></span>&ndash;&gt;-->
+                         <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                        <!--</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
         </div>
     <div class="row">

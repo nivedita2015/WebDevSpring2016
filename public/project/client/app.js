@@ -1,4 +1,4 @@
 (function (){
     angular
-        .module("SheetEditorApp", ["ngRoute"]);
+        .module("SheetEditorApp", ["ngRoute","ui.sortable"]);
 })();

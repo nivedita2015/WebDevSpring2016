@@ -16,5 +16,10 @@
     <orderEntry type="library" name="jquery.magnific-popup" level="application" />
     <orderEntry type="library" name="modernizr" level="application" />
     <orderEntry type="library" name="responsiveslides" level="application" />
+    <orderEntry type="library" name="wow" level="application" />
+    <orderEntry type="library" name="jquery.nicescroll" level="application" />
+    <orderEntry type="library" name="jquery.mixitup" level="application" />
+    <orderEntry type="library" name="imagesloaded.pkgd" level="application" />
+    <orderEntry type="library" name="owl.carousel" level="application" />
   </component>
 </module>

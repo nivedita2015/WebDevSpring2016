@@ -2,6 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{webdevspring2016 node_modules}" />
-    <file url="PROJECT" libraries="{angular, angular-route, bootstrap, jquery, jquery-1.10.2, jquery-ui, jquery.easing, jquery.magnific-popup, modernizr, responsiveslides, sortable}" />
+    <file url="PROJECT" libraries="{angular, angular-route, bootstrap, imagesloaded.pkgd, jquery, jquery-1.10.2, jquery-ui, jquery.easing, jquery.magnific-popup, jquery.mixitup, jquery.nicescroll, modernizr, owl.carousel, responsiveslides, sortable, wow}" />
   </component>
 </project>

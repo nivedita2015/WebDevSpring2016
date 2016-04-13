@@ -537,12 +537,8 @@ color: #282a2e;
 
 .jumbotron {
     height: 100vh;
-}
-
-.mainJumbo {
-    height: 80%;
-    background-color: #ffffff;
-    border: solid #b4b4b4;
+    background-color: #FFFFFF;
+    padding-top: 100px;
 }
 
 .mainText {
@@ -550,7 +546,6 @@ color: #282a2e;
 }
 
 .myPic {
-    padding: 15px;
     max-width: 350px;
     max-height: 350px;
 

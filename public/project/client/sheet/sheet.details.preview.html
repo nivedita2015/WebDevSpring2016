@@ -1,10 +1,26 @@
 <div class="display">
-    <div>
-        <div class="table borderless">
-            <div ng-repeat="cell in model.sheet.cells"
-                ng-class="{'active': $index==model.functionCellIndex}">
-                <div ng-if="cell.visible == true">
-                    <div ng-show="cell.editable && cell.editable === true">
+    <div class="intro-header-noImg">
+        <a href="#/sheet/{{model.sheet._id}}" class="sheet-preview-name"><h1>{{model.sheet.name}}</h1></a><br>
+        <ul class="shareButtons">
+            <li class="inline">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out what i built using Spreadsheet Editor!">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+            </li>
+            <li class="inline">
+                <div id="fb-root"></div>
+                <script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
+                <div class="fb-share-button" id="fbShare" data-href='window.location();' data-layout="button" data-mobile-iframe="true"></div>
+            </li>
+            <li class="inline">
+                <div class="g-plus" data-action="share" data-annotation="none"></div>
+                <script type="text/javascript">(function() {var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;po.src = 'https://apis.google.com/js/platform.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();</script>
+            </li>
+        </ul>
+    </div>
+        <div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="display-text">
+            <div ng-if="cell.visible == true">
+                <div ng-show="cell.editable && cell.editable === true">
                         <input ng-if="cell.cellStyle != 'p'"
                                ng-model="cell.literal"
                                tabindex="{{$index}}"
@@ -12,8 +28,7 @@
                         <textarea ng-if="cell.cellStyle == 'p'" ng-model="cell.literal"
                                   class="form-control"></textarea>
                     </div>
-
-                    <div ng-show="!cell.editable || cell.editable === false">
+                <div ng-show="!cell.editable || cell.editable === false">
                         <label ng-if="cell.cellStyle == 'label'">
                             {{cell.literal}}
                         </label>
@@ -33,26 +48,6 @@
                             {{cell.literal}}
                         </div>
                     </div>
-                </div>
-                <!--<div ng-if="cell.visible==true && cell.editable == true && cell.cellStyle != 'textarea'">-->
-                    <!--<input ng-model="cell.literal"-->
-                           <!--ng-readonly="false"-->
-                           <!--tabindex="{{$index}}"-->
-                           <!--class="form-control"/>-->
-                <!--</div>-->
-
-                <!--<div ng-if="cell.visible==true && cell.editable == false">-->
-                    <!--<textarea ng-model="cell.literal"-->
-                              <!--class="form-control"/>-->
-                <!--</div>-->
-
-                <!--<div ng-if="cell.visible==true && cell.editable == false && cell.cellStyle != 'textarea'">-->
-                    <!--<input ng-model="cell.literal"-->
-                           <!--id={{cell.cellStyle}}-->
-                           <!--ng-readonly="true"-->
-                           <!--tabindex="{{$index}}"-->
-                           <!--class="form-control "/>-->
-                <!--</div>-->
             </div>
         </div>
     </div>

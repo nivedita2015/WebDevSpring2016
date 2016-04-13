@@ -44,6 +44,7 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
 
     function SheetDetailsController(SheetService, $routeParams, CellService, $q, $scope) {
         var model = this;
+        model.url = window.location;
 
         model.addCell = addCell;
         model.removeCell = removeCell;
@@ -64,6 +65,7 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
 
         function init() {
             readOneSheet($routeParams.sheetId);
+            console.log("printing "+model.url);
         }
 
         init();

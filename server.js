@@ -27,7 +27,7 @@ var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 var mongoose = require('mongoose');
-var connectionString = 'mongodb://127.0.0.1:27017/formMaker';
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610';
 // use remote connection string
 // if running in remote server
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {

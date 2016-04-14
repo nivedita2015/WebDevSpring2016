@@ -62,6 +62,8 @@ module.exports = function(db, mongoose) {
             sheet.save(function(err, sheet){
                 deferred.resolve(sheet);
             });
+            console.log("printing all cells now");
+            console.log(sheet.cells);
         });
 
         return deferred.promise;

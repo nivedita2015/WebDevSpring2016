@@ -32,9 +32,7 @@ module.exports = function(mongoose) {
                 arithmetic: ArithmeticSchema,
                 editable  : Boolean,
                 cellStyle : String,
-                visible   : Boolean,
-                //newly adding for allignment//
-                alignment : String
+                visible   : Boolean
             }
         ]
     }, {collection: "ds.ss.sheet"});

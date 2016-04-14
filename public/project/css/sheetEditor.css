@@ -108,6 +108,7 @@
     margin-right:auto;
     margin-left: auto;
     border-radius: 25px;
+    color:#555;
 }
 
 .doBorder {
@@ -138,6 +139,10 @@
 
 .endButtons {
     text-align:center;
+    width:20%;
+    margin-left:auto;
+    margin-right:auto;
+
 }
 
 .buttons {
@@ -191,4 +196,12 @@
 
 .sheet-preview-name {
     color: #FFFFFF;
+}
+
+.display-function-options {
+    padding: 10px;
+    margin: 10px;
+    border: solid thin #5e5e5e;
+    /*background-color: #808080;*/
+    color: #5e5e5e;
 }

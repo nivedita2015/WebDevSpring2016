@@ -32,6 +32,7 @@
                             model.sheets = sheets;
                         });
                 });
+            model.sheet = null;
         }
 
         function deleteSheet(id) {

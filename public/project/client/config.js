@@ -22,7 +22,7 @@
             })
             .when("/sheet/:sheetId/cell/:cellId", {
                 //templateUrl: "sheet/cell.list.view.html",
-                templateUrl: "sheet/cell.list.view.html",
+                templateUrl: "sheet/cell.list.view1.html",
                 controller: "SheetDetailsController",
                 controllerAs: "model"
             })

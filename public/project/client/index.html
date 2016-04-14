@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
     <!-- Bootstrap required js and css -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.2/css/bootstrap2/bootstrap-switch.min.css" rel="stylesheet"/>
     <link href="../css/sheetEditor.css" rel="stylesheet"/>
     <link href="../css/landing-page.css" rel="stylesheet"/>
+    <title></title>
+</head>
+<body>
+    <div class="container main">
+        <div ng-view> </div>
+    </div>
+    <!-- Scripts before body closing for better loading -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
     <!-- for sortable-->
-    <script   src="https://code.jquery.com/ui/1.12.0-rc.1/jquery-ui.min.js"   integrity="sha256-mFypf4R+nyQVTrc8dBd0DKddGB5AedThU73sLmLWdc0="   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
+    <script   src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"   integrity="sha256-DI6NdAhhFRnO2k51mumYeDShet3I8AKCQf/tf7ARNhI="   crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.min.js"></script>
+    <script type="text/javascript" src="modules/directives/sortable/src/sortable.js"></script>>
 
     <script src="app.js"></script>
     <script src="config.js"></script>
@@ -22,14 +29,5 @@
     <script src="sheet/sheet.list.controller.js"></script>
     <script src="services/sheet.service.client.js"></script>
     <script src="services/cell.service.client.js"></script>
-    <title></title>
-</head>
-<body>
-    <div class="container main">
-        <div ng-view> </div>
-    </div>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-
 </body>
 </html>

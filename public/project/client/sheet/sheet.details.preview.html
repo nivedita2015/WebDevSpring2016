@@ -18,7 +18,7 @@
             </li>
         </ul>
     </div>
-        <div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="display-text">
+        <div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="table-bordered pad">
             <div ng-if="cell.visible == true">
                 <div ng-show="cell.editable && cell.editable === true">
                         <input ng-if="cell.cellStyle != 'p'"

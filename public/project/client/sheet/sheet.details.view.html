@@ -13,63 +13,59 @@
     <div class="row noBorder padding10">
         <div ng-class="model.leftCol" ng-if="model.showSheetCell">
             <div class="col-xs-12 pad">
-                <div class="col-xs-9">
+                <div class="col-xs-9 padLeft">
                         <input ng-model="model.cell.literal"
                                class="form-control"/>
                 </div>
-                <div class="col-xs-3">
-                        <button ng-click="model.addCell(model.sheet._id, model.cell)" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus">
-                        </span>
+                <div class="col-xs-3 noPad">
+                    <span ng-show="true" class="input-group-btn">
+                        <button ng-click="model.addCell(model.sheet._id, model.cell)" class="btn btn-success btn-group">
+                            <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                        <button ng-click="model.functionCell($index)"
-                                class="btn btn-warning">
-                            <span class="glyphicon glyphicon-pencil">
-                            </span>
-                        </button>
-                    </div>
+                    </span>
+                </div>
             </div>
             <div>
                 <ul ui-sortable class="noBullets" ng-model="model.sheet.cells" >
                     <li class="col-xs-12 pad ui-state-default " ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}">
-                        <div class="col-xs-9" ng-if="!cell.arithmetic && !cell.ifObj">
-                        <span ng-if="cell.cellStyle == 'p'">
+                        <div class="col-xs-9 padLeft" ng-if="!cell.arithmetic && !cell.ifObj">
+                            <span ng-if="cell.cellStyle == 'p'">
                             <textarea ng-model="cell.literal"
                                       ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                       class="form-control"></textarea>
                         </span>
-                        <span ng-if="cell.cellStyle == 'label'">
+                            <span ng-if="cell.cellStyle == 'label'">
                         <input ng-model="cell.literal"
                                id={{cell.cellStyle}}
                                ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                class="form-control"/>
                         </span>
-                        <span ng-if="cell.cellStyle == 'h1'">
+                            <span ng-if="cell.cellStyle == 'h1'">
                             <input
                                     ng-model="cell.literal"
                                     id={{cell.cellStyle}}
                                     ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                     class="form-control"/>
                         </span>
-                        <span ng-show="cell.cellStyle == 'h2'">
+                            <span ng-show="cell.cellStyle == 'h2'">
                             <input ng-model="cell.literal"
                                    id={{cell.cellStyle}}
                                    ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                    class="form-control"/>
                         </span>
-                        <span ng-show="cell.cellStyle == 'h3'">
+                            <span ng-show="cell.cellStyle == 'h3'">
                             <input ng-model="cell.literal"
                                    id={{cell.cellStyle}}
                                    ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                    class="form-control"/>
                         </span>
-                        <span ng-show="!cell.cellStyle">
+                            <span ng-show="!cell.cellStyle">
                             <input ng-model="cell.literal"
                                    ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
                                    class="form-control"/>
                         </span>
                         </div>
-                        <div class="col-xs-9" ng-if="cell.arithmetic || cell.ifObj">
+                        <div class="col-xs-9 padLeft" ng-if="cell.arithmetic || cell.ifObj">
                             <span ng-if="cell.cellStyle == 'p'">
                                 <textarea ng-model="cell.literal"
                                           ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
@@ -112,7 +108,7 @@
                                        class="form-control"/>
                             </span>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-xs-3 noPad">
                             <span ng-show="true" class="input-group-btn">
                                 <button ng-click="model.removeCell(model.sheet._id, $index)"
                                 class="btn btn-danger btn-group">

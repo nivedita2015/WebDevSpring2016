@@ -63,11 +63,13 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
         model.showFunctionCell = false;
         model.showSheetCell = true;
         model.functionCellIndex = -1;
-        model.vis = true;
-        model.edit = false;
+        //model.vis = true;
+        //model.edit = false;
 
         function init() {
-            readOneSheet($routeParams.sheetId);
+
+            console.log($routeParams.cellId);
+            readOneSheet($routeParams.sheetId,$routeParams.cellId)
         }
 
         init();
@@ -83,8 +85,9 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             model.rightCol = "col-sm-6";
             model.showFunctionCell = true;
             model.showSheetCell = true;
-            model.vis = cells[cellIndex].visible;
-            model.edit = cells[cellIndex].editable;
+            console.log(cellIndex);
+            //model.vis = cells[cellIndex].visible;
+            //model.edit = cells[cellIndex].editable;
         }
 
         function cellIdxById(id) {
@@ -432,21 +435,28 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             model.showSheetCell = true;
         }
 
-        function readOneSheet(sheetId) {
+        function readOneSheet(sheetId, cellIndex) {
             var deferred = $q.defer();
+
             SheetService
                 .readOneSheet(sheetId)
                 .then(function (sheet) {
                     model.sheet = sheet;
+                    if(cellIndex!=null || cellIndex != cellIndex ){
+                        var cell = model.sheet.cells[cellIdxById(cellIndex)];
+                        console.log(cell);
+                        model.vis = cell.visible;
+                        model.edit = cell.editable;
+                    }
                     deferred.resolve();
-                })
+                });
             return deferred.promise;
         }
 
         function addCell(sheetId, cell) {
             var deferred = $q.defer();
-            cell.visible = model.vis;
-            cell.editable = model.edit;
+            cell.visible = true;
+            cell.editable = false;
             CellService
                 .addCell(sheetId, cell)
                 .then(function (sheet) {

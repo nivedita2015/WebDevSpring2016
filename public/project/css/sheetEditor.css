@@ -205,3 +205,22 @@
     /*background-color: #808080;*/
     color: #5e5e5e;
 }
+
+.check-me {
+    border:solid thick;
+    font-size: xx-large;
+
+}
+
+.noPad {
+    padding:0px;
+}
+
+.padLeft {
+    padding-left: 15px;
+    padding-right: 0px;
+}
+
+.align-center {
+    text-align: center;
+}

@@ -1,13 +1,12 @@
 module.exports = function(app, model) {
-    app.post("/ds/ss/sheet", createSheet);
-    app.get("/ds/ss/sheet", readAllSheet);
-    app.get("/ds/ss/sheet/:id", readOneSheet);
-    app.put("/ds/ss/sheet/:id", updateSheet);
-    app.delete("/ds/ss/sheet/:id", removeSheet);
+    app.post("/spreadsheetEditor/sheet", createSheet);
+    app.get("/spreadsheetEditor/sheet", readAllSheet);
+    app.get("/spreadsheetEditor/sheet/:id", readSheet);
+    app.put("/spreadsheetEditor/sheet/:id", updateSheet);
+    app.delete("/spreadsheetEditor/sheet/:id", removeSheet);
 
     function createSheet(req, res) {
-        model
-            .createSheet(req.body)
+        model.createSheet(req.body)
             .then(function(sheet){
                 res.json(sheet);
             });
@@ -21,9 +20,9 @@ module.exports = function(app, model) {
             });
     }
 
-    function readOneSheet(req, res) {
+    function readSheet(req, res) {
         model
-            .readOneSheet(req.params.id)
+            .readSheet(req.params.id)
             .then(function(sheet){
                 res.json(sheet);
             });

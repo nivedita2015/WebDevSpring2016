@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div>
-                <ul ui-sortable class="noBullets" ng-model="model.sheet.cells" >
+                <ul ui-sortable="sortableOptions" class="noBullets" ng-model="model.sheet.cells" >
                     <li class="col-xs-12 pad ui-state-default " ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}">
                         <div class="col-xs-9 padLeft" ng-if="!cell.arithmetic && !cell.ifObj">
                             <span ng-if="cell.cellStyle == 'p'">
@@ -122,13 +122,6 @@
                                 <button class="btn btn-default btn-group">
                             <span class="glyphicon glyphicon-menu-hamburger"></span>
                         </button>
-                            <!--<button ng-click="model.functionCellUp($index,model.sheet._id)" class="btn btn-default">-->
-                            <!--<span class="glyphicon glyphicon-arrow-up"></span>-->
-                            <!--</button>-->
-
-                            <!--<button ng-click="model.functionCellDown($index,model.sheet._id)" class="btn btn-default">-->
-                            <!--<span class="glyphicon glyphicon-arrow-down"></span>-->
-                            <!--</button>-->
                             </span>
                         </div>
                     </li>

@@ -29,9 +29,10 @@ h6 {
     padding-top: 30px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 30px;
     text-align: center;
-    color: #f8f8f8;
-    background-color: #d2d2d2;
+    color: #ffffff;
+    background-color: #a2ebe5;
     margin-bottom: 20px;
+    border: solid thin #8cacd0;
 }
 
 .intro-message {

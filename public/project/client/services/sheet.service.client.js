@@ -7,7 +7,7 @@
         var api = {
             createSheet: createSheet,
             readAllSheet: readAllSheet,
-            readOneSheet: readOneSheet,
+            readOneSheet: readSheet,
             updateSheet: updateSheet,
             deleteSheet: deleteSheet
         };
@@ -16,7 +16,7 @@
         function createSheet(sheet) {
             var deferred = $q.defer();
 
-            $http.post("/ds/ss/sheet", sheet)
+            $http.post("/spreadsheetEditor/sheet", sheet)
                 .success(function(response){
                     deferred.resolve(response);
                 });
@@ -27,7 +27,7 @@
         function readAllSheet() {
             var deferred = $q.defer();
 
-            $http.get("/ds/ss/sheet")
+            $http.get("/spreadsheetEditor/sheet")
                 .success(function(response){
                     deferred.resolve(response);
                 });
@@ -35,10 +35,10 @@
             return deferred.promise;
         }
 
-        function readOneSheet(id) {
+        function readSheet(id) {
             var deferred = $q.defer();
 
-            $http.get("/ds/ss/sheet/" + id)
+            $http.get("/spreadsheetEditor/sheet/" + id)
                 .success(function(response){
                     deferred.resolve(response);
                 });
@@ -49,7 +49,7 @@
         function updateSheet(id, sheet) {
             var deferred = $q.defer();
 
-            $http.put("/ds/ss/sheet/" + id, sheet)
+            $http.put("/spreadsheetEditor/sheet/" + id, sheet)
                 .success(function(response){
                     deferred.resolve(response);
                 });
@@ -60,7 +60,7 @@
         function deleteSheet(id) {
             var deferred = $q.defer();
 
-            $http.delete("/ds/ss/sheet/" + id)
+            $http.delete("/spreadsheetEditor/sheet/" + id)
                 .success(function(response){
                     deferred.resolve(response);
                 });
@@ -69,33 +69,3 @@
         }
     }
 })();
-//(function(){
-//    angular
-//        .module("SheetEditorApp")
-//        .factory("SheetService", SheetService);
-//
-//    function SheetService($http, $q) {
-//
-//        var sheets = [
-//            {label: "Sheet 1"},
-//            {label: "Sheet 2"},
-//            {label: "Sheet 3"}
-//        ];
-//
-//        var api = {
-//            getAllSheets: getAllSheets
-//        };
-//        return api;
-//
-//        function getAllSheets() {
-//            var deferred = $q.defer();
-//
-//            $http.get("/api/ds/ss/sheet")
-//                .success(function(response){
-//                    deferred.resolve(response);
-//                });
-//
-//            return deferred.promise;
-//        }
-//    }
-//})();

@@ -1,7 +1,7 @@
 module.exports = function(app, model) {
-    app.post("/ds/ss/sheet/:sheetId/cell", createCell);
-    app.put("/ds/ss/sheet/:sheetId/cell/:cellIndex", updateCell);
-    app.delete("/ds/ss/sheet/:sheetId/cell/:cellIndex", removeCell);
+    app.post("/spreadsheetEditor/sheet/:sheetId/cell", createCell);
+    app.put("/spreadsheetEditor/sheet/:sheetId/cell/:cellIndex", updateCell);
+    app.delete("/spreadsheetEditor/sheet/:sheetId/cell/:cellIndex", removeCell);
 
     function updateCell(req, res) {
         model
@@ -10,17 +10,6 @@ module.exports = function(app, model) {
                 res.json(sheet);
             });
     }
-
-    /*
-    function updateCells(req, res) {
-        console.log("[cell.service.server.js] Cell indices>");
-        console.log(req.params.cellIndices);
-        model.updateCells(req.params.sheetId, req.params.cellIndices, req.body)
-             .then(function(sheet) {
-                 res.json(sheet);
-             });
-    }
-    */
 
     function createCell(req, res) {
         model

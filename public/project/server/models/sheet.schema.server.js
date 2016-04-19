@@ -1,9 +1,5 @@
 module.exports = function(mongoose) {
     var IfSchema = mongoose.Schema({
-        //operation: {
-        //    type: String,
-        //    enum: ["EQ", "NEQ", "LT", "LTE", "GT", "GTE"]
-        //},
         operation : String,
         inputCell1: String,
         inputCell2: String,
@@ -12,13 +8,7 @@ module.exports = function(mongoose) {
     });
 
     var ArithmeticSchema = mongoose.Schema({
-        //operation: {
-        //    type: String
-        //    //enum: ["ADD", "SUB", "TIMES", "DIVISION","LENGTH"]
-        //},
-        operation: String,
-        inputCell1: String,
-        inputCell2: String
+        operation: String, inputCell1: String, inputCell2: String
     });
 
     var SheetSchema = mongoose.Schema({
@@ -35,7 +25,7 @@ module.exports = function(mongoose) {
                 visible   : Boolean
             }
         ]
-    }, {collection: "ds.ss.sheet"});
+    }, {collection: "spreadsheetEditor.sheet"});
     return SheetSchema;
 };
 

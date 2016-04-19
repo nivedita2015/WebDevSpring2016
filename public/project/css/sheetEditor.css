@@ -224,3 +224,9 @@
 .align-center {
     text-align: center;
 }
+
+.table-style {
+    background-color: #f6f6f6;
+    border: solid thin #8cacd0;
+
+}

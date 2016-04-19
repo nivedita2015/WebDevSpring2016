@@ -50,44 +50,40 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
         model.removeCell = removeCell;
         model.updateCell = updateCell;
         //-------------------------------------------//
-        model.functionCell = functionCell;
-        model.functionCellDone = functionCellDone;
-        model.functionGetIndex = functionGetIndex;
-        model.functionCellCancel = functionCellCancel;
-        model.functionCellReset = functionCellReset;
-        //model.functionDone = functionDone;
-        model.functionCellReplaceDone = functionCellReplaceDone;
-        model.functionCellIfDone = functionCellIfDone;
+        model.findListOfCells= findListOfCells;
+        model.updateCellForSheet = updateCellForSheet;
+        model.cancelCellForSheet = cancelCellForSheet;
+        model.parseReplaceFunction = parseReplaceFunction;
+        model.evalIfFunction = evalIfFunction;
         model.leftCol = "col-sm-12";
         model.rightCol = "";
         model.showFunctionCell = false;
         model.showSheetCell = true;
         model.functionCellIndex = -1;
-        //model.vis = true;
-        //model.edit = false;
+
+        //------Initialising Function. Takes two variables- SheetId and CellId----//
+        //------If no Cell Id then Sheet Details view, else Cell Details view ---//
 
         function init() {
-
-            console.log($routeParams.cellId);
             readOneSheet($routeParams.sheetId,$routeParams.cellId)
         }
-
         init();
 
-        function functionGetIndex(cell) {
-            return cellIdxById(cell._id);
-        }
-
-        function functionCell(cellIndex, sheetId) {
-            var cells = model.sheet.cells;
-            model.functionCellIndex = cellIndex;
-            model.leftCol = "";
-            model.rightCol = "col-sm-6";
-            model.showFunctionCell = true;
-            model.showSheetCell = true;
-            console.log(cellIndex);
-            //model.vis = cells[cellIndex].visible;
-            //model.edit = cells[cellIndex].editable;
+        function readOneSheet(sheetId, cellIndex) {
+            var deferred = $q.defer();
+            SheetService
+                .readOneSheet(sheetId)
+                .then(function (sheet) {
+                    model.sheet = sheet;
+                    if(cellIndex!=null || cellIndex != cellIndex ){
+                        var cell = model.sheet.cells[cellIdxById(cellIndex)];
+                        console.log(cell);
+                        model.vis = cell.visible;
+                        model.edit = cell.editable;
+                    }
+                    deferred.resolve();
+                });
+            return deferred.promise;
         }
 
         function cellIdxById(id) {
@@ -99,7 +95,56 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             }
         }
 
-        function evalIfFunction(cell1, cell2, isCell, thenCell, elseCell) {
+        function findListOfCells(cellIndex, sheetId) {
+            var cells = model.sheet.cells;
+            model.functionCellIndex = cellIndex;
+            model.leftCol = "";
+            model.rightCol = "col-sm-6";
+            model.showFunctionCell = true;
+            model.showSheetCell = true;
+            return cells;
+        }
+        
+        //-----Arithmetic Function ----//
+        function parseArithmeticFunction(cell1, cell2, operation) {
+            var res;
+            var val1;
+            var val2;
+            if (operation != "DATE" && operation != "LENGTH") {
+                val1 = parseInt(cell1.literal);
+                val2 = parseInt(cell2.literal);
+            }
+
+            switch (operation) {
+                case "SUM":
+                    res = val1 + val2;
+                    break;
+                case "AVERAGE":
+                    res = (val1 + val2) / 2;
+                    break;
+                case "MAX":
+                    res = (val1 > val2) ? val1 : val2;
+                    break;
+                case "MIN":
+                    res = (val1 < val2) ? val1 : val2;
+                    break;
+                case "DATE":
+                    var dateParts1 = cell1.literal.split("/");
+                    var date1 = new Date(dateParts1[2], (dateParts1[1] - 1), dateParts1[0]);
+                    var dateParts2 = cell2.literal.split("/");
+                    var date2 = new Date(dateParts2[2], (dateParts2[1] - 1), dateParts2[0]);
+
+                    res = Math.abs(Math.floor(date1 - date2) / 86400000);
+                    break;
+                case "LENGTH":
+                    res = cell1.literal.length;
+            }
+
+            return res;
+        }
+        
+        //----IF Function -------------//
+        function parseIfFunction(cell1, cell2, isCell, thenCell, elseCell) {
             var res;
             var cell1Val = parseInt(cell1.literal);
             var cell2Val = parseInt(cell2.literal);
@@ -129,9 +174,8 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             return res;
         }
 
-        function functionCellIfDone(sheetId, cellIndex, cell1, cell2, isCell, thenCell, elseCell, cellStyle, visible, editable) {
-            var res = evalIfFunction(cell1, cell2, isCell, thenCell, elseCell);
-
+        function evalIfFunction(sheetId, cellIndex, cell1, cell2, isCell, thenCell, elseCell, cellStyle, visible, editable) {
+            var res = parseIfFunction(cell1, cell2, isCell, thenCell, elseCell);
             var cell1Idx = cellIdxById(cell1._id);
             var cell2Idx = cellIdxById(cell2._id);
             var thenCellIdx = cellIdxById(thenCell._id);
@@ -194,66 +238,54 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             model.showSheetCell = true;
         }
 
-        /* Evaluate result of the specified arithmetic function. */
-        function evalArithmeticFunction(cell1, cell2, operation) {
-            var res;
-            var val1;
-            var val2;
-            if (operation != "DATE" && operation != "LENGTH") {
-                val1 = parseInt(cell1.literal);
-                val2 = parseInt(cell2.literal);
-            }
+        //----- Replace Function -------//
 
-            switch (operation) {
-                case "SUM":
-                    res = val1 + val2;
-                    break;
-                case "AVERAGE":
-                    res = (val1 + val2) / 2;
-                    break;
-                case "MAX":
-                    res = (val1 > val2) ? val1 : val2;
-                    break;
-                case "MIN":
-                    res = (val1 < val2) ? val1 : val2;
-                    break;
-                case "DATE":
-                    var dateParts1 = cell1.literal.split("/");
-                    var date1 = new Date(dateParts1[2], (dateParts1[1] - 1), dateParts1[0]);
-                    var dateParts2 = cell2.literal.split("/");
-                    var date2 = new Date(dateParts2[2], (dateParts2[1] - 1), dateParts2[0]);
+        function parseReplaceFunction(sheetId, Index, cell1, replace, replaceBy, cellStyle, visible, editable) {
 
-                    res = Math.abs(Math.floor(date1 - date2) / 86400000);
-                    break;
-                case "LENGTH":
-                    res = cell1.literal.length;
-            }
+            var newString = (cell1.literal).replace(replace, replaceBy);
+            var cells = model.sheet.cells;
 
-            return res;
+            updateCell(sheetId,
+                Index,
+                new Cell(cells[Index].label,
+                    newString,
+                    cells[Index].reference,
+                    cells[Index].ifObj,
+                    cells[Index].arithmetic,
+                    !editable.checked,
+                    cellStyle,
+                    visible.checked ),
+                true)
+            window.location.href = "#/sheet/" + sheetId;
+
+            model.functionCellIndex = -1;
+            model.leftCol = "col-sm-12";
+            model.rightCol = "";
+            model.showFunctionCell = false;
+            model.showSheetCell = true;
         }
 
-        function functionCellCancel(sheetId) {
+        function cancelCellForSheet(sheetId) {
             window.location.href = "#/sheet/" + sheetId;
         }
-
-        /* Invoked when the "Done" button is clicked - Arithmetic functions. */
-        function functionCellDone(sheetId, cell1, cell2, cell3, operation, cellStyle, ifoperation, thenCell, elseCell) {
+        
+        function updateCellForSheet(sheetId, cell1, cell2, cell3, operation, cellStyle, ifoperation, thenCell, elseCell) {
             var cells = model.sheet.cells;
             var cellIndex = cellIdxById($routeParams.cellId);
             var visible = document.getElementById("visible");
             var editable = document.getElementById("editable");
 
             if (ifoperation != undefined) {
-                functionCellIfDone(sheetId, cellIndex, cell1, cell2, ifoperation, thenCell, elseCell, cellStyle, visible, editable);
+                evalIfFunction(sheetId, cellIndex, cell1, cell2, ifoperation, thenCell, elseCell, cellStyle, visible, editable);
             }
             else if (cell1 === undefined && cell2 === undefined && cell3 === undefined) {
-                //console.log(cells[cellIndex]);
                 if (cells[cellIndex].arithmetic != undefined || cells[cellIndex].ifObj != undefined)
                 {
                     visible.checked = true;
                     editable.checked = true;
                 }
-                updateCell(sheetId,
+                updateCell(
+                    sheetId,
                     cellIndex,
                     new Cell(cells[cellIndex].label,
                         cells[cellIndex].literal,
@@ -264,34 +296,23 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
                         cellStyle,
                         visible.checked),
                     true);
-
                 window.location.href = "#/sheet/" + sheetId;
             }
             else if (cell3 !== undefined && ifoperation === undefined)
-                functionCellReplaceDone(sheetId, cellIndex, cell1, cell2.literal, cell3.literal, cellStyle, visible, editable)
+                parseReplaceFunction(sheetId, cellIndex, cell1, cell2.literal, cell3.literal, cellStyle, visible, editable)
             else {
                 if (cell1 === undefined || cell1.literal === undefined)
                     cell1.literal = "";
                 if (cell2 === undefined)
                     cell2 = "";
-
-
-                var res = evalArithmeticFunction(cell1, cell2, operation);
+                var res = parseArithmeticFunction(cell1, cell2, operation);
                 var cell1Idx = cellIdxById(cell1._id);
                 var cell2Idx = "-1";
                 if (cell2 != "") {
                     cell2Idx = cellIdxById(cell2._id);
                 }
-                var cell = new Cell(
-                    "",
-                    res,
-                    "",
-                    undefined,
-                    new ArithmeticSchema(operation, cell1Idx, cell2Idx),
-                    !editable.checked,
-                    cellStyle,
-                    visible.checked);
-                //addCell(sheetId, cell)
+                var cell = new Cell("", res, "", undefined, new ArithmeticSchema(operation, cell1Idx, cell2Idx), !editable.checked, cellStyle, visible.checked);
+
                 updateCell(sheetId, cellIndex, cell, true)
                     .then(function () {
                         /* Update the first source cell. */
@@ -315,29 +336,6 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
                             });
                     });
             }
-            //model.functionCellIndex = -1;
-            //model.leftCol = "col-sm-12";
-            //model.rightCol = "";
-            //model.showFunctionCell = false;
-            //model.showSheetCell = true;
-        }
-
-        function functionCellReset(sheetID) {
-
-            var cells = model.sheet.cells;
-            var cellIndex = cellIdxById($routeParams.cellId);
-            updateCell(sheetId,
-                cellIndex,
-                new Cell(cells[cellIndex].label,
-                    cells[cellIndex].literal,
-                    cells[cellIndex].reference,
-                    cells[cellIndex].ifObj,
-                    cells[cellIndex].arithmetic,
-                    !editable.checked,
-                    cellStyle,
-                    visible.checked),
-                true);
-
         }
 
         function updateReference(sheetId, cellIndex, cell) {
@@ -346,17 +344,16 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             var arithmetic = cells[cellIndex].arithmetic;
             var literal;
 
-
             if (arithmetic != undefined) {
                 var cell1 = model.sheet.cells[arithmetic.inputCell1];
                 var cell2 = arithmetic.inputCell2;
                 if (cell2 != -1) {
                     cell2 = model.sheet.cells[cell2];
                 }
-                literal = evalArithmeticFunction(cell1, cell2, arithmetic.operation);
+                literal = parseArithmeticFunction(cell1, cell2, arithmetic.operation);
             }
             else {
-                literal = evalIfFunction(cells[ifObj.inputCell1],
+                literal = parseIfFunction(cells[ifObj.inputCell1],
                     cells[ifObj.inputCell2],
                     ifObj.operation,
                     cells[ifObj.thenCell],
@@ -410,48 +407,7 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
                 });
         }
 
-        function functionCellReplaceDone(sheetId, Index, cell1, replace, replaceBy, cellStyle, visible, editable) {
-
-            var newString = (cell1.literal).replace(replace, replaceBy);
-            var cells = model.sheet.cells;
-
-            updateCell(sheetId,
-                Index,
-                new Cell(cells[Index].label,
-                    newString,
-                    cells[Index].reference,
-                    cells[Index].ifObj,
-                    cells[Index].arithmetic,
-                    !editable.checked,
-                    cellStyle,
-                    visible.checked ),
-                true)
-            window.location.href = "#/sheet/" + sheetId;
-
-            model.functionCellIndex = -1;
-            model.leftCol = "col-sm-12";
-            model.rightCol = "";
-            model.showFunctionCell = false;
-            model.showSheetCell = true;
-        }
-
-        function readOneSheet(sheetId, cellIndex) {
-            var deferred = $q.defer();
-
-            SheetService
-                .readOneSheet(sheetId)
-                .then(function (sheet) {
-                    model.sheet = sheet;
-                    if(cellIndex!=null || cellIndex != cellIndex ){
-                        var cell = model.sheet.cells[cellIdxById(cellIndex)];
-                        console.log(cell);
-                        model.vis = cell.visible;
-                        model.edit = cell.editable;
-                    }
-                    deferred.resolve();
-                });
-            return deferred.promise;
-        }
+        //-------Only Cell Functions--------//
 
         function addCell(sheetId, cell) {
             var deferred = $q.defer();
@@ -473,12 +429,11 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
                 .updateCell(sheetId, cellIndex, cell)
                 .then(function (sheet) {
                     if (refreshFlag) {
+
                         model.sheet = sheet;
                     }
                     model.vis = cell.visible;
-                    console.log("visible updated to "+model.vis)
                     model.edit = cell.editable;
-
                     deferred.resolve();
                 });
             return deferred.promise;

@@ -1,7 +1,9 @@
-<div class="display">
+<div class="container-fluid main">
     <div class="intro-header-noImg">
+        <span class="glyphicon glyphicon-home"></span>
         <a href="#/sheet/{{model.sheet._id}}" class="sheet-preview-name"><h1>{{model.sheet.name}}</h1></a><br>
         <ul class="shareButtons">
+            <li class="inline">Share the sheet: &nbsp; </li>
             <li class="inline">
                 <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out what i built using Spreadsheet Editor!">Tweet</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -18,39 +20,34 @@
             </li>
         </ul>
     </div>
-        <div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="table-bordered pad">
-            <div ng-if="cell.visible == true">
-                <div ng-show="cell.editable && cell.editable === true">
-                        <input ng-if="cell.cellStyle != 'p'"
-                               ng-model="cell.literal"
-                               tabindex="{{$index}}"
-                               class="form-control"
-                               ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"
-                        />
-                        <textarea ng-if="cell.cellStyle == 'p'" ng-model="cell.literal"
-                                  class="form-control"></textarea>
-                    </div>
-                <div ng-show="!cell.editable || cell.editable === false">
-                        <label ng-if="cell.cellStyle == 'label'">
-                            {{cell.literal}}
-                        </label>
-                        <h1 ng-if="cell.cellStyle == 'h1'">
-                            {{cell.literal}}
-                        </h1>
-                        <h2 ng-if="cell.cellStyle == 'h2'">
-                            {{cell.literal}}
-                        </h2>
-                        <h3 ng-if="cell.cellStyle == 'h3'">
-                            {{cell.literal}}
-                        </h3>
-                        <p ng-if="cell.cellStyle == 'p'">
-                            {{cell.literal}}
-                        </p>
-                        <div ng-if="!cell.cellStyle">
-                            {{cell.literal}}
-                        </div>
-                    </div>
+        <div ng-repeat="cell in model.sheet.cells" ng-class="{'active': $index==model.functionCellIndex}" class="table-bordered pad table-style">
+        <div ng-if="cell.visible == true">
+            <div ng-show="cell.editable && cell.editable === true">
+                <input ng-if="cell.cellStyle != 'p'" ng-model="cell.literal" tabindex="{{$index}}" class="form-control"
+                           ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"/>
+                <textarea ng-if="cell.cellStyle == 'p'" ng-model="cell.literal"
+                              class="form-control"></textarea>
             </div>
+            <div ng-show="!cell.editable || cell.editable === false">
+                    <label ng-if="cell.cellStyle == 'label'">
+                        {{cell.literal}}
+                    </label>
+                    <h1 ng-if="cell.cellStyle == 'h1'">
+                        {{cell.literal}}
+                    </h1>
+                    <h2 ng-if="cell.cellStyle == 'h2'">
+                        {{cell.literal}}
+                    </h2>
+                    <h3 ng-if="cell.cellStyle == 'h3'">
+                        {{cell.literal}}
+                    </h3>
+                    <p ng-if="cell.cellStyle == 'p'">
+                        {{cell.literal}}
+                    </p>
+                    <div ng-if="!cell.cellStyle">
+                        {{cell.literal}}
+                    </div>
+                </div>
         </div>
     </div>
 </div>

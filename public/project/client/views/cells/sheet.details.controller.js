@@ -61,6 +61,7 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
         model.showSheetCell = true;
         model.functionCellIndex = -1;
 
+
         //------Initialising Function. Takes two variables- SheetId and CellId----//
         //------If no Cell Id then Sheet Details view, else Cell Details view ---//
 
@@ -68,6 +69,18 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
             readOneSheet($routeParams.sheetId,$routeParams.cellId)
         }
         init();
+
+        $scope.sortableOptions = {
+            //handle: '> .myHandle',
+            stop: function (e, ui) {
+                SheetService.updateCellOrders(model.sheet).then(function (res) {
+                    console.log(res);
+                });
+            }
+
+        };
+
+
 
         function readOneSheet(sheetId, cellIndex) {
             var deferred = $q.defer();

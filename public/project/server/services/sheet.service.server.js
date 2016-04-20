@@ -1,9 +1,17 @@
 module.exports = function(app, model) {
     app.post("/spreadsheetEditor/sheet", createSheet);
     app.get("/spreadsheetEditor/sheet", readAllSheet);
+    app.put("/spreadsheetEditor/sheet/cells", updateCellOrders);
     app.get("/spreadsheetEditor/sheet/:id", readSheet);
     app.put("/spreadsheetEditor/sheet/:id", updateSheet);
     app.delete("/spreadsheetEditor/sheet/:id", removeSheet);
+
+    function updateCellOrders(req, res) {
+        model.updateCellOrders(req.body)
+            .then(function(sheet) {
+                res.json(sheet);
+            });
+    }
 
     function createSheet(req, res) {
         model.createSheet(req.body)

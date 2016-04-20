@@ -12,13 +12,35 @@ module.exports = function(db, mongoose) {
         //---------------------------//
         createCell: createCell,
         removeCell: removeCell,
-        updateCell: updateCell
+        updateCell: updateCell,
+        updateCellOrders: updateCellOrders
     };
     return api;
 
+    function updateCellOrders(sheet) {
+        var deferred = q.defer();
+        var a = sheet._id;
+
+
+        sheetModel.remove({_id: a}, function(err, status) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                sheetModel.create(sheet, function(err, sheet) {
+                    if(err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(sheet);
+                    }
+                });
+            }
+        });
+
+        return deferred.promise;
+    }
+
     function updateCell(sheetId, cellIndex, cell) {
         var deferred = q.defer();
-        console.log(cell);
 
         sheetModel.findById(sheetId, function(err, sheet){
             

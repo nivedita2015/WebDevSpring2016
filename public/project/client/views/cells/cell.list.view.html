@@ -131,7 +131,7 @@
                                 <div ng-if="model.editor=='AVERAGE'" class="pad">
                                     <h5>Average </h5>
                                     <div class="form-inline">
-                                        <label for="average" class="col-sm-6 control-label">of </label>
+                                        <label for="average" class="control-label">of </label>
                                         <label for="value1" class="control-label">Value 1</label>
                                             <select class="form-control" id="value1"
                                                     ng-options="+ cell.literal for cell in model.sheet.cells track by cell._id"
@@ -147,7 +147,7 @@
                                 <div ng-if="model.editor=='SUM'" class="pad">
                                     <h5>Sum</h5>
                                     <div class="form-inline">
-                                        <label for="sum" class="col-sm-6 control-label">of </label>
+                                        <label for="sum" class="control-label">of </label>
                                         <label for="value1" class="control-label">Value 1</label>
                                             <select class="form-control" id="value1"
                                                     ng-options="+ cell.literal for cell in model.sheet.cells track by cell._id"

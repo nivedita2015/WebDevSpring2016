@@ -9,9 +9,21 @@
             readAllSheet: readAllSheet,
             readOneSheet: readSheet,
             updateSheet: updateSheet,
-            deleteSheet: deleteSheet
+            deleteSheet: deleteSheet,
+            updateCellOrders: updateCellOrders
         };
         return api;
+
+        function updateCellOrders(sheet) {
+            var deferred = $q.defer();
+
+            $http.put("/spreadsheetEditor/sheet/cells", sheet)
+                .success(function (response) {
+                   deferred.resolve(response);
+                });
+
+            return deferred.promise;
+        }
 
         function createSheet(sheet) {
             var deferred = $q.defer();

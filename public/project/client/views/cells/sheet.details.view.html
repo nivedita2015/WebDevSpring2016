@@ -2,12 +2,19 @@
 <div class="container-fluid detailsBg">
     <div class="row padding10">
             <div class="jumbotron listDescr">
-            <h2> Sheet: {{model.sheet.name}}
-                <a href="#/sheet/{{model.sheet._id}}/preview"class="btn btn-info">
-                    <span class="glyphicon glyphicon-share"> </span>
-                </a>
-            </h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                <h2> Sheet: {{model.sheet.name}}
+                    <a href="#/sheet/{{model.sheet._id}}/preview"class="btn btn-info">
+                        <span class="glyphicon glyphicon-share"> </span>
+                    </a>
+                    <a href="#/sheet" class="btn btn-info float-right">
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                    </a>
+
+                </h2>
+                <p>
+                    Find below all the fields that are in your sheet. Add new fields, update the styles of the existing fields or delete uneccesary ones.
+                    Go ahead and have some fun!</p>
+
             </div>
         </div>
     <div class="row noBorder padding10">
@@ -120,7 +127,7 @@
                             </span>
                           </a>
                                 <button class="btn btn-default btn-group">
-                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            <span class="glyphicon glyphicon-menu-hamburger myHandle"></span>
                         </button>
                             </span>
                         </div>

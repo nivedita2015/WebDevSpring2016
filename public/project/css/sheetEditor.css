@@ -1,3 +1,14 @@
+.pad {
+    padding: 10px;
+}
+
+.display-text{
+    margin: 0;
+    font-size: 2em;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
 .top {
     margin-top: 20px !important;
 }
@@ -192,17 +203,19 @@
 .shareButtons {
     list-style-type: none;
     float: right;
+    color: #3a526b;
 }
 
 .sheet-preview-name {
     color: #FFFFFF;
+
 }
+
 
 .display-function-options {
     padding: 10px;
     margin: 10px;
     border: solid thin #5e5e5e;
-    /*background-color: #808080;*/
     color: #5e5e5e;
 }
 
@@ -226,7 +239,19 @@
 }
 
 .table-style {
-    background-color: #f6f6f6;
-    border: solid thin #8cacd0;
+    background-color: #ffffff;
+    /*border: solid thin #8cacd0;*/
+
+}
+
+a.sheet-preview-name:link,
+a.sheet-preview-name.visited,
+a.sheet-preview-name.hover,
+a.sheet-preview-name.active
+{
+
+    color: #FFFFFF;
+    text-decoration: none;
+
 
 }

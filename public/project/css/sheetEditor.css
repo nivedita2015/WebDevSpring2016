@@ -208,6 +208,9 @@
 
 .sheet-preview-name {
     color: #FFFFFF;
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 2em;
 
 }
 
@@ -254,4 +257,10 @@ a.sheet-preview-name.active
     text-decoration: none;
 
 
+}
+
+.inputForm{
+    border-radius:0px;
+    -moz-border-radius:0px;
+    -webkit-border-radius:0px;
 }

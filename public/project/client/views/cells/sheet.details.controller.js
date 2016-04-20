@@ -71,7 +71,7 @@ function Cell(label, literal, reference, ifObj, arithmetic, editable, cellStyle,
         init();
 
         $scope.sortableOptions = {
-            //handle: '> .myHandle',
+
             stop: function (e, ui) {
                 SheetService.updateCellOrders(model.sheet).then(function (res) {
                     console.log(res);

@@ -1,17 +1,23 @@
 <div class="container-fluid sheetBg">
     <div class="row pad">
             <div class="jumbotron listDescr">
-                <a href="#/home" class="btn btn-info">
-                    <span class="glyphicon glyphicon-home"></span>
-                </a>
-                <h2>Welcome to your Sheet List</h2>
+                <ul class="noBullets">
+                    <li class="inline">
+                        <a href="#/home" class="btn btn-info">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <h2>&emsp;Welcome to your Sheet List</h2>
+                    </li>
+                </ul>
                 <p> Below you can see a list of Sheets you have already created. Add fields to your sheet, edit their functions and start sharing with your friends.
                 &nbsp; Dont see any sheet yet? Type your desired sheet name and get editing!</p>
             </div>
         </div>
     <div class="row pad">
             <div class="input-group">
-                <input ng-model="model.sheet.name" class="form-control inputVal" id="name" placeholder="Add a New Sheet" type="text" />
+                <input ng-model="model.sheet.name" class="form-control inputForm" id="name" placeholder="Add a New Sheet" type="text" />
                 <span class="input-group-btn"><button class="btn btn-default" ng-click="model.createSheet(model.sheet)">+</button></span>
             </div>
     </div>

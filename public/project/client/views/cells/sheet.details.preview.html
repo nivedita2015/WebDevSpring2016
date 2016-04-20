@@ -1,11 +1,12 @@
 <div class="container-fluid main">
     <div class="intro-header-noImg">
-        <a href="#/sheet">
-            <span class="glyphicon glyphicon-home"></span>
-        </a>
-        <h1>
-            <a href="#/sheet/{{model.sheet._id}}" class="sheet-preview-name">{{model.sheet.name}}</a>
-        </h1>
+        <ul class="noBullets">
+            <li class="inline pad"><a href="#/home" class="btn btn-info"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="inline pad"><a href="#/sheet" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span></a></li>
+            <li><a href="#/sheet/{{model.sheet._id}}" class="sheet-preview-name"><h1>{{model.sheet.name}}</h1></a></li>
+        </ul>
+
+
         <br>
         <ul class="shareButtons">
             <li class="inline">Share the sheet: &nbsp; </li>
@@ -30,10 +31,10 @@
             <div ng-show="cell.editable && cell.editable === true">
                 <input ng-if="cell.cellStyle != 'p'" ng-model="cell.literal" tabindex="{{$index}}" class="form-control"
                            ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"/>
-                <textarea ng-if="cell.cellStyle == 'p'" ng-model="cell.literal"
-                              class="form-control"></textarea>
+                <textarea ng-if="cell.cellStyle == 'p'" ng-model="cell.literal" class="form-control"
+                          ng-change="model.updateCell(model.sheet._id, $index, cell) && updateReferences(model.sheet._id, $index, cell)"></textarea>
             </div>
-            <div ng-show="!cell.editable || cell.editable === false" class="table-bordered pad">
+            <div ng-show="!cell.editable || cell.editable === false">
                     <label ng-if="cell.cellStyle == 'label'">
                         {{cell.literal}}
                     </label>

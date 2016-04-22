@@ -7,6 +7,9 @@
     function UserService($http,$rootScope) {
         var api = {
 
+            login:login,
+            logout:logout,
+            register:register,
             createUser: createUser,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
@@ -26,12 +29,26 @@
         }
 
         function getCurrentUser() {
-            return $rootScope.currentUser;
+            return $http.get("/api/assignment/loggedin");
         }
 
         function getCurrentUserId() {
             return $rootscope.currentUser._id;
         }
+
+        function login(){
+            console.log("inside client service login");
+            return $http.post("/api/assignment/login", user);
+        };
+
+        function logout(){
+            return $http.post("/api/assignment/logout");
+        }
+
+        function register(){
+            return $http.post("/api/assignment/register", user);
+        }
+
 
         function findUserByUsername(username){
 
@@ -40,9 +57,7 @@
         }
 
         function findUserByCredentials(username, password) {
-
-            console.log("find user by cred user client service");
-
+            console.log("FuBc client service");
             return $http.get("/api/assignment/user?username="+username+"&password="+password);
 
         }
@@ -51,17 +66,6 @@
             return $http.get("/api/assignment/user/" + userId);
 
         };
-
-
-        function createUser(user) {
-
-            console.log("inside create user service");
-
-            return $http.post("/api/assignment/user",user);
-
-        }
-
-
 
         function findAllUsers() {
 
@@ -75,10 +79,15 @@
         }
 
         function updateUser(userId, user) {
-            console.log("user service client update");
-
            return $http.put("/api/assignment/user/"+userId,user);
 
         }
+
+        function createUser(user) {
+            console.log("client service creat user");
+            return $http.post("/api/assignment/user",user);
+        }
+
+
     }
 })();

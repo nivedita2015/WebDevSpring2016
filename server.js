@@ -41,5 +41,4 @@ db = mongoose.connect(connectionString);
 
 require("./public/assignment/server/app.js")(app,db,mongoose);
 require("./public/project/server/app.js")(app,db,mongoose);
-require("./public/project4/server/app.js")(app);
 app.listen(port, ipaddress);

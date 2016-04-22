@@ -1,5 +1,6 @@
+var mongoose      = require("mongoose");
 
-module.exports = function(app,db,mongoose) {
+module.exports = function() {
     var FormSchema = require('./form.schema.server.js')(mongoose);
     var FormModel = mongoose.model("Form", FormSchema);
     var FieldSchema = require('./field.schema.server.js')(mongoose);

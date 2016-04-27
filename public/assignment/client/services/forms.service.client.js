@@ -12,10 +12,8 @@
             updateFormById: updateFormById,
             setCurrentForm: setCurrentForm,
             getCurrentForm: getCurrentForm,
-            getCurrentForms: getCurrentForms,
-            findFormById: findFormById
+            getFormById: getFormById,
         };
-        //$rootScope.sheets = formsApi.sheets;
         return formsApi;
 
         function setCurrentForm(form){
@@ -26,20 +24,15 @@
             return $rootScope.currentForm;
         }
 
-        function getCurrentForms(){
-            return formsApi.forms;
-        }
         function createFormForUser(userId, form){
             return $http.post("/api/assignment/user/"+userId+"/form", form);
         };
 
         function findAllFormsForUser(userId){
-            console.log("entered find All sheets for User");
             return $http.get("/api/assignment/user/"+userId+"/form");
         };
 
         function deleteFormById(formId){
-            console.log("entered deleteFormById in sheets service client");
             return $http.delete("/api/assignment/form/"+ formId);
         };
 
@@ -47,8 +40,8 @@
             return $http.put("/api/assignment/form/"+ formId, newForm);
         };
 
-        function findFormById(formId){
-            return $http.get("/api/assignment/formId?formId=formId",formId);
+        function getFormById (formId) {
+            return $http.get("/api/assignment/form/" + formId);
         }
     }
 })();

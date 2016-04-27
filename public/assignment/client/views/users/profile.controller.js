@@ -1,32 +1,39 @@
 (function(){
-    "use strict"
+    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("ProfileController", profileController);
-
-    function profileController($scope, UserService, $location) {
-
+        .controller("ProfileController", profileController)
+    function profileController($location, UserService){
         var vm = this;
-        vm.updateUser = updateUser;
-        console.log("inside profile controller");
         vm.error = null;
         vm.message = null;
+        vm.update = update;
 
-        console.log(UserService.getCurrentUser());
+        function init(){
+            UserService
+                .getCurrentUser()
+                .then(function(resp){
+                    vm.currentUser = resp.data;
+                    if(!vm.currentUser){
+                        $location.url("/home");
+                    }
+                })
+        } init();
 
-        vm.currentUser = UserService.getCurrentUser();
-        if (!vm.currentUser) {
-            $location.url("/home");
-        }
-
-        function updateUser(user){
-            console.log("profile controller update");
-
-            UserService.updateUser(vm.currentUser._id,user).then(
-                function (response){
-                    UserService.setCurrentUser(response.data);
+        function update(user){
+            vm.error = null;
+            vm.message = null;
+            var emails = user.emails.toString();
+            emails = emails.split(",");
+            user.emails=emails;
+            UserService
+                .updateUser(user._id, user)
+                .then(function (response){
+                    vm.message = "User updated successfully";
+                    UserService.setCurrentUser(user);
                     $location.url("/profile");
                 });
         }
+
     }
 })();

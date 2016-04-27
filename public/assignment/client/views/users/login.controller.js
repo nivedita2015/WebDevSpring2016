@@ -1,41 +1,42 @@
 (function(){
-    "use strict"
+    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("LoginController", loginController);
+        .controller("LoginController", LoginController);
 
-    function loginController (UserService, $location) {
-        console.log("inside login controller");
-
+    function LoginController(UserService, $location){
         var vm = this;
-        vm.login=login;
-
-        function init() {
-
+        vm.login = login;
+        vm.message = null;
+        function init(){
 
         }
         init();
 
-        function login(user) {
-
-            console.log("inside login");
-
-            if(!user) {
-
-                console.log("no user for login");
+        function login(user){
+            if(!user){
+                vm.error="Please enter the credentials";
                 return;
             }
-
-            console.log("user found. going ahead");
-            UserService
-                .findUserByCredentials(user.username,user.password)
-                .then(function(response){
-                    if(response.data) {
-                        UserService.setCurrentUser(response.data);
-                        $location.url("/profile");
-                        console.log("all logged in ");
-                    }
-                });
+            if(!user.username){
+                vm.error="Please enter the username";
+                return;
+            }
+            if(!user.password){
+                vm.error="Please enter the password";
+                return;
+            }else {
+                UserService
+                    .login(user)
+                    .then(function (response) {
+                        if (response.data) {
+                            UserService.setCurrentUser(response.data);
+                            $location.url("/profile");
+                        }else{
+                            vm.error="Please check your credentials";
+                        }
+                    });
+            }
         }
     }
 })();

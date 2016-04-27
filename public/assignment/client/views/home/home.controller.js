@@ -1,3 +1,10 @@
-/**
- * Created by Nivi on 19/02/16.
- */
+"use strict";
+(function(){
+    angular
+        .module("FormBuilderApp")
+        .controller("HomeController", homeController);
+
+    function homeController(){
+        var vm = this;
+    }
+})();

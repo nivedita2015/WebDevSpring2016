@@ -1,43 +1,72 @@
 (function(){
-    "use strict"
+    "use strict";
     angular
         .module("FormBuilderApp")
-        .factory("UserService",UserService);
+        .factory("UserService", userService);
+    function userService($http, $rootScope) {
 
-    function UserService($http,$rootScope) {
-        var api = {
-
-            login:login,
-            logout:logout,
-            register:register,
+        var api= {
+            login: login,
+            logout: logout,
+            register: register,
             createUser: createUser,
-            findUserByCredentials: findUserByCredentials,
+            deleteUser: deleteUser,
             updateUser: updateUser,
-            setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser,
-            findAllUsers: findAllUsers,
-            deleteUserById: deleteUserById,
+            findUserByCredentials: findUserByCredentials,
             findUserByUsername:findUserByUsername,
+            findAllUsers: findAllUsers,
             findUserById: findUserById,
+            getCurrentUser: getCurrentUser,
+            setCurrentUser: setCurrentUser,
             getCurrentUserId: getCurrentUserId
-
         };
+
         return api;
 
-        function setCurrentUser(user) {
-            $rootScope.currentUser = user;
-        }
+        function createUser(user) {
+            return $http.post("/api/assignment/admin/user", user);
+        };
 
-        function getCurrentUser() {
+        function deleteUser(userId) {
+            return $http.delete("/api/assignment/admin/user/" + userId);
+        };
+
+        function updateUser(userId, user) {
+            return $http.put("/api/assignment/admin/user/" + userId, user);
+        };
+
+        function findUserById(userId){
+            return $http.get("/api/assignment/admin/user/" + userId);
+
+        };
+
+        function findUserByUsername(username){
+            return $http.get("/api/assignment/user?username="+ username);
+        };
+
+
+        function findUserByCredentials(username, password) {
+            return $http.get("/api/assignment/user?username="
+                +username+"&password=" +password);
+        };
+
+        function findAllUsers() {
+            var users = $http.get("/api/assignment/admin/user");
+            return users;
+        };
+
+        function setCurrentUser(user){
+            $rootScope.currentUser= user;
+        };
+
+        function getCurrentUser(){
             return $http.get("/api/assignment/loggedin");
-        }
+        };
+        function getCurrentUserId(){
+            return $rootScope.currentUser._id;
+        };
 
-        function getCurrentUserId() {
-            return $rootscope.currentUser._id;
-        }
-
-        function login(){
-            console.log("inside client service login");
+        function login(user){
             return $http.post("/api/assignment/login", user);
         };
 
@@ -45,49 +74,8 @@
             return $http.post("/api/assignment/logout");
         }
 
-        function register(){
+        function register(user){
             return $http.post("/api/assignment/register", user);
         }
-
-
-        function findUserByUsername(username){
-
-            return $http.get("/api/assignment/user?username=username",username);
-           
-        }
-
-        function findUserByCredentials(username, password) {
-            console.log("FuBc client service");
-            return $http.get("/api/assignment/user?username="+username+"&password="+password);
-
-        }
-
-        function findUserById(userId){
-            return $http.get("/api/assignment/user/" + userId);
-
-        };
-
-        function findAllUsers() {
-
-            return $http.get("/api/assignment/user");
-
-        }
-
-        function deleteUserById(userId) {
-
-            $http.delete("/api/assignment/user/",+userId);
-        }
-
-        function updateUser(userId, user) {
-           return $http.put("/api/assignment/user/"+userId,user);
-
-        }
-
-        function createUser(user) {
-            console.log("client service creat user");
-            return $http.post("/api/assignment/user",user);
-        }
-
-
     }
 })();

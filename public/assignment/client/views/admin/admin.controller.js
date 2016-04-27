@@ -1,58 +1,71 @@
 "use strict";
-
 (function()
 {
     angular
         .module("FormBuilderApp")
-        .controller("AdminController", AdminController);
+        .controller("AdminController", adminController);
 
-    function AdminController($location, UserService)
+    function adminController($location, UserService)
     {
         var vm = this;
         vm.deleteUser = deleteUser;
         vm.updateUser = updateUser;
         vm.addUser    = addUser;
         vm.selectUser = selectUser;
+        vm.sortBy = sortBy;
 
         function init() {
             UserService
                 .findAllUsers()
-                .then(handleSuccess, handleError);
+                .then(function(response){
+                    vm.users = response.data;
+                });
         }
         init();
 
-        function deleteUser(user)
-        {
-            UserService
-                .deleteUserById(user._id)
-                .then(handleSuccess, handleError);
+        function deleteUser(user) {
+
+            UserService.deleteUser(user._id)
+                .then(function (response) {
+                        init();
+                    }
+                );
         }
 
-        function updateUser(user)
-        {
-            UserService
-                .updateUser(user._id, user)
-                .then(handleSuccess, handleError);
+
+        function selectUser(user) {
+            var userArray = [];
+            vm.user = {
+                _id: user._id,
+                username: user.username,
+                password: user.password,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                roles: user.roles
+            }
         }
 
-        function addUser(user)
-        {
-            UserService
-                .createUser(user)
-                .then(handleSuccess, handleError);
-        }
+        function updateUser(user) {
+            UserService.updateUser(user._id, user)
+                .then(function (response) {
+                        if(response) {
+                            console.log(response);
+                            init();
+                            vm.user = null;}});}
 
-        function selectUser(user)
-        {
-            vm.user = angular.copy(user);
-        }
+        function addUser(user) {
+            UserService.createUser(user)
+                .then(function (response) {
+                        if(response) {
+                            console.log(response);
+                            init();
+                            vm.user = null;
+                        }});}
 
-        function handleSuccess(response) {
-            vm.users = response.data;
-        }
 
-        function handleError(error) {
-            vm.error = error;
+        function sortBy(attribute) {
+            vm.reverse = (vm.attribute == attribute)? !vm.reverse: false;
+            vm.attribute = attribute;
         }
     }
 })();

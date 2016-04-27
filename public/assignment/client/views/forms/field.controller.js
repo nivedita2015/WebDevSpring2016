@@ -10,33 +10,35 @@
         vm.removeField = removeField;
         vm.editField = editField;
         vm.updateField = updateField;
+        vm.sortFields = sortFields;
         vm.fields = [];
         vm.fieldType = null;
+        
         var formId = $routeParams.formId;
         var fieldTypes =
             [
                 {
-                    option: "singleText",
+                    fieldOption: "singleText",
                     heading: "Single Line Text Field",
                     type: "TEXT",
                     template:
                     {"label": "New Text Field", "type": "TEXT", "placeholder": "New Field"}
                 },
                 {
-                    option: "paragraphTextField",
+                    fieldOption: "paragraphTextField",
                     heading: "Multi Line Text Field",
-                    type: "TEXTAREA",
+                    type: "TEXT AREA",
                     template:
-                    {"label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"}
+                    {"label": "New Text Field", "type": "TEXT AREA", "placeholder": "New Field"}
                 },
                 {
-                    option: "date",
+                    fieldOption: "date",
                     heading: "Date Field",
                     type: "DATE",
                     template:{"label": "New Date Field", "type": "DATE"}
                 },
                 {
-                    option: "dropDown",
+                    fieldOption: "dropDown",
                     heading: "Dropdown Field",
                     type: "OPTIONS",
                     template:
@@ -49,7 +51,7 @@
                     }
                 },
                 {
-                    option: "checkBoxes",
+                    fieldOption: "checkBoxes",
                     heading: "Checkbox Field",
                     type: "CHECKBOXES",
                     template:
@@ -62,7 +64,7 @@
                     }
                 },
                 {
-                    option: "radioButtons",
+                    fieldOption: "radioButtons",
                     heading: "Radio Button Field",
                     type: "RADIOS",
                     template:
@@ -92,81 +94,79 @@
 
         function addField(fieldType){
             vm.fieldType = fieldType;
-            for (var index in fieldTypes){
-                if(fieldTypes[index].option== fieldType){
-                    var newFieldTemplate = fieldTypes[index].template;
-                }
-            }
+            var newFieldTemplate = findFieldType(vm.fieldType);
             FieldService
                 .createFieldForForm(vm.currentForm._id, newFieldTemplate)
-                .then(FieldService
-                    .findForm(formId)
-                    .then(function(response){
-                        vm.currentForm = response.data;
-                        FieldService
-                            .getFieldsForForm(vm.currentForm._id)
-                            .then(function(response){
-                                vm.fields= response.data;
-                            });
-                    })
-        );
+                .then(init);
             vm.fieldType = null;
+        };
+
+        function removeField(field){
+            FieldService
+                .deleteFieldFromForm(vm.currentForm._id, field._id)
+                .then(init);
         };
 
         function editField(field){
             vm.field = field;
-            for(var index in fieldTypes){
-                if(fieldTypes[index].type == vm.field.type){
-                    vm.modalHeading = fieldTypes[index].heading;
-                }
-            }
-            if(vm.field.type == "OPTIONS" || vm.field.type == "CHECKBOXES" || vm.field.type == "RADIOS"){
+            vm.modalHeading = findHeading(vm.field);
+            if(vm.field.type == "OPTIONS"
+                || vm.field.type == "CHECKBOXES"
+                || vm.field.type == "RADIOS"){
                 var editedOptions = [];
-                var opts= vm.field.options;
-                for (var index in opts) {
-                    editedOptions.push(opts[index].label + ":" + opts[index].value);
+                var poss=[];
+                poss = vm.field.options;
+                for (var index in poss) {
+                    editedOptions.push(poss[index].label + ":" + poss[index].value);
                 }
-                vm.newOpt = editedOptions.join("\n");
+                vm.newOptions = editedOptions;
             }
         };
 
         function updateField(field){
             vm.field = field;
-            if (vm.field.type == "OPTIONS" || vm.field.type == "CHECKBOXES" || vm.field.type == "RADIOS") {
-                var newOpt=[];
-                var enteredOptions = vm.newOpt;
+            if (vm.field.type == "OPTIONS"
+                || vm.field.type == "CHECKBOXES"
+                || vm.field.type == "RADIOS") {
+                var newOptions=[];
+                var enteredOptions = vm.newOptions;
                 for(var index in enteredOptions){
-                    newOpt.push
+                    newOptions.push
                     ({
                         "label": enteredOptions[index].split(":")[0],
                         "value": enteredOptions[index].split(":")[1],
                     });
                 }
-                vm.field.options = newOpt;
+                vm.field.options = newOptions;
             }
             FieldService
                 .updateField(vm.currentForm._id, vm.field._id, vm.field)
-                .then(function(response){
-                    vm.fields = response.data;
-                });
+                .then(init);
         }
 
-        function removeField(field){
-            FieldService
-                .deleteFieldFromForm(vm.currentForm._id, field._id)
-                .then(FieldService
-                    .getMyForm(formId)
-                    .then(function(response){
-                        vm.currentForm = response.data;
-                        FieldService
-                            .getFieldsForForm(vm.currentForm._id)
-                            .then(function(response){
-                                vm.fields= response.data;
-                            });
-                    }));
+        function findFieldType(fieldType){
+            for (var index in fieldTypes){
+                if(fieldTypes[index].fieldOption== fieldType){
+                    return fieldTypes[index].template;
+                }}};
 
+        function findHeading(field){
+            for(var index in fieldTypes){
+                if(fieldTypes[index].type == field.type){
+                    return fieldTypes[index].heading;
+                }
+            }
         };
 
+        function sortFields(start, end) {
+            FieldService.sortFields(formId, start, end)
+                .then(function (response) {
+                    },
+                    function (err) {
+                        vm.error = err;
+                    }
+                );
+        }
     }
 
 })();

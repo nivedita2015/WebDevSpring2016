@@ -11,13 +11,11 @@
             getFieldForForm: getFieldForForm,
             deleteFieldFromForm: deleteFieldFromForm,
             updateField: updateField,
-            findForm: findForm
+            getMyForm: getMyForm,
+            sortFields: sortFields
         };
-        return fieldsApi;
 
-        function findForm(formId){
-            return $http.get("/api/assignment/form/"+ formId);
-        };
+        return fieldsApi;
 
         function createFieldForForm(formId, field){
             return $http.post("/api/assignment/form/"+formId+"/field", field);
@@ -31,12 +29,21 @@
             return $http.get("/api/assignment/form/"+formId+"/field/"+ fieldId);
         };
 
+        function deleteFieldFromForm(formId, fieldId){
+            return $http.delete("/api/assignment/form/"+ formId+"/field/"+ fieldId);
+        }
+
         function updateField(formId, fieldId, field){
+            console.log("entered the updateField in client services");
             return $http.put("/api/assignment/form/"+formId+"/field/"+ fieldId, field);
         };
 
-        function deleteFieldFromForm(formId, fieldId){
-            return $http.delete("/api/assignment/form/"+ formId+"/field/"+ fieldId);
+        function getMyForm(formId){
+            return $http.get("/api/assignment/form/"+ formId);
+        };
+
+        function sortFields(formId, startIndex, endIndex) {
+            return $http.put("/api/assignment/form/"+formId+"/field?startIndex="+startIndex+"&endIndex="+endIndex);
         }
     }
 })();

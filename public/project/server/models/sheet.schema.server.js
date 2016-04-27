@@ -1,5 +1,8 @@
 module.exports = function(mongoose) {
-    var IfSchema = mongoose.Schema({
+
+    var schema = mongoose.Schema;
+
+    var IfSchema = new schema({
         operation : String,
         inputCell1: String,
         inputCell2: String,
@@ -7,11 +10,11 @@ module.exports = function(mongoose) {
         elseCell  : String
     });
 
-    var ArithmeticSchema = mongoose.Schema({
+    var ArithmeticSchema = new schema({
         operation: String, inputCell1: String, inputCell2: String
     });
 
-    var SheetSchema = mongoose.Schema({
+    var SheetSchema = new schema({
         name: String,
         cells: [
             {

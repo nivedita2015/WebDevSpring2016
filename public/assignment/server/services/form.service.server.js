@@ -6,69 +6,103 @@ module.exports = function(app, formModel) {
     app.put("/api/assignment/form/:formId", updateFormById);
 
 
-
     function getFormsForUser(req, res){
-        formModel
-            .findFormsForUser(req.params.userId)
-            .then(function(result){
-                res.json(result);
-            },
-            function(err){
-                res.status(400).send(err);
-            });
+        var userId = req.params.userId;
+        var forms =
+            formModel
+                .findFormsForUser(userId)
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     };
 
     function getFormById(req, res){
-
-        formModel
-            .findFormById(req.params.formId)
-            .then(function(result){
-                    res.json(result);
-                },
-                function(err){
-                    res.status(400).send(err);
-                });
+        var formId = req.params.formId;
+        var form =
+            formModel
+                .findFormById(formId)
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     };
 
     function deleteFormById(req, res){
-
-        formModel
-            .deleteForm(req.params.formId)
-            .then(function(result) {
-                    res.json(result);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+        var deleteFormId = req.params.formId;
+        var response =
+            formModel
+                .deleteForm(deleteFormId)
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     };
 
     function createFormForUser(req, res){
         var form = req.body;
         var userId = req.params.userId;
         form.userId = userId;
-
-        formModel
-            .createForm(form)
-            .then(function(result) {
-                    res.json(result);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+        var createdForm =
+            formModel
+                .createForm(form)
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     };
 
     function updateFormById(req, res){
+        //updates form
+        var formId = req.params.formId;
+        var updatedForm = req.body;
+        var response =
+            formModel
+                .updateForm(formId, updatedForm)
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
+    };
 
-        formModel
-            .updateForm(req.params.formId, req.body)
-            .then(function(result) {
-                    res.json(result);
-                },
-                function(err){
-                    res.status(400).send(err);
-                }
-            );
+    function getAllForms(req, res){
+        var allForms = [];
+        allForms =
+            formModel
+                .findAllForms()
+                .then(
+                    function(result)
+                    {
+                        res.json(result);
+                    },
+                    function(err){
+                        res.status(400).send(err);
+                    }
+                );
     };
 };

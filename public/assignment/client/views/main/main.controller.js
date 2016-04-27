@@ -1,12 +1,15 @@
 
-(function()
-{
-    "use strict"
+(function MainController(){
+    "use strict";
     angular
         .module("FormBuilderApp")
-        .controller("MainController",MainController);
-    function MainController($rootScope,$location)
-    {
-        $rootScope.$location = $location;
+        .controller("MainController", mainController);
+    function mainController($location){
+        var vm = this;
+        function init(){
+
+            vm.$location = $location;
+        }
+        init();
     }
 })();
